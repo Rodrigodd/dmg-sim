@@ -1,3 +1,4 @@
+`timescale 1ns/1ns
 `default_nettype none
 
 module dmg_cpu_b_test;
@@ -396,4 +397,3 @@ module dmg_cpu_b_test;
 	endprogram
 
 endmodule
-
