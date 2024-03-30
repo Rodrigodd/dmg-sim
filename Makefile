@@ -58,8 +58,7 @@ SM83 = \
 dmgcpu/HDL/_GekkioNames.v \
 dmgcpu/HDL/ALU.v \
 dmgcpu/HDL/Bottom.v \
-dmgcpu/HDL/DataBridge.v \
-dmgcpu/HDL/DataLatch.v \
+dmgcpu/HDL/DataMux.v \
 dmgcpu/HDL/Decoder1.v \
 dmgcpu/HDL/Decoder2.v \
 dmgcpu/HDL/Decoder3.v \
