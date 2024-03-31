@@ -85,29 +85,29 @@ module dmg_cpu_b_gameboy;
 
 	// See dmgcpu/ports.md
 	SM83Core cpu(
-		.M1(cpu_out_t1),    // out T1 
-		.CLK1(cpu_clkin_t2),  // in  T2 
-		.CLK2(cpu_clkin_t3),  // in  T3 
-		.CLK3(cpu_clkin_t4),  // in  T4 
-		.CLK4(cpu_clkin_t5),  // in  T5 
-		.CLK5(cpu_clkin_t6),  // in  T6 
-		.CLK6(cpu_clkin_t7),  // in  T7 
-		.CLK7(cpu_clkin_t8),  // in  T8 
-		.CLK8(cpu_clkin_t9),  // in  T9 
-		.CLK9(cpu_clkin_t10), // in  T10
+		.M1(cpu_out_t1),         // out T1 
+		.CLK1(cpu_clkin_t2),     // in  T2 
+		.CLK2(cpu_clkin_t3),     // in  T3 
+		.CLK3(cpu_clkin_t4),     // in  T4 
+		.CLK4(cpu_clkin_t5),     // in  T5 
+		.CLK5(cpu_clkin_t6),     // in  T6 
+		.CLK6(cpu_clkin_t7),     // in  T7 
+		.CLK7(cpu_clkin_t8),     // in  T8 
+		.CLK8(cpu_clkin_t9),     // in  T9 
+		.CLK9(cpu_clkin_t10),    // in  T10
 		.CLK_ENA(cpu_clk_ena),   // out T11
-		.SYNC_RESET(cpu_in_t12),    // in  T12
-		.RESET(cpu_in_t13),    // in  T13
+		.SYNC_RESET(cpu_in_t12), // in  T12
+		.RESET(cpu_in_t13),      // in  T13
 		.OSC_ENA(cpu_xo_ena),    // out T14
-		.OSC_STABLE(cpu_in_t15),    // in  T15
-		// .in(cpu_in_t16),    // in  T16
-		.RD(cpu_raw_rd),    // out R1 
-		.WR(cpu_raw_wr),    // out R2 
-		.Maybe1(cpu_in_r3),     // in  R3 
-		.MMIO_REQ(cpu_in_r4),     // in  R4 
+		.OSC_STABLE(cpu_in_t15), // in  T15
+		// .in(cpu_in_t16),      // in  T16
+		.RD(cpu_raw_rd),         // out R1 
+		.WR(cpu_raw_wr),         // out R2 
+		.BUS_DISABLE(cpu_in_r3), // in  R3 
+		.MMIO_REQ(cpu_in_r4),    // in  R4 
 		.IPL_REQ(cpu_in_r5),     // in  R5 
-		.Maybe2(cpu_in_r6),     // in  R6 
-		.MREQ(cpu_out_r7),    // out R7 
+		.IPL_DISABLE(cpu_in_r6), // in  R6 
+		.MREQ(cpu_out_r7),       // out R7 
 
 		.CPU_IRQ_ACK({
 			cpu_irq0_ack, // out R14

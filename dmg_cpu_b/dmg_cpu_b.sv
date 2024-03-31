@@ -168,10 +168,10 @@ module dmg_cpu_b(
 
 	// these delays fix a issue in `dmgcpu` where the sequencer would miss
 	// conditional branches. See https://github.com/emu-russia/dmgcpu/issues/266#issuecomment-2028477521
-	assign #22ns cpu_clkin_t4  = beko;
-	assign #22ns cpu_clkin_t5  = nphi_out;
-	assign #22ns cpu_clkin_t6  = bolo;
-	assign #22ns cpu_clkin_t7  = from_cpu5;
+	assign cpu_clkin_t4  = beko;
+	assign cpu_clkin_t5  = nphi_out;
+	assign cpu_clkin_t6  = bolo;
+	assign cpu_clkin_t7  = from_cpu5;
 
 	assign cpu_clkin_t8  = buke;
 	assign cpu_clkin_t9  = boma;
