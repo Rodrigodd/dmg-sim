@@ -516,42 +516,364 @@ module dmg_cpu_b(
 	end
 	assign d = boot_cs ? brom[a[7:0]] : 'z;
 
-	clocks_reset           p1_clocks_reset(.*);
-	interrupts             p2_interrupts(.*);
-	timer                  p3_timer(.*);
-	dma                    p4_dma(.*);
-	joypad_io              p5_joypad_io(.*);
-	serial_link            p6_serial_link(.*);
-	sys_decode             p7_sys_decode(.*);
-	ext_cpu_busses         p8_ext_cpu_busses(.*);
-	apu_control            p9_apu_control(.*);
-	apu_decode             p10_apu_decode(.*);
-	ch1_regs               p11_ch1_regs(.*);
-	ch1_sweep              p12_ch1_sweep(.*);
-	channel1               p13_channel1(.*);
-	ch2_regs               p14_ch2_regs(.*);
-	channel2               p15_channel2(.*);
-	ch3_regs               p16_ch3_regs(.*);
-	wave_ram               p17_wave_ram(.*);
-	channel3               p18_channel3(.*);
-	ch4_regs               p19_ch4_regs(.*);
-	channel4               p20_channel4(.*);
-	video_control          p21_video_control(.*);
-	ppu_decode             p22_ppu_decode(.*);
-	video_regs             p23_video_regs(.*);
-	lcd_control            p24_lcd_control(.*);
-	vram_interface         p25_vram_interface(.*);
-	background             p26_background(.*);
-	window_map_lookup      p27_window_map_lookup(.*);
-	oam                    p28_oam(.*);
-	sprite_control         p29_sprite_control(.*);
-	sprite_store           p30_sprite_store(.*);
-	sprite_x_matchers      p31_sprite_x_matchers(.*);
-	bg_pixel_shifter       p32_bg_pixel_shifter(.*);
-	sprite_pixel_shifter   p33_sprite_pixel_shifter(.*);
-	sprite_palette_shifter p34_sprite_palette_shifter(.*);
-	pixel_mux              p35_pixel_mux(.*);
-	palettes               p36_palettes(.*);
+	clocks_reset           p1_clocks_reset(
+		.clkin_a(clkin_a), .clkin_b(clkin_b), .reset(reset), .nreset2(nreset2), .nreset6(nreset6),
+		.reset7(reset7), .nreset7(nreset7), .nreset8(nreset8), .nreset9(nreset9),
+		.reset_video(reset_video), .nreset_video(nreset_video), .reset_video2(reset_video2),
+		.nreset_video2(nreset_video2), .reset_video3(reset_video3), .clk1(clk1), .clk2(clk2),
+		.clk4(clk4), .clk5(clk5), .nphi_out(nphi_out), .phi_out(phi_out), .dova_phi(dova_phi), .d(d),
+		.cpu_wr_sync(cpu_wr_sync), .cpu_wr(cpu_wr), .cpu_rd(cpu_rd), .t1t2_nrst(t1t2_nrst),
+		.t1_nt2(t1_nt2), .nt1_t2(nt1_t2), .from_cpu3(from_cpu3), .from_cpu4(from_cpu4),
+		.clk_from_cpu(clk_from_cpu), .to_cpu(to_cpu), .from_cpu5(from_cpu5), .ff04_ff07(ff04_ff07),
+		.ff40_d7(ff40_d7), .ff60_d1(ff60_d1), .tovy_na0(tovy_na0), .tola_na1(tola_na1),
+		.apu_reset(apu_reset), .napu_reset5(napu_reset5), .ajer_2mhz(ajer_2mhz),
+		.apuv_4mhz(apuv_4mhz), .amuk_4mhz(amuk_4mhz), .boga1mhz(boga1mhz), .bavu_1mhz(bavu_1mhz),
+		.cery_2mhz(cery_2mhz), .byfe_128hz(byfe_128hz), .bufy_256hz(bufy_256hz),
+		.horu_512hz(horu_512hz), .jeso_512k(jeso_512k), .hama_512k(hama_512k), .fero_q(fero_q),
+		.bedo(bedo), .abuz(abuz), .afas(afas), .beko(beko), .bolo(bolo), .boma(boma), .afer(afer),
+		.taba(taba), .buke(buke), .nff04_d0(nff04_d0), .nff04_d1(nff04_d1), ._16384hz(_16384hz),
+		._65536hz(_65536hz), ._262144hz(_262144hz)
+	);
+	interrupts             p2_interrupts(
+		.d(d), .nreset2(nreset2), .boga1mhz(boga1mhz), .p10_c(p10_c), .p11_c(p11_c), .p12_c(p12_c),
+		.p13_c(p13_c), .nff0f_wr(nff0f_wr), .nff0f_rd(nff0f_rd), .int_vbl_buf(int_vbl_buf),
+		.int_serial(int_serial), .int_stat(int_stat), .int_timer(int_timer),
+		.cpu_irq0_ack(cpu_irq0_ack), .cpu_irq1_ack(cpu_irq1_ack), .cpu_irq2_ack(cpu_irq2_ack),
+		.cpu_irq3_ack(cpu_irq3_ack), .cpu_irq4_ack(cpu_irq4_ack), .cpu_irq0_trig(cpu_irq0_trig),
+		.cpu_irq1_trig(cpu_irq1_trig), .cpu_irq2_trig(cpu_irq2_trig), .cpu_irq3_trig(cpu_irq3_trig),
+		.cpu_irq4_trig(cpu_irq4_trig), .to_cpu2(to_cpu2)
+	);
+	timer                  p3_timer(
+		.a(a), .d(d), .nreset2(nreset2), .boga1mhz(boga1mhz), .tola_na1(tola_na1), .cpu_wr(cpu_wr),
+		.cpu_rd(cpu_rd), .ff04_ff07(ff04_ff07), .nff04_d1(nff04_d1), .from_cpu5(from_cpu5),
+		._16384hz(_16384hz), ._65536hz(_65536hz), ._262144hz(_262144hz), .int_timer(int_timer),
+		.tovy_na0(tovy_na0)
+        
+	);
+	dma                    p4_dma(
+		 .d(d), .nma(nma), .dma_a(dma_a), .clk1(clk1), .nreset6(nreset6), .from_cpu5(from_cpu5),
+		 .cpu_rd2(cpu_rd2), .cpu_wr2(cpu_wr2), .ff46(ff46), .amab(amab), .phi_out(phi_out),
+		 .wyja(wyja), .caty(caty), .dma_run(dma_run), .mopa_nphi(mopa_nphi),
+		 .vram_to_oam(vram_to_oam), .dma_addr_ext(dma_addr_ext), .oam_addr_ndma(oam_addr_ndma)
+	);
+	joypad_io              p5_joypad_io(
+		.d(d), .nreset2(nreset2), .bedo(bedo), .ff00wr(ff00wr), .ff00rd(ff00rd), .ff60_d0(ff60_d0),
+		.t1_nt2(t1_nt2), .ser_out(ser_out), .nsout(nsout), .sin_a(sin_a), .sin_b(sin_b),
+		.sin_d(sin_d), .p10_c(p10_c), .p11_c(p11_c), .p12_c(p12_c), .p13_c(p13_c), .p10_a(p10_a),
+		.p10_b(p10_b), .p10_d(p10_d), .p11_a(p11_a), .p11_b(p11_b), .p11_d(p11_d), .p12_a(p12_a),
+		.p12_b(p12_b), .p12_d(p12_d), .p13_a(p13_a), .p13_b(p13_b), .p13_d(p13_d), .p14_a(p14_a),
+		.p14_b(p14_b), .p15_a(p15_a), .p15_b(p15_b)
+	);
+	serial_link            p6_serial_link(
+		.a(a), .d(d), .nreset2(nreset2), .cpu_wr(cpu_wr), .cpu_rd(cpu_rd), .ffxx(ffxx),
+		.a00_07(a00_07), .int_serial(int_serial), .sck_a(sck_a), .sck_dir(sck_dir), .sck_d(sck_d),
+		.ser_out(ser_out), .sck_in(sck_in), .sin_in(sin_in), ._16384hz(_16384hz),
+		.tovy_na0(tovy_na0), .tola_na1(tola_na1)
+	);
+	sys_decode             p7_sys_decode(
+		.a(a), .d(d), .reset(reset), .nreset2(nreset2), .nt1(nt1), .nt2(nt2), .wr_in(wr_in),
+		.rd_b(rd_b), .cpu_wr_sync(cpu_wr_sync), .cpu_raw_rd(cpu_raw_rd), .from_cpu6(from_cpu6),
+		.cpu_wr(cpu_wr), .cpu_wr2(cpu_wr2), .cpu_rd(cpu_rd), .cpu_rd2(cpu_rd2),
+		.t1t2_nrst(t1t2_nrst), .t1_nt2(t1_nt2), .nt1_t2(nt1_t2), .ff04_ff07(ff04_ff07),
+		.nff0f_rd(nff0f_rd), .nff0f_wr(nff0f_wr), .hram_cs(hram_cs), .anap(anap), .bedo(bedo),
+		.tutu(tutu), .a00_07(a00_07), .ffxx(ffxx), .nffxx(nffxx), .nfexxffxx(nfexxffxx), .saro(saro),
+		.ff60_d1(ff60_d1), .ff60_d0(ff60_d0), .boot_cs(boot_cs)
+	);
+	ext_cpu_busses         p8_ext_cpu_busses(
+		 .d(d), .d_in(d_in), .d_d(d_d), .a(a), .a_c(a_c), .dma_a(dma_a), .a_a(a_a), .a_d(a_d),
+		 .wr_a(wr_a), .wr_c(wr_c), .rd_a(rd_a), .rd_c(rd_c), .from_cpu3(from_cpu3),
+		 .from_cpu4(from_cpu4), .from_cpu5(from_cpu5), .cpu_raw_rd(cpu_raw_rd),
+		 .cpu_wr_sync(cpu_wr_sync), .cpu_rd(cpu_rd), .nt1_t2(nt1_t2), .t1_nt2(t1_nt2),
+		 .dma_addr_ext(dma_addr_ext), .abuz(abuz), .tutu(tutu), .nfexxffxx(nfexxffxx), .texo(texo),
+		 .roru(roru), .lula(lula), .cs_out(cs_out), .tola_na1(tola_na1)
+	);
+	apu_control            p9_apu_control(
+		.cpu_rd(cpu_rd), .nreset2(nreset2), .d(d), .t1_nt2(t1_nt2), .ff24(ff24), .ff25(ff25),
+		.ff26(ff26), .apu_wr(apu_wr), .apu_reset(apu_reset), .net03(net03), .ncpu_rd(ncpu_rd),
+		.napu_reset(napu_reset), .napu_reset2(napu_reset2), .napu_reset4(napu_reset4),
+		.napu_reset5(napu_reset5), .napu_reset6(napu_reset6), .apuv_4mhz(apuv_4mhz),
+		.ajer_2mhz(ajer_2mhz), .dyfa_1mhz(dyfa_1mhz), .byfe_128hz(byfe_128hz), .fero_q(fero_q),
+		.cate(cate), .gaxo(gaxo), .rmixer(rmixer), .lmixer(lmixer), .nrvolume(nrvolume),
+		.nlvolume(nlvolume), .vin_r_ena(vin_r_ena), .vin_l_ena(vin_l_ena), .nch1_active(nch1_active),
+		.nch2_active(nch2_active), .nch3_active(nch3_active), .nch4_active(nch4_active)
+	);
+	apu_decode             p10_apu_decode(
+		.a(a), .cpu_wr(cpu_wr), .cpu_rd(cpu_rd), .ff00wr(ff00wr), .ff00rd(ff00rd), .apu_wr(apu_wr),
+		.ff26(ff26), .ff3x(ff3x), .ffxx(ffxx), .nffxx(nffxx), .anap(anap), .duce(duce),
+		.nff1a_d7(nff1a_d7), .nch1_amp_en(nch1_amp_en), .nch2_amp_en(nch2_amp_en),
+		.nch4_amp_en(nch4_amp_en), .namp_en(namp_en), .ff10(ff10), .ff11(ff11), .ff12(ff12),
+		.ff13(ff13), .ff14(ff14), .ff16(ff16), .ff17(ff17), .ff18(ff18), .ff19(ff19), .ff1a(ff1a),
+		.ff1b(ff1b), .ff1c(ff1c), .ff1d(ff1d), .ff1e(ff1e), .ff20(ff20), .ff21(ff21), .ff22(ff22),
+		.ff23(ff23), .ff24(ff24), .ff25(ff25)
+	);
+	ch1_regs               p11_ch1_regs(
+		.d(d), .apu_wr(apu_wr), .cpu_rd(cpu_rd), .ncpu_rd(ncpu_rd), .apu_reset(apu_reset),
+		.napu_reset(napu_reset), .napu_reset6(napu_reset6), .ff10(ff10), .ff11(ff11), .ff12(ff12),
+		.ff13(ff13), .ff14(ff14), .nff10_d0(nff10_d0), .nff10_d1(nff10_d1), .nff10_d2(nff10_d2),
+		.nff10_d3(nff10_d3), .nff10_d4(nff10_d4), .nff10_d5(nff10_d5), .nff10_d6(nff10_d6),
+		.ff11_d6(ff11_d6), .ff11_d7(ff11_d7), .nff11_d6(nff11_d6), .nff11_d7(nff11_d7),
+		.ff12_d0(ff12_d0), .ff12_d1(ff12_d1), .ff12_d2(ff12_d2), .ff12_d3(ff12_d3),
+		.ff12_d4(ff12_d4), .ff12_d5(ff12_d5), .ff12_d6(ff12_d6), .ff12_d7(ff12_d7),
+		.nff12_d0(nff12_d0), .nff12_d1(nff12_d1), .nff12_d2(nff12_d2), .nff12_d3(nff12_d3),
+		.ff14_d6(ff14_d6), .nff14_d6(nff14_d6), .acc_d(acc_d), .ch1_restart(ch1_restart),
+		.dyfa_1mhz(dyfa_1mhz), .net03(net03), .anuj(anuj), .cope(cope), .ngexu(ngexu), .copu(copu)
+	);
+	ch1_sweep              p12_ch1_sweep(
+		.d(d), .apu_wr(apu_wr), .apu_reset(apu_reset), .ff13(ff13), .ff14(ff14), .nff10_d3(nff10_d3),
+		.acc_d(acc_d), .ch1_ld_shift(ch1_ld_shift), .ch1_shift_clk(ch1_shift_clk),
+		.ch1_freq_upd1(ch1_freq_upd1), .ch1_freq_upd2(ch1_freq_upd2), .adad(adad), .kyly(kyly),
+		.atys(atys)
+	);
+	channel1               p13_channel1(
+		.d(d), .apu_wr(apu_wr), .apu_reset(apu_reset), .napu_reset6(napu_reset6),
+		.dova_phi(dova_phi), .net03(net03), .ff11(ff11), .ff11_d6(ff11_d6), .nff11_d6(nff11_d6),
+		.ff11_d7(ff11_d7), .nff11_d7(nff11_d7), .ff14(ff14), .ff14_d6(ff14_d6), .nff14_d6(nff14_d6),
+		.nff10_d0(nff10_d0), .nff10_d1(nff10_d1), .nff10_d2(nff10_d2), .nff10_d4(nff10_d4),
+		.nff10_d5(nff10_d5), .nff10_d6(nff10_d6), .ff12_d0(ff12_d0), .ff12_d1(ff12_d1),
+		.ff12_d2(ff12_d2), .ff12_d3(ff12_d3), .ff12_d4(ff12_d4), .ff12_d5(ff12_d5),
+		.ff12_d6(ff12_d6), .ff12_d7(ff12_d7), .nff12_d0(nff12_d0), .nff12_d1(nff12_d1),
+		.nff12_d2(nff12_d2), .nff12_d3(nff12_d3), .ch1_restart(ch1_restart),
+		.ch1_shift_clk(ch1_shift_clk), .ch1_ld_shift(ch1_ld_shift), .ch1_freq_upd1(ch1_freq_upd1),
+		.ch1_freq_upd2(ch1_freq_upd2), .nch1_active(nch1_active), .nch1_amp_en(nch1_amp_en),
+		.atys(atys), .copu(copu), .cate(cate), .ngexu(ngexu), .cope(cope), .kyly(kyly), .adad(adad),
+		.byfe_128hz(byfe_128hz), .bufy_256hz(bufy_256hz), .horu_512hz(horu_512hz),
+		.dyfa_1mhz(dyfa_1mhz), .ajer_2mhz(ajer_2mhz), .ch1_out(ch1_out)
+	);
+	ch2_regs               p14_ch2_regs(
+		.d(d), .apu_wr(apu_wr), .apu_reset(apu_reset), .napu_reset2(napu_reset2), .ncpu_rd(ncpu_rd),
+		.net03(net03), .ff16(ff16), .ff17(ff17), .ff18(ff18), .ff19(ff19), .nff16_wr(nff16_wr),
+		.ff16_d6(ff16_d6), .nff16_d6(nff16_d6), .ff16_d7(ff16_d7), .nff16_d7(nff16_d7),
+		.ff17_d0(ff17_d0), .nff17_d0(nff17_d0), .ff17_d1(ff17_d1), .nff17_d1(nff17_d1),
+		.ff17_d2(ff17_d2), .nff17_d2(nff17_d2), .ff17_d3(ff17_d3), .nff17_d3(nff17_d3),
+		.ff17_d4(ff17_d4), .ff17_d5(ff17_d5), .ff17_d6(ff17_d6), .ff17_d7(ff17_d7),
+		.ff19_d6(ff19_d6), .nff19_d6(nff19_d6), .ff19_d7(ff19_d7), .ch2_ftick(ch2_ftick),
+		.beny(beny), .elox_q(elox_q), .anuj(anuj), .duce(duce), .doca(doca), .cogu(cogu),
+		.erog(erog), .dera(dera), .gypa(gypa)
+	);
+	channel2               p15_channel2(
+		.d(d), .apu_reset(apu_reset), .napu_reset2(napu_reset2), .dova_phi(dova_phi), .net03(net03),
+		.byfe_128hz(byfe_128hz), .bufy_256hz(bufy_256hz), .horu_512hz(horu_512hz),
+		.amuk_4mhz(amuk_4mhz), .nff16_wr(nff16_wr), .ff16_d6(ff16_d6), .nff16_d6(nff16_d6),
+		.ff16_d7(ff16_d7), .nff16_d7(nff16_d7), .ff17_d0(ff17_d0), .nff17_d0(nff17_d0),
+		.ff17_d1(ff17_d1), .nff17_d1(nff17_d1), .ff17_d2(ff17_d2), .nff17_d2(nff17_d2),
+		.ff17_d3(ff17_d3), .nff17_d3(nff17_d3), .ff17_d4(ff17_d4), .ff17_d5(ff17_d5),
+		.ff17_d6(ff17_d6), .ff17_d7(ff17_d7), .ff19_d6(ff19_d6), .nff19_d6(nff19_d6),
+		.ff19_d7(ff19_d7), .ch2_ftick(ch2_ftick), .beny(beny), .nch2_active(nch2_active),
+		.nch2_amp_en(nch2_amp_en), .elox_q(elox_q), .doca(doca), .cogu(cogu), .erog(erog),
+		.dera(dera), .gypa(gypa), .ch2_out(ch2_out)
+	);
+	ch3_regs               p16_ch3_regs(
+		.d(d), .ncpu_rd(ncpu_rd), .apu_wr(apu_wr), .apu_reset(apu_reset), .dova_phi(dova_phi),
+		.net03(net03), .from_cpu5(from_cpu5), .cery_2mhz(cery_2mhz), .ff1a(ff1a), .ff1b(ff1b),
+		.ff1c(ff1c), .ff1d(ff1d), .ff1e(ff1e), .nff1a_d7(nff1a_d7), .ff1b_wr1(ff1b_wr1),
+		.ff1b_wr2(ff1b_wr2), .ff1b_wr3(ff1b_wr3), .ff1c_d5(ff1c_d5), .nff1c_d5(nff1c_d5),
+		.ff1c_d6(ff1c_d6), .nff1c_d6(nff1c_d6), .ff1d_d0(ff1d_d0), .ff1d_d1(ff1d_d1),
+		.ff1d_d2(ff1d_d2), .ff1d_d3(ff1d_d3), .ff1d_d4(ff1d_d4), .ff1d_d5(ff1d_d5),
+		.ff1d_d6(ff1d_d6), .ff1d_d7(ff1d_d7), .ff1e_d0(ff1e_d0), .ff1e_d1(ff1e_d1),
+		.ff1e_d2(ff1e_d2), .ff1e_d6(ff1e_d6), .nff1e_d6(nff1e_d6), .gara(gara), .ngugu(ngugu),
+		.anuj(anuj), .nkeno(nkeno), .nkafo(nkafo), .nkepa(nkepa), .nkygu(nkygu), .nkemu(nkemu),
+		.nkunu(nkunu), .nkupe(nkupe), .nkutu(nkutu), .njapu(njapu), .nkeza(nkeza), .nkeju(nkeju),
+		.gaxo(gaxo)
+	);
+	wave_ram               p17_wave_ram(
+		.d(d), .ncpu_rd(ncpu_rd), .apu_wr(apu_wr), .apu_reset(apu_reset), .amuk_4mhz(amuk_4mhz),
+		.butu_512khz(butu_512khz), .wave_ram_rd(wave_ram_rd), .nwave_ram_wr(nwave_ram_wr),
+		.wave_ram_ctrl1(wave_ram_ctrl1), .ff3x(ff3x), .ch3_active(ch3_active), .buke(buke),
+		.gase(gase), .efar_q(efar_q), .wave_rd_d(wave_rd_d), .wave_play_d(wave_play_d)
+	);
+	channel3               p18_channel3(
+		 .d(d), .a(a), .ncpu_rd(ncpu_rd), .apu_reset(apu_reset), .net03(net03),
+		 .bufy_256hz(bufy_256hz), .butu_512khz(butu_512khz), .cery_2mhz(cery_2mhz),
+		 .ajer_2mhz(ajer_2mhz), .nff1a_d7(nff1a_d7), .ff1b_wr1(ff1b_wr1), .ff1b_wr2(ff1b_wr2),
+		 .ff1b_wr3(ff1b_wr3), .ff1c(ff1c), .ff1c_d5(ff1c_d5), .nff1c_d5(nff1c_d5), .ff1c_d6(ff1c_d6),
+		 .nff1c_d6(nff1c_d6), .ff1d_d0(ff1d_d0), .ff1d_d1(ff1d_d1), .ff1d_d2(ff1d_d2),
+		 .ff1d_d3(ff1d_d3), .ff1d_d4(ff1d_d4), .ff1d_d5(ff1d_d5), .ff1d_d6(ff1d_d6),
+		 .ff1d_d7(ff1d_d7), .ff1e_d0(ff1e_d0), .ff1e_d1(ff1e_d1), .ff1e_d2(ff1e_d2),
+		 .ff1e_d6(ff1e_d6), .nff1e_d6(nff1e_d6), .ch3_active(ch3_active), .nch3_active(nch3_active),
+		 .gase(gase), .efar_q(efar_q), .atok(atok), .nkutu(nkutu), .nkupe(nkupe), .nkunu(nkunu),
+		 .nkemu(nkemu), .nkygu(nkygu), .nkepa(nkepa), .nkafo(nkafo), .nkeno(nkeno), .nkeju(nkeju),
+		 .nkeza(nkeza), .njapu(njapu), .wave_ram_rd(wave_ram_rd), .ngugu(ngugu), .gara(gara),
+		 .wave_play_d(wave_play_d), .wave_a(wave_a), .wave_dac_d(wave_dac_d)
+	);
+	ch4_regs               p19_ch4_regs(
+		.d(d), .ncpu_rd(ncpu_rd), .apu_wr(apu_wr), .apu_reset(apu_reset), .napu_reset4(napu_reset4),
+		.napu_reset5(napu_reset5), .bufy_256hz(bufy_256hz), .ff20(ff20), .ff21(ff21), .ff22(ff22),
+		.ff23(ff23), .ff21_d0(ff21_d0), .nff21_d0(nff21_d0), .ff21_d1(ff21_d1), .nff21_d1(nff21_d1),
+		.ff21_d2(ff21_d2), .nff21_d2(nff21_d2), .ff21_d3(ff21_d3), .nff21_d3(nff21_d3),
+		.ff21_d4(ff21_d4), .ff21_d5(ff21_d5), .ff21_d6(ff21_d6), .ff21_d7(ff21_d7),
+		.nff22_d0(nff22_d0), .nff22_d1(nff22_d1), .nff22_d2(nff22_d2), .ff22_d3(ff22_d3),
+		.nff22_d3(nff22_d3), .ff22_d4(ff22_d4), .nff22_d4(nff22_d4), .ff22_d5(ff22_d5),
+		.nff22_d5(nff22_d5), .ff22_d6(ff22_d6), .nff22_d6(nff22_d6), .ff22_d7(ff22_d7),
+		.ff23_d6(ff23_d6), .ff23_d7(ff23_d7), .ch4_restart(ch4_restart), .rst_ff23_d7(rst_ff23_d7),
+		.anuj(anuj), .fugo_q(fugo_q)
+	);
+	channel4               p20_channel4(
+		.d(d), .ncpu_rd(ncpu_rd), .apu_reset(apu_reset), .napu_reset4(napu_reset4),
+		.dova_phi(dova_phi), .net03(net03), .byfe_128hz(byfe_128hz), .horu_512hz(horu_512hz),
+		.jeso_512k(jeso_512k), .hama_512k(hama_512k), .bavu_1mhz(bavu_1mhz), .ff23(ff23),
+		.ff21_d0(ff21_d0), .nff21_d0(nff21_d0), .ff21_d1(ff21_d1), .nff21_d1(nff21_d1),
+		.ff21_d2(ff21_d2), .nff21_d2(nff21_d2), .ff21_d3(ff21_d3), .nff21_d3(nff21_d3),
+		.ff21_d4(ff21_d4), .ff21_d5(ff21_d5), .ff21_d6(ff21_d6), .ff21_d7(ff21_d7),
+		.nff22_d0(nff22_d0), .nff22_d1(nff22_d1), .nff22_d2(nff22_d2), .ff22_d3(ff22_d3),
+		.nff22_d3(nff22_d3), .ff22_d4(ff22_d4), .nff22_d4(nff22_d4), .ff22_d5(ff22_d5),
+		.nff22_d5(nff22_d5), .ff22_d6(ff22_d6), .nff22_d6(nff22_d6), .ff22_d7(ff22_d7),
+		.ff23_d6(ff23_d6), .ff23_d7(ff23_d7), .rst_ff23_d7(rst_ff23_d7), .ch4_restart(ch4_restart),
+		.nch4_active(nch4_active), .nch4_amp_en(nch4_amp_en), .anuj(anuj), .fugo_q(fugo_q),
+		.ch4_out(ch4_out)
+	);
+	video_control          p21_video_control(
+		.d(d), .cpu_rd2(cpu_rd2), .cpu_wr2(cpu_wr2), .clk2(clk2), .v(v), .h(h), .nh(nh),
+		.int_vbl(int_vbl), .int_vbl_buf(int_vbl_buf), .int_stat(int_stat), .talu(talu), .xyvo(xyvo),
+		.nnype(nnype), .wodu(wodu), .napo(napo), .PURE(PURE), .sela(sela), .nxymu(nxymu),
+		.wuvu_nq(wuvu_nq), .fepo(fepo), .tofu(tofu), .avap(avap), .pova(pova), .acyl(acyl),
+		.atej(atej), .nreset9(nreset9), .nreset_video(nreset_video), .nreset_video2(nreset_video2),
+		.reset_video3(reset_video3), .clkpipe(clkpipe), .ff45_d0(ff45_d0), .ff45_d1(ff45_d1),
+		.ff45_d2(ff45_d2), .ff45_d3(ff45_d3), .ff45_d4(ff45_d4), .ff45_d5(ff45_d5),
+		.ff45_d6(ff45_d6), .ff45_d7(ff45_d7), .ff41(ff41), .npin_cpg(npin_cpg), .ncp(ncp)
+	);
+	ppu_decode             p22_ppu_decode(
+		.a(a), .ffxx(ffxx), .ff40(ff40), .ff41(ff41), .ff42(ff42), .ff43(ff43), .ff44(ff44),
+		.ff45(ff45), .ff46(ff46), .ff47(ff47), .ff48(ff48), .ff49(ff49), .ff4a(ff4a), .ff4b(ff4b)
+	);
+	video_regs             p23_video_regs(
+		.d(d), .cpu_rd2(cpu_rd2), .cpu_wr2(cpu_wr2), .nreset6(nreset6), .reset7(reset7),
+		.nreset8(nreset8), .nreset9(nreset9), .v(v), .ff40_d0(ff40_d0), .ff40_d1(ff40_d1),
+		.ff40_d2(ff40_d2), .ff40_d3(ff40_d3), .ff40_d4(ff40_d4), .ff40_d5(ff40_d5),
+		.ff40_d6(ff40_d6), .ff40_d7(ff40_d7), .ff42_d0(ff42_d0), .ff42_d1(ff42_d1),
+		.ff42_d2(ff42_d2), .ff42_d3(ff42_d3), .ff42_d4(ff42_d4), .ff42_d5(ff42_d5),
+		.ff42_d6(ff42_d6), .ff42_d7(ff42_d7), .ff43_d0(ff43_d0), .ff43_d1(ff43_d1),
+		.ff43_d2(ff43_d2), .ff43_d3(ff43_d3), .ff43_d4(ff43_d4), .ff43_d5(ff43_d5),
+		.ff43_d6(ff43_d6), .ff43_d7(ff43_d7), .ff45_d0(ff45_d0), .ff45_d1(ff45_d1),
+		.ff45_d2(ff45_d2), .ff45_d3(ff45_d3), .ff45_d4(ff45_d4), .ff45_d5(ff45_d5),
+		.ff45_d6(ff45_d6), .ff45_d7(ff45_d7), .ff4a_d0(ff4a_d0), .ff4a_d1(ff4a_d1),
+		.ff4a_d2(ff4a_d2), .ff4a_d3(ff4a_d3), .ff4a_d4(ff4a_d4), .ff4a_d5(ff4a_d5),
+		.ff4a_d6(ff4a_d6), .ff4a_d7(ff4a_d7), .ff4b_d0(ff4b_d0), .ff4b_d1(ff4b_d1),
+		.ff4b_d2(ff4b_d2), .ff4b_d3(ff4b_d3), .ff4b_d4(ff4b_d4), .ff4b_d5(ff4b_d5),
+		.ff4b_d6(ff4b_d6), .ff4b_d7(ff4b_d7), .ff40(ff40), .ff42(ff42), .ff43(ff43), .ff44(ff44),
+		.ff45(ff45), .ff4a(ff4a), .ff4b(ff4b), .waru(waru), .xare(xare)
+	);
+	lcd_control            p24_lcd_control(
+		.clk2(clk2), .nreset_video(nreset_video), .nreset_video2(nreset_video2), .v(v), .h(h),
+		.nff04_d0(nff04_d0), .nff04_d1(nff04_d1), .ff40_d7(ff40_d7), .l113(l113), .nxymu(nxymu),
+		.mosu(mosu), .lyry(lyry), .myvo(myvo), .sylo(sylo), .fepo(fepo), .wodu(wodu), .napo(napo),
+		.PURE(PURE), .avap(avap), .roxy(roxy), .nnype(nnype), .loby(loby), .nyka(nyka), .pory(pory),
+		.tomu(tomu), .poky(poky), .roxo(roxo), .segu(segu), .tofu(tofu), .npin_cpl(npin_cpl),
+		.npin_fr(npin_fr), .npin_st(npin_st), .npin_s(npin_s), .clkpipe(clkpipe)
+	);
+	vram_interface         p25_vram_interface(
+		.a(a), .nma(nma), .nma_out(nma_out), .d(d), .d_in(d_in), .d_a(d_a), .md(md), .md_in(md_in),
+		.md_out(md_out), .md_a(md_a), .oam_a_nd(oam_a_nd), .oam_b_nd(oam_b_nd), .moe_in(moe_in),
+		.mwr_in(mwr_in), .mcs_in(mcs_in), .moe_a(moe_a), .moe_d(moe_d), .mwr_a(mwr_a), .mwr_d(mwr_d),
+		.mcs_a(mcs_a), .mcs_d(mcs_d), .md_b(md_b), .t1_nt2(t1_nt2), .dma_run(dma_run),
+		.mopa_nphi(mopa_nphi), .nfexxffxx(nfexxffxx), .nreset6(nreset6), .cpu_wr_sync(cpu_wr_sync),
+		.vram_to_oam(vram_to_oam), .dma_addr_ext(dma_addr_ext), .ff40_d4(ff40_d4),
+		.from_cpu3(from_cpu3), .roru(roru), .lula(lula), .bedo(bedo), .saro(saro), .tacu(tacu),
+		.tuvo(tuvo), .acyl(acyl), .xyso(xyso), .texo(texo), .abuz(abuz), .texy(texy), .myma(myma),
+		.lena(lena), .nxymu(nxymu), .leko(leko), .xuha(xuha), .vyno(vyno), .vujo(vujo), .vymu(vymu),
+		.neta(neta), .pore(pore), .potu(potu), .pyju(pyju), .powy(powy), .poju(poju), .pulo(pulo),
+		.poxa(poxa), .pyzo(pyzo), .pozo(pozo), .rawu(rawu), .cota(cota), .wuko(wuko), .syro(syro)
+	);
+	background             p26_background(
+		.nma(nma), .v(v), .h(h), .ff40_d3(ff40_d3), .clkpipe(clkpipe), .ff42_d0(ff42_d0),
+		.ff42_d1(ff42_d1), .ff42_d2(ff42_d2), .ff42_d3(ff42_d3), .ff42_d4(ff42_d4),
+		.ff42_d5(ff42_d5), .ff42_d6(ff42_d6), .ff42_d7(ff42_d7), .ff43_d0(ff43_d0),
+		.ff43_d1(ff43_d1), .ff43_d2(ff43_d2), .ff43_d3(ff43_d3), .ff43_d4(ff43_d4),
+		.ff43_d5(ff43_d5), .ff43_d6(ff43_d6), .ff43_d7(ff43_d7), .pore(pore), .potu(potu),
+		.neta(neta), .xuha(xuha), .ndepo(ndepo), .lesy(lesy), .lota(lota), .lyku(lyku), .roby(roby),
+		.tyta(tyta), .tyco(tyco), .soka(soka), .xovu(xovu), .vava(vava)
+	);
+	window_map_lookup      p27_window_map_lookup(
+		.nma(nma), .clk2(clk2), .clk4(clk4), .clk5(clk5), .nreset_video(nreset_video),
+		.reset_video2(reset_video2), .int_vbl(int_vbl), .v(v), .h(h), .ff40_d5(ff40_d5),
+		.ff40_d6(ff40_d6), .ff43_d0(ff43_d0), .ff43_d1(ff43_d1), .ff43_d2(ff43_d2),
+		.ff4a_d0(ff4a_d0), .ff4a_d1(ff4a_d1), .ff4a_d2(ff4a_d2), .ff4a_d3(ff4a_d3),
+		.ff4a_d4(ff4a_d4), .ff4a_d5(ff4a_d5), .ff4a_d6(ff4a_d6), .ff4a_d7(ff4a_d7),
+		.ff4b_d0(ff4b_d0), .ff4b_d1(ff4b_d1), .ff4b_d2(ff4b_d2), .ff4b_d3(ff4b_d3),
+		.ff4b_d4(ff4b_d4), .ff4b_d5(ff4b_d5), .ff4b_d6(ff4b_d6), .ff4b_d7(ff4b_d7), .wuty(wuty),
+		.tomu(tomu), .fepo(fepo), .atej(atej), .talu(talu), .avap(avap), .segu(segu), .wuko(wuko),
+		.pory(pory), .nxymu(nxymu), .poky(poky), .nyka(nyka), .roxo(roxo), .loby(loby), .lyry(lyry),
+		.seca(seca), .mosu(mosu), .nyxu(nyxu), .pore(pore), .vyno(vyno), .vujo(vujo), .vymu(vymu),
+		.pova(pova), .roxy(roxy), .mofu(mofu), .myvo(myvo), .lena(lena), .potu(potu), .neta(neta),
+		.nydy(nydy), .xuha(xuha), .myma(myma), .sylo(sylo)
+	);
+	oam                    p28_oam(
+		 .oam_a_nd(oam_a_nd), .oam_b_nd(oam_b_nd), .d(d), .md(md), .oam_a(oam_a), .dma_a(dma_a),
+		 .a(a), .clk3(clk3), .oam_clk(oam_clk), .oam_a_cpu_nrd(oam_a_cpu_nrd),
+		 .oam_b_cpu_nrd(oam_b_cpu_nrd), .oam_a_ncs(oam_a_ncs), .oam_b_ncs(oam_b_ncs),
+		 .cpu_wr2(cpu_wr2), .cpu_rd2(cpu_rd2), .nreset7(nreset7), .reset_video(reset_video),
+		 .nreset_video(nreset_video), .dma_run(dma_run), .vram_to_oam(vram_to_oam),
+		 .oam_addr_ndma(oam_addr_ndma), .xupy(xupy), .avap(avap), .catu(catu), .nxymu(nxymu),
+		 .mopa_nphi(mopa_nphi), .saro(saro), .tuvo(tuvo), .tyfo_nq(tyfo_nq), .caty(caty),
+		 .xoce(xoce), .waru(waru), .xare(xare), .abez(abez), .weza(weza), .wuco(wuco), .wyda(wyda),
+		 .zysu(zysu), .wyse(wyse), .wuzy(wuzy), .wyja(wyja), .anom(anom), .feto(feto), .besu(besu),
+		 .acyl(acyl), .amab(amab), .azyb(azyb), .byva(byva), .leko(leko), .atej(atej)
+	);
+	sprite_control         p29_sprite_control(
+		 // .d(d), 
+		 .oam_b_nd(oam_b_nd), .v(v), .nma(nma), .clk1(clk1), .clk2(clk2), .clk3(clk3),
+		 .clk4(clk4), .clk5(clk5), .reset_video(reset_video), .nreset_video(nreset_video),
+		 .oam_b_cpu_nrd(oam_b_cpu_nrd), .ff40_d1(ff40_d1), .ff40_d2(ff40_d2), .nxymu(nxymu),
+		 .ynaz(ynaz), .ykok(ykok), .zure(zure), .ywos(ywos), .ekes(ekes), .cehu(cehu), .ewam(ewam),
+		 .cyvy(cyvy), .zako(zako), .xeba(xeba), .ylev(ylev), .ytub(ytub), .feha(feha), .dama(dama),
+		 .cyco(cyco), .daje(daje), .ydot(ydot), .ywap(ywap), .fyma(fyma), .cogy(cogy), .byva(byva),
+		 .cota(cota), .nyzos(nyzos), .sela(sela), .xyvo(xyvo), .anom(anom), .feto(feto), .seca(seca),
+		 .nbaxo(nbaxo), .azyb(azyb), .wenu(wenu), .cucu(cucu), .cuca(cuca), .cega(cega), .besu(besu),
+		 .fepo(fepo), .fado(fado), .deny(deny), .gugy(gugy), .xyme(xyme), .gygy(gygy), .gowo(gowo),
+		 .gyma(gyma), .fame(fame), .dydo(dydo), .furo(furo), .wuty(wuty), .dosy(dosy), .wuzo(wuzo),
+		 .gafy(gafy), .xaho(xaho), .ejad(ejad), .wunu(wunu), .wupa(wupa), .gamy(gamy), .doku(doku),
+		 .dyna(dyna), .texy(texy), .dege(dege), .daby(daby), .dabu(dabu), .gysa(gysa),
+		 .wuvu_nq(wuvu_nq), .xupy(xupy), .abez(abez), .xoce(xoce), .catu(catu), .xyso(xyso),
+		 .buza(buza), .avap(avap), .tyfo_nq(tyfo_nq), .tuvo(tuvo), .tacu(tacu), .xefy(xefy),
+		 .xono(xono), .xado(xado), .puco(puco), .cacu(cacu), .buzy(buzy), .fuke(fuke), .zape(zape),
+		 .wuse(wuse), .zuru(zuru), .fefo(fefo), .gecy(gecy), .wabe(wabe), .feka(feka), .xyha(xyha),
+		 .yfag(yfag), .cexu(cexu), .akol(akol), .bymy(bymy), .fuxu(fuxu), .enob(enob), .geny(geny),
+		 .weme(weme), .wufa(wufa), .faka(faka), .cyla(cyla), .dymo(dymo), .bucy(bucy), .wofo(wofo),
+		 .wylu(wylu), .ewot(ewot), .asys(asys), .ahof(ahof), .byvy(byvy)
+	);
+	sprite_store           p30_sprite_store(
+		.oam_a(oam_a), .xupy(xupy), .buza(buza), .fepo(fepo), .dege(dege), .daby(daby), .dabu(dabu),
+		.gysa(gysa), .deny(deny), .akol(akol), .xyme(xyme), .wuse(wuse), .gowo(gowo), .wylu(wylu),
+		.gugy(gugy), .fefo(fefo), .dydo(dydo), .byvy(byvy), .gygy(gygy), .dymo(dymo), .gyma(gyma),
+		.feka(feka), .fame(fame), .buzy(buzy), .fado(fado), .wufa(wufa), .furo(furo), .geny(geny),
+		.bymy(bymy), .zuru(zuru), .ewot(ewot), .wabe(wabe), .ahof(ahof), .bucy(bucy), .xyha(xyha),
+		.fuke(fuke), .faka(faka), .enob(enob), .weza(weza), .wuco(wuco), .wyda(wyda), .zysu(zysu),
+		.wyse(wyse), .wuzy(wuzy), .wenu(wenu), .cucu(cucu), .cuca(cuca), .cega(cega)
+	);
+	sprite_x_matchers      p31_sprite_x_matchers(
+		.d(d), .oam_a_nd(oam_a_nd), .nh(nh), .clk3(clk3), .oam_a_cpu_nrd(oam_a_cpu_nrd), .cota(cota),
+		.dyna(dyna), .fuxu(fuxu), .wupa(wupa), .yfag(yfag), .gafy(gafy), .gecy(gecy), .asys(asys),
+		.doku(doku), .zape(zape), .xaho(xaho), .wunu(wunu), .wofo(wofo), .wuzo(wuzo), .cexu(cexu),
+		.dosy(dosy), .weme(weme), .ejad(ejad), .cyla(cyla), .cacu(cacu), .gamy(gamy), .ngomo(ngomo),
+		.nbaxo(nbaxo), .nyzos(nyzos), .ndepo(ndepo), .xeba(xeba), .zako(zako), .ywos(ywos),
+		.zure(zure), .daje(daje), .cyco(cyco), .cyvy(cyvy), .ewam(ewam), .ywap(ywap), .ydot(ydot),
+		.ykok(ykok), .ynaz(ynaz), .dama(dama), .feha(feha), .ytub(ytub), .ylev(ylev), .cogy(cogy),
+		.fyma(fyma), .cehu(cehu), .ekes(ekes)
+	);
+	bg_pixel_shifter       p32_bg_pixel_shifter(
+		.md(md), .clkpipe(clkpipe), .mofu(mofu), .nydy(nydy), .nyxu(nyxu), .rawu(rawu), .pyzo(pyzo),
+		.pulo(pulo), .powy(powy), .pozo(pozo), .poxa(poxa), .poju(poju), .pyju(pyju),
+		.bg_pix_a_7(bg_pix_a_7), .bg_pix_b_7(bg_pix_b_7)
+	);
+	sprite_pixel_shifter   p33_sprite_pixel_shifter(
+		.md(md), .spr_pix_a(spr_pix_a), .spr_pix_b(spr_pix_b), .clkpipe(clkpipe), .xono(xono),
+		.xado(xado), .puco(puco), .roby(roby), .lyku(lyku), .lesy(lesy), .lota(lota), .tyta(tyta),
+		.tyco(tyco), .xovu(xovu), .soka(soka)
+	);
+	sprite_palette_shifter p34_sprite_palette_shifter(
+		.spr_pix_a(spr_pix_a), .spr_pix_b(spr_pix_b), .clkpipe(clkpipe), .xefy(xefy), .ngomo(ngomo),
+		.lesy(lesy), .lota(lota), .lyku(lyku), .roby(roby), .tyta(tyta), .tyco(tyco), .soka(soka),
+		.xovu(xovu), .nbgpixel(nbgpixel), .nobp0pixel(nobp0pixel), .nobp1pixel(nobp1pixel)
+	);
+	pixel_mux              p35_pixel_mux(
+		.obp0_d(obp0_d), .obp1_d(obp1_d), .bgp_d(bgp_d), .spr_pix_a(spr_pix_a),
+		.spr_pix_b(spr_pix_b), .bg_pix_a_7(bg_pix_a_7), .bg_pix_b_7(bg_pix_b_7),
+		.nobp0pixel(nobp0pixel), .nobp1pixel(nobp1pixel), .ff40_d0(ff40_d0), .ff40_d1(ff40_d1),
+		.vava(vava), .nbgpixel(nbgpixel), .nld0(nld0), .nld1(nld1)
+	);
+	palettes               p36_palettes(
+		.d(d), .cpu_rd2(cpu_rd2), .cpu_wr2(cpu_wr2), .ff47(ff47), .ff48(ff48), .ff49(ff49),
+		.bgp_d(bgp_d), .obp0_d(obp0_d), .obp1_d(obp1_d)
+	);
 
 	/* for convinience */
 	assign reg_div16[0]   = p1_clocks_reset.ukup;

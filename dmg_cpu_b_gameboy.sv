@@ -6,7 +6,7 @@ module dmg_cpu_b_gameboy;
 	import snd_dump::write_header;
 	import snd_dump::write_bit4_as_int8;
 	import snd_dump::write_real_as_int16;
-	vid_dump vdump(.*, .t(test.sample_idx));
+	vid_dump vdump(.cpg(cpg), .cp(cp), .cpl(cpl), .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .t(test.sample_idx));
 
 	/* Clock (crystal) pins */
 	logic xi, xo;
@@ -174,11 +174,38 @@ module dmg_cpu_b_gameboy;
 		.NMI(1'b0)
 	);
 
-	dmg_cpu_b dmg(.*, .t1('0), .t2('0), .vin(0.0), .unbonded_pad0('1), .unbonded_pad1());
+	dmg_cpu_b dmg(
+		 .xi(xi), .xo(xo), .t1('0), .t2('0), .nrst(nrst), .phi(phi), .nrd(nrd),
+		 .nwr(nwr), .ncs(ncs), .nmoe(nmoe), .nmwr(nmwr), .nmcs(nmcs),
+		 .d_pin(d_pin), .md_pin(md_pin), .a_pin(a_pin), .ma_pin(ma_pin),
+		 .sout(sout), .sin(sin), .sck(sck), .p10(p10), .p11(p11), .p12(p12),
+		 .p13(p13), .p14(p14), .p15(p15), .cpg(cpg), .cp(cp), .cpl(cpl),
+		 .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .rout(rout),
+		 .lout(lout), .vin(0.0), .unbonded_pad0('1),
+		 .unbonded_pad1(), .cpu_out_t1(cpu_out_t1),
+		 .cpu_clkin_t2(cpu_clkin_t2), .cpu_clkin_t3(cpu_clkin_t3),
+		 .cpu_clkin_t4(cpu_clkin_t4), .cpu_clkin_t5(cpu_clkin_t5),
+		 .cpu_clkin_t6(cpu_clkin_t6), .cpu_clkin_t7(cpu_clkin_t7),
+		 .cpu_clkin_t8(cpu_clkin_t8), .cpu_clkin_t9(cpu_clkin_t9),
+		 .cpu_clkin_t10(cpu_clkin_t10), .cpu_clk_ena(cpu_clk_ena),
+		 .cpu_in_t12(cpu_in_t12), .cpu_in_t13(cpu_in_t13),
+		 .cpu_xo_ena(cpu_xo_ena), .cpu_in_t15(cpu_in_t15),
+		 .cpu_in_t16(cpu_in_t16), .cpu_raw_rd(cpu_raw_rd),
+		 .cpu_raw_wr(cpu_raw_wr), .cpu_in_r3(cpu_in_r3), .cpu_in_r4(cpu_in_r4),
+		 .cpu_in_r5(cpu_in_r5), .cpu_in_r6(cpu_in_r6), .cpu_out_r7(cpu_out_r7),
+		 .cpu_irq0_ack(cpu_irq0_ack), .cpu_irq0_trig(cpu_irq0_trig),
+		 .cpu_irq1_ack(cpu_irq1_ack), .cpu_irq1_trig(cpu_irq1_trig),
+		 .cpu_irq2_ack(cpu_irq2_ack), .cpu_irq2_trig(cpu_irq2_trig),
+		 .cpu_irq3_ack(cpu_irq3_ack), .cpu_irq3_trig(cpu_irq3_trig),
+		 .cpu_irq4_ack(cpu_irq4_ack), .cpu_irq4_trig(cpu_irq4_trig),
+		 .cpu_irq5_ack(cpu_irq5_ack), .cpu_irq5_trig(cpu_irq5_trig),
+		 .cpu_irq6_ack(cpu_irq6_ack), .cpu_irq6_trig(cpu_irq6_trig),
+		 .cpu_irq7_ack(cpu_irq7_ack), .cpu_irq7_trig(cpu_irq7_trig), .d(d),
+		 .cpu_a(cpu_a), .cpu_wakeup(cpu_wakeup));
 
 	task automatic xi_tick();
 		/* Simulate the 4 MiHz crystal that is attached to the XI and XO pins */
-		#122ns xi = xo;
+		#120ns xi = xo;
 
 		clk = xi;
 	endtask
@@ -298,8 +325,6 @@ module dmg_cpu_b_gameboy;
 			has_ram = |ram_size;
 		end
 	end
-
-	// sm83 cpu(.*);
 
 	assign ncyc        = !dmg.p1_clocks_reset.adyk && !dmg.p1_clocks_reset.alef;
 	// assign cpu_a       = cpu_a_out;
@@ -454,15 +479,15 @@ module dmg_cpu_b_gameboy;
 
 				begin
 					@(negedge reset);
-					$sformat(time_str, "%.1f", $itor(sim_mcycs) / 1048576.0);
+					$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
 					$display("System reset done -- will simulate %s seconds", time_str);
 					$fflush(32'h8000_0001);
 					prev_time_str = time_str;
 
 					while (sim_mcycs) begin
 						sim_mcycs--;
-						if (sim_mcycs % 131072) begin
-							$sformat(time_str, "%.1f", $itor(sim_mcycs) / 1048576.0);
+						if (sim_mcycs % 1024 == 0) begin
+							$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
 							if (time_str != prev_time_str && time_str != "0.0") begin
 								$display("%s seconds remaining", time_str);
 								$fflush(32'h8000_0001);
