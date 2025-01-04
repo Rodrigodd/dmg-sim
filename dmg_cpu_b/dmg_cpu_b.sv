@@ -85,7 +85,7 @@ module dmg_cpu_b(
 		output logic            cpu_irq6_trig, /* CPU in  R27 - IRQ6 trigger; active-high */
 		input  logic            cpu_irq7_ack,  /* CPU out R28 - IRQ7 acknowledge; active-high */
 		output logic            cpu_irq7_trig, /* CPU in  R29 - IRQ7 trigger; active-high */
-		inout  tri logic [7:0]  d,             /* CPU I/O B1-B8  */
+		inout  logic [7:0]  d,             /* CPU I/O B1-B8  */
 		input  tri logic [15:0] cpu_a,         /* CPU out B9-B24 */
 		output logic            cpu_wakeup     /* CPU in  B25 - Wake from STOP mode; active-high */
 	);
@@ -96,8 +96,6 @@ module dmg_cpu_b(
 	tri0 logic [15:0] a;
 	tri logic  [7:0]  md;
 	tri0 logic [12:0] nma;
-
-	logic [7:0] d_cap = /*random*/0, md_cap = /*random*/0;
 
 	logic [7:0]  d_a, d_in, d_d, md_a, md_in, md_out;
 	logic [15:0] a_a, a_c, a_d, dma_a;
@@ -254,7 +252,6 @@ module dmg_cpu_b(
 	logic     [7:0] oam_a;                   /* address (except bit 0) */
 	logic     oam_a_ncs, oam_b_ncs;          /* !WR */
 	logic     oam_clk;                       /* !OE */
-	logic     [7:0] oam_a_nd_cap = /*random*/0, oam_b_nd_cap = /*random*/0;
 
 	logic [7:0] oam_a_ram[0:79], oam_b_ram[0:79];
 
@@ -413,11 +410,8 @@ module dmg_cpu_b(
 	assign cpu_irq6_trig = 0;
 	assign cpu_irq7_trig = 0;
 
-	/* Icarus doesn't support trireg, so we do it like this: */
-	always @(d) d_cap = d;
-	always @(md) md_cap = md;
-	assign (weak1, weak0) d = d_cap;
-	assign (weak1, weak0) md = md_cap;
+	trireg_m d_trireg [7:0] (d);
+	trireg_m md_trireg [7:0] (md);
 
 	assign d_in  = ~d_pin;
 	assign md_in = ~md_pin;
@@ -478,11 +472,8 @@ module dmg_cpu_b(
 	// TODO: When reading the next byte from wave RAM (for example FF31), the previous sample (high nibble of FF30)
 	//       gets output for a very short time before the next sample (high nibble of FF31) gets output. Check if correct.
 
-	/* Icarus doesn't support trireg, so we do it like this: */
-	always @(oam_a_nd) oam_a_nd_cap = oam_a_nd;
-	always @(oam_b_nd) oam_b_nd_cap = oam_b_nd;
-	assign (weak1, weak0) oam_a_nd = oam_a_nd_cap;
-	assign (weak1, weak0) oam_b_nd = oam_b_nd_cap;
+	trireg_m oam_a_trireg [7:0] (oam_a_nd);
+	trireg_m oam_b_trireg [7:0] (oam_b_nd);
 
 	initial foreach (oam_a_ram[i]) oam_a_ram[i] = /*random*/0;
 	initial foreach (oam_b_ram[i]) oam_b_ram[i] = /*random*/0;

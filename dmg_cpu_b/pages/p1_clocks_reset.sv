@@ -10,7 +10,7 @@ module clocks_reset(
 		output logic clk1, clk2, clk4, clk5,
 		output logic nphi_out, phi_out, dova_phi,
 
-		inout tri logic [7:0] d,
+		output tri logic [7:0] d,
 
 		output logic cpu_wr_sync,
 		input  logic cpu_wr, cpu_rd,

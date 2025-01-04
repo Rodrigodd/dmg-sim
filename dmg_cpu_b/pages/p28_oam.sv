@@ -256,8 +256,6 @@ module oam(
 	assign oam_a_ncs = zone;
 	assign oam_b_ncs = zofe;
 
-	/* Icarus doesn't support trireg, so we do it like this: */
-	always @(oam_na) oam_na_cap = oam_na;
-	assign (weak1, weak0) oam_na = oam_na_cap;
+	trireg_m tr_oam_na [7:0] (oam_na);
 
 endmodule

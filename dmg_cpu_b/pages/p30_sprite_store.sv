@@ -39,9 +39,6 @@ module sprite_store(
 
 	tri logic weza_tri, wuco_tri, wyda_tri, zysu_tri, wyse_tri, wuzy_tri;
 	tri logic wenu_tri, cucu_tri, cuca_tri, cega_tri;
-	logic     weza_cap = /*random*/0, wuco_cap = /*random*/0, wyda_cap = /*random*/0, zysu_cap = /*random*/0;
-	logic     wyse_cap = /*random*/0, wuzy_cap = /*random*/0;
-	logic     wenu_cap = /*random*/0, cucu_cap = /*random*/0, cuca_cap = /*random*/0, cega_cap = /*random*/0;
 
 	dffr_b dffr_xecu(!cyke, '1, oam_a[7], xecu);
 	dffr_b dffr_yduf(!cyke, '1, oam_a[6], yduf);
@@ -382,26 +379,14 @@ module sprite_store(
 	assign cega = cega_tri;
 	assign cuca = cuca_tri;
 
-	/* Icarus doesn't support trireg, so we do it like this: */
-	always @(weza_tri) weza_cap = weza_tri;
-	always @(wuco_tri) wuco_cap = wuco_tri;
-	always @(wyda_tri) wyda_cap = wyda_tri;
-	always @(zysu_tri) zysu_cap = zysu_tri;
-	always @(wyse_tri) wyse_cap = wyse_tri;
-	always @(wuzy_tri) wuzy_cap = wuzy_tri;
-	always @(wenu_tri) wenu_cap = wenu_tri;
-	always @(cucu_tri) cucu_cap = cucu_tri;
-	always @(cuca_tri) cuca_cap = cuca_tri;
-	always @(cega_tri) cega_cap = cega_tri;
-	assign (weak1, weak0) weza_tri = weza_cap;
-	assign (weak1, weak0) wuco_tri = wuco_cap;
-	assign (weak1, weak0) wyda_tri = wyda_cap;
-	assign (weak1, weak0) zysu_tri = zysu_cap;
-	assign (weak1, weak0) wyse_tri = wyse_cap;
-	assign (weak1, weak0) wuzy_tri = wuzy_cap;
-	assign (weak1, weak0) wenu_tri = wenu_cap;
-	assign (weak1, weak0) cucu_tri = cucu_cap;
-	assign (weak1, weak0) cuca_tri = cuca_cap;
-	assign (weak1, weak0) cega_tri = cega_cap;
-
+	trireg_m trireg_weza (weza_tri);
+	trireg_m trireg_wuco (wuco_tri);
+	trireg_m trireg_wyda (wyda_tri);
+	trireg_m trireg_zysu (zysu_tri);
+	trireg_m trireg_wyse (wyse_tri);
+	trireg_m trireg_wuzy (wuzy_tri);
+	trireg_m trireg_wenu (wenu_tri);
+	trireg_m trireg_cucu (cucu_tri);
+	trireg_m trireg_cuca (cuca_tri);
+	trireg_m trireg_cega (cega_tri);
 endmodule
