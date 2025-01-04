@@ -10,7 +10,7 @@ module tffd #(
 
 	bit ff, initff;
 	initial begin
-		initff = $isunknown(INITIAL_Q) ? $random : INITIAL_Q;
+		initff = $isunknown(INITIAL_Q) ? /*random*/0 : INITIAL_Q;
 		ff     = initff;
 	end
 

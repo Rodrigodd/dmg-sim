@@ -97,7 +97,7 @@ module dmg_cpu_b(
 	tri logic  [7:0]  md;
 	tri0 logic [12:0] nma;
 
-	logic [7:0] d_cap = $random, md_cap = $random;
+	logic [7:0] d_cap = /*random*/0, md_cap = /*random*/0;
 
 	logic [7:0]  d_a, d_in, d_d, md_a, md_in, md_out;
 	logic [15:0] a_a, a_c, a_d, dma_a;
@@ -241,7 +241,7 @@ module dmg_cpu_b(
 	real rmix, lmix;
 
 	/* connections to wave RAM */
-	logic [7:0] wave_rd_d = $random; /* data output (data input is directly connected to common d[7:0]) */
+	logic [7:0] wave_rd_d = /*random*/0; /* data output (data input is directly connected to common d[7:0]) */
 	logic [3:0] wave_a;              /* address */
 	logic       wave_ram_ctrl1;      /* !CS */
 	logic       nwave_ram_wr;        /* !WR */
@@ -254,7 +254,7 @@ module dmg_cpu_b(
 	logic     [7:0] oam_a;                   /* address (except bit 0) */
 	logic     oam_a_ncs, oam_b_ncs;          /* !WR */
 	logic     oam_clk;                       /* !OE */
-	logic     [7:0] oam_a_nd_cap = $random, oam_b_nd_cap = $random;
+	logic     [7:0] oam_a_nd_cap = /*random*/0, oam_b_nd_cap = /*random*/0;
 
 	logic [7:0] oam_a_ram[0:79], oam_b_ram[0:79];
 
@@ -471,8 +471,8 @@ module dmg_cpu_b(
 	assign rout = (rmix * rvol_fp > 1.0) ? 1.0 : (rmix * rvol_fp);
 	assign lout = (lmix * lvol_fp > 1.0) ? 1.0 : (lmix * lvol_fp);
 
-	initial foreach (wave_ram[i]) wave_ram[i] = $random;
-	always_ff @(posedge nwave_ram_wr) if (!wave_ram_ctrl1) wave_ram[wave_a] <= $isunknown(d) ? $random : d;
+	initial foreach (wave_ram[i]) wave_ram[i] = /*random*/0;
+	always_ff @(posedge nwave_ram_wr) if (!wave_ram_ctrl1) wave_ram[wave_a] <= $isunknown(d) ? /*random*/0 : d;
 	always_latch if (!wave_ram_ctrl1 && !atok) wave_rd_d = wave_ram[wave_a];
 	// TODO: The very first sample (high nibble of FF30) gets skipped when CH3 is started. Check if this is correct.
 	// TODO: When reading the next byte from wave RAM (for example FF31), the previous sample (high nibble of FF30)
@@ -484,15 +484,15 @@ module dmg_cpu_b(
 	assign (weak1, weak0) oam_a_nd = oam_a_nd_cap;
 	assign (weak1, weak0) oam_b_nd = oam_b_nd_cap;
 
-	initial foreach (oam_a_ram[i]) oam_a_ram[i] = $random;
-	initial foreach (oam_b_ram[i]) oam_b_ram[i] = $random;
-	always_ff @(posedge oam_a_ncs) oam_a_ram[oam_a[7:1]] <= $isunknown(oam_a_nd) ? $random : oam_a_nd;
-	always_ff @(posedge oam_b_ncs) oam_b_ram[oam_a[7:1]] <= $isunknown(oam_b_nd) ? $random : oam_b_nd;
+	initial foreach (oam_a_ram[i]) oam_a_ram[i] = /*random*/0;
+	initial foreach (oam_b_ram[i]) oam_b_ram[i] = /*random*/0;
+	always_ff @(posedge oam_a_ncs) oam_a_ram[oam_a[7:1]] <= $isunknown(oam_a_nd) ? /*random*/0 : oam_a_nd;
+	always_ff @(posedge oam_b_ncs) oam_b_ram[oam_a[7:1]] <= $isunknown(oam_b_nd) ? /*random*/0 : oam_b_nd;
 	assign oam_a_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_a_ram[oam_a[7:1]] : 'z;
 	assign oam_b_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_b_ram[oam_a[7:1]] : 'z;
 
-	initial foreach (hram[i]) hram[i] = $random;
-	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= $isunknown(d) ? $random : d;
+	initial foreach (hram[i]) hram[i] = /*random*/0;
+	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= $isunknown(d) ? /*random*/0 : d;
 	assign d = (hram_cs && cpu_rd) ? hram[a[6:0]] : 'z;
 
 	initial begin

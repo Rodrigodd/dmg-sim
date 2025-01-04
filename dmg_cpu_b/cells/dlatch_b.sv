@@ -8,7 +8,7 @@ module dlatch_b(
 
 	logic l;
 
-	initial l = $random;
+	initial l = /*random*/0;
 
 	always_latch begin
 		if (c)

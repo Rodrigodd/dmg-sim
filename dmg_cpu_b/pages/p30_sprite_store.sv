@@ -39,9 +39,9 @@ module sprite_store(
 
 	tri logic weza_tri, wuco_tri, wyda_tri, zysu_tri, wyse_tri, wuzy_tri;
 	tri logic wenu_tri, cucu_tri, cuca_tri, cega_tri;
-	logic     weza_cap = $random, wuco_cap = $random, wyda_cap = $random, zysu_cap = $random;
-	logic     wyse_cap = $random, wuzy_cap = $random;
-	logic     wenu_cap = $random, cucu_cap = $random, cuca_cap = $random, cega_cap = $random;
+	logic     weza_cap = /*random*/0, wuco_cap = /*random*/0, wyda_cap = /*random*/0, zysu_cap = /*random*/0;
+	logic     wyse_cap = /*random*/0, wuzy_cap = /*random*/0;
+	logic     wenu_cap = /*random*/0, cucu_cap = /*random*/0, cuca_cap = /*random*/0, cega_cap = /*random*/0;
 
 	dffr_b dffr_xecu(!cyke, '1, oam_a[7], xecu);
 	dffr_b dffr_yduf(!cyke, '1, oam_a[6], yduf);

@@ -9,7 +9,7 @@ module nor_srlatch(
 	logic lp, lm;
 
 	initial begin
-		lp = $random;
+		lp = /*random*/0;
 		lm = !lp;
 	end
 

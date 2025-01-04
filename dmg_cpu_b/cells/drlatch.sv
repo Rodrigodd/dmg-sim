@@ -10,7 +10,7 @@ module drlatch #(
 
 	logic l;
 
-	initial l = $random;
+	initial l = /*random*/0;
 
 	always_latch begin
 		if (!nreset)
