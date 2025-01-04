@@ -123,7 +123,7 @@ dmg_cpu_b_gameboy.mkv
 TIMESCALE = timescale.f
 
 IVERILOG = iverilog
-IVERILOG_FLAGS = -g2012 -f $(TIMESCALE) -pfileline=1 -gsupported-assertions
+IVERILOG_FLAGS = -g2012 -f $(TIMESCALE) -pfileline=1 -gsupported-assertions -Wall -Wfloating-nets
 VVP = vvp
 VVP_FLAGS = -N
 
