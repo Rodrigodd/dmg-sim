@@ -47,7 +47,8 @@ dmg_cpu_b/cells/dffr_a.sv \
 dmg_cpu_b/cells/dffr_b.sv \
 dmg_cpu_b/cells/dffr_bp.sv \
 dmg_cpu_b/cells/dffsr.sv \
-dmg_cpu_b/cells/tffd.sv
+dmg_cpu_b/cells/tffd.sv \
+dmg_cpu_b/cells/trireg_m.sv
 
 DMG_CPU_B = \
 dmg_cpu_b/dmg_cpu_b.sv \
