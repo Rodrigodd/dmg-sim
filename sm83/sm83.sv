@@ -239,7 +239,7 @@ module sm83 #(
 			sel[4]:                db_mux = in4;
 			sel[5]:                db_mux = in5;
 			sel[6]:                db_mux = in6;
-			!sel, $isunknown(sel): db_mux = 'x;
+			!sel, /*isunknown(sel))*/0: db_mux = 'x;
 		endcase
 	endfunction
 

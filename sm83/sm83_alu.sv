@@ -92,13 +92,13 @@ module sm83_alu
 	always_comb unique case (1)
 		op_low:             core_op_a = op_a.l;
 		!op_low:            core_op_a = op_a.h;
-		$isunknown(op_low): core_op_a = 'x;
+		/*isunknown(op_low))*/0: core_op_a = 'x;
 	endcase
 
 	always_comb unique case (1)
 		!op_b_high:            core_op_b = negate ? ~op_b.l : op_b.l;
 		op_b_high:             core_op_b = negate ? ~op_b.h : op_b.h;
-		$isunknown(op_b_high): core_op_b = 'x;
+		/*isunknown(op_b_high))*/0: core_op_b = 'x;
 	endcase
 
 	/* shift_l and shift_r must not be set at the same time */

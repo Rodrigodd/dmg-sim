@@ -10,7 +10,7 @@ module dffsr #(
 
 	bit ff, initff;
 	initial begin
-		initff = $isunknown(INITIAL_Q) ? /*random*/0 : INITIAL_Q;
+		initff = /*isunknown(INITIAL_Q))*/0 ? /*random*/0 : INITIAL_Q;
 		ff     = initff;
 	end
 
@@ -32,7 +32,7 @@ module dffsr #(
 		else if (nset_posedge)
 			ff <= 1;
 		else
-			ff <= $isunknown(d) ? initff : d;
+			ff <= /*isunknown(d))*/0 ? initff : d;
 
 		if (nset_posedge)
 			nset_posedge <= 0;

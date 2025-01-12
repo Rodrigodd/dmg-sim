@@ -12,7 +12,7 @@ module dffr_a #(
 
 	bit ff, initff;
 	initial begin
-		initff = $isunknown(INITIAL_Q) ? /*random*/0 : INITIAL_Q;
+		initff = /*isunknown(INITIAL_Q))*/0 ? /*random*/0 : INITIAL_Q;
 		ff     = initff;
 	end
 
@@ -21,7 +21,7 @@ module dffr_a #(
 
 	always_ff @(posedge dffra_clk, negedge nreset) begin
 		if (nreset)
-			ff <= $isunknown(d) ? initff : d;
+			ff <= /*isunknown(d))*/0 ? initff : d;
 		else
 			ff <= 0;
 	end

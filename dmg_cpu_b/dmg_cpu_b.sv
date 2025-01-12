@@ -320,7 +320,7 @@ module dmg_cpu_b(
 	logic [7:0]  reg_obj5x, reg_obj6x, reg_obj7x, reg_obj8x, reg_obj9x;
 
 	function automatic logic bidir_out(logic drv_low, ndrv_high);
-		if ($isunknown(drv_low) || $isunknown(ndrv_high))
+		if (/*isunknown(drv_low))*/0 || /*isunknown(ndrv_high)))*/0
 			bidir_out = 'x;
 		else if (drv_low == ndrv_high)
 			bidir_out = !drv_low;
@@ -466,7 +466,7 @@ module dmg_cpu_b(
 	assign lout = (lmix * lvol_fp > 1.0) ? 1.0 : (lmix * lvol_fp);
 
 	initial foreach (wave_ram[i]) wave_ram[i] = /*random*/0;
-	always_ff @(posedge nwave_ram_wr) if (!wave_ram_ctrl1) wave_ram[wave_a] <= $isunknown(d) ? /*random*/0 : d;
+	always_ff @(posedge nwave_ram_wr) if (!wave_ram_ctrl1) wave_ram[wave_a] <= /*isunknown(d))*/0 ? /*random*/0 : d;
 	always_latch if (!wave_ram_ctrl1 && !atok) wave_rd_d = wave_ram[wave_a];
 	// TODO: The very first sample (high nibble of FF30) gets skipped when CH3 is started. Check if this is correct.
 	// TODO: When reading the next byte from wave RAM (for example FF31), the previous sample (high nibble of FF30)
@@ -477,13 +477,13 @@ module dmg_cpu_b(
 
 	initial foreach (oam_a_ram[i]) oam_a_ram[i] = /*random*/0;
 	initial foreach (oam_b_ram[i]) oam_b_ram[i] = /*random*/0;
-	always_ff @(posedge oam_a_ncs) oam_a_ram[oam_a[7:1]] <= $isunknown(oam_a_nd) ? /*random*/0 : oam_a_nd;
-	always_ff @(posedge oam_b_ncs) oam_b_ram[oam_a[7:1]] <= $isunknown(oam_b_nd) ? /*random*/0 : oam_b_nd;
+	always_ff @(posedge oam_a_ncs) oam_a_ram[oam_a[7:1]] <= /*isunknown(oam_a_nd))*/0 ? /*random*/0 : oam_a_nd;
+	always_ff @(posedge oam_b_ncs) oam_b_ram[oam_a[7:1]] <= /*isunknown(oam_b_nd))*/0 ? /*random*/0 : oam_b_nd;
 	assign oam_a_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_a_ram[oam_a[7:1]] : 'z;
 	assign oam_b_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_b_ram[oam_a[7:1]] : 'z;
 
 	initial foreach (hram[i]) hram[i] = /*random*/0;
-	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= $isunknown(d) ? /*random*/0 : d;
+	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= /*isunknown(d))*/0 ? /*random*/0 : d;
 	assign d = (hram_cs && cpu_rd) ? hram[a[6:0]] : 'z;
 
 	initial begin
