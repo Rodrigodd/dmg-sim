@@ -8,8 +8,8 @@ module nand_srlatch(
 	logic lp, lm;
 
 	initial begin
-		lp = $random;
-		lm = !lp;
+		lp = /*random*/0;
+		lm = 1;
 	end
 
 	always_latch begin
