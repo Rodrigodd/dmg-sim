@@ -10,7 +10,7 @@ module nor_srlatch(
 
 	initial begin
 		lp = /*random*/0;
-		lm = !lp;
+		lm = 1;
 	end
 
 	always_latch begin
