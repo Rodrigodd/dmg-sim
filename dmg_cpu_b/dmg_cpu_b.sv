@@ -37,8 +37,8 @@ module dmg_cpu_b(
 		output logic            st,         /* Pin 54        - ST pin */
 		output logic            s,          /* Pin 57        - S pin */
 		output logic            ld0, ld1,   /* Pin 51, 50    - LD0, LD1 pins (pixel data) */
-		output real             rout, lout, /* Pin 59, 60    - SO1, SO2 pins (right and left audio out channels) */
-		input  real             vin,        /* Pin 61        - Cartridge audio input */
+		// output real             rout, lout, /* Pin 59, 60    - SO1, SO2 pins (right and left audio out channels) */
+		// input  real             vin,        /* Pin 61        - Cartridge audio input */
 
 		/* Unbonded I/O pads of the DMG CPU B chip */
 		input  logic unbonded_pad0,  /* Unbonded input pad between pin 11 (A10) and 12 (A11) */
@@ -89,6 +89,8 @@ module dmg_cpu_b(
 		input  tri logic [15:0] cpu_a,         /* CPU out B9-B24 */
 		output logic            cpu_wakeup     /* CPU in  B25 - Wake from STOP mode; active-high */
 	);
+
+	integer i;
 
 	logic [7:0] d_pin_drv;  /* Value driven internally onto the data pins if not 'z */
 	logic [7:0] md_pin_drv; /* Value driven internally onto the pins if not 'z */
@@ -234,9 +236,9 @@ module dmg_cpu_b(
 	logic [2:0] nrvolume, nlvolume;
 	logic       vin_r_ena, vin_l_ena;
 
-	real ch1_fp, ch2_fp, ch3_fp, ch4_fp;
-	real rvol_fp, lvol_fp;
-	real rmix, lmix;
+	// real ch1_fp, ch2_fp, ch3_fp, ch4_fp;
+	// real rvol_fp, lvol_fp;
+	// real rmix, lmix;
 
 	/* connections to wave RAM */
 	logic [7:0] wave_rd_d = /*random*/0; /* data output (data input is directly connected to common d[7:0]) */
@@ -320,7 +322,7 @@ module dmg_cpu_b(
 	logic [7:0]  reg_obj5x, reg_obj6x, reg_obj7x, reg_obj8x, reg_obj9x;
 
 	function automatic logic bidir_out(logic drv_low, ndrv_high);
-		if (/*isunknown(drv_low))*/0 || /*isunknown(ndrv_high)))*/0
+		if (/*isunknown(drv_low))*/0 || /*isunknown(ndrv_high))*/0)
 			bidir_out = 'x;
 		else if (drv_low == ndrv_high)
 			bidir_out = !drv_low;
@@ -446,26 +448,26 @@ module dmg_cpu_b(
 	assign p13_c  = !p13;
 
 	/* simulate analog parts */
-	assign ch1_fp = $itor(ch1_out) / 15.0;
-	assign ch2_fp = $itor(ch2_out) / 15.0;
-	assign ch3_fp = $itor(wave_dac_d) / 15.0;
-	assign ch4_fp = $itor(ch4_out) / 15.0;
-	assign rvol_fp = $itor(~nrvolume) / 7.0;
-	assign lvol_fp = $itor(~nlvolume) / 7.0;
-	assign rmix = (rmixer[0] ? ch1_fp * 0.7 : 0.0) +
-	              (rmixer[1] ? ch2_fp * 0.7 : 0.0) +
-	              (rmixer[2] ? ch3_fp * 0.7 : 0.0) +
-	              (rmixer[3] ? ch4_fp * 0.7 : 0.0) +
-	              (vin_r_ena ? vin * 0.7 : 0.0);
-	assign lmix = (lmixer[0] ? ch1_fp * 0.7 : 0.0) +
-	              (lmixer[1] ? ch2_fp * 0.7 : 0.0) +
-	              (lmixer[2] ? ch3_fp * 0.7 : 0.0) +
-	              (lmixer[3] ? ch4_fp * 0.7 : 0.0) +
-	              (vin_l_ena ? vin * 0.7 : 0.0);
-	assign rout = (rmix * rvol_fp > 1.0) ? 1.0 : (rmix * rvol_fp);
-	assign lout = (lmix * lvol_fp > 1.0) ? 1.0 : (lmix * lvol_fp);
+	// assign ch1_fp = $itor(ch1_out) / 15.0;
+	// assign ch2_fp = $itor(ch2_out) / 15.0;
+	// assign ch3_fp = $itor(wave_dac_d) / 15.0;
+	// assign ch4_fp = $itor(ch4_out) / 15.0;
+	// assign rvol_fp = $itor(~nrvolume) / 7.0;
+	// assign lvol_fp = $itor(~nlvolume) / 7.0;
+	// assign rmix = (rmixer[0] ? ch1_fp * 0.7 : 0.0) +
+	//               (rmixer[1] ? ch2_fp * 0.7 : 0.0) +
+	//               (rmixer[2] ? ch3_fp * 0.7 : 0.0) +
+	//               (rmixer[3] ? ch4_fp * 0.7 : 0.0) +
+	//               (vin_r_ena ? vin * 0.7 : 0.0);
+	// assign lmix = (lmixer[0] ? ch1_fp * 0.7 : 0.0) +
+	//               (lmixer[1] ? ch2_fp * 0.7 : 0.0) +
+	//               (lmixer[2] ? ch3_fp * 0.7 : 0.0) +
+	//               (lmixer[3] ? ch4_fp * 0.7 : 0.0) +
+	//               (vin_l_ena ? vin * 0.7 : 0.0);
+	// assign rout = (rmix * rvol_fp > 1.0) ? 1.0 : (rmix * rvol_fp);
+	// assign lout = (lmix * lvol_fp > 1.0) ? 1.0 : (lmix * lvol_fp);
 
-	initial foreach (wave_ram[i]) wave_ram[i] = /*random*/0;
+	initial for (i = 0; i < $size(wave_ram); i++) wave_ram[i] = /*random*/0;
 	always_ff @(posedge nwave_ram_wr) if (!wave_ram_ctrl1) wave_ram[wave_a] <= /*isunknown(d))*/0 ? /*random*/0 : d;
 	always_latch if (!wave_ram_ctrl1 && !atok) wave_rd_d = wave_ram[wave_a];
 	// TODO: The very first sample (high nibble of FF30) gets skipped when CH3 is started. Check if this is correct.
@@ -475,14 +477,14 @@ module dmg_cpu_b(
 	trireg_m oam_a_trireg [7:0] (oam_a_nd);
 	trireg_m oam_b_trireg [7:0] (oam_b_nd);
 
-	initial foreach (oam_a_ram[i]) oam_a_ram[i] = /*random*/0;
-	initial foreach (oam_b_ram[i]) oam_b_ram[i] = /*random*/0;
+	initial for (i = 0; i < $size(oam_a_ram); i++) oam_a_ram[i] = /*random*/0;
+	initial for (i = 0; i < $size(oam_b_ram); i++) oam_b_ram[i] = /*random*/0;
 	always_ff @(posedge oam_a_ncs) oam_a_ram[oam_a[7:1]] <= /*isunknown(oam_a_nd))*/0 ? /*random*/0 : oam_a_nd;
 	always_ff @(posedge oam_b_ncs) oam_b_ram[oam_a[7:1]] <= /*isunknown(oam_b_nd))*/0 ? /*random*/0 : oam_b_nd;
 	assign oam_a_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_a_ram[oam_a[7:1]] : 'z;
 	assign oam_b_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_b_ram[oam_a[7:1]] : 'z;
 
-	initial foreach (hram[i]) hram[i] = /*random*/0;
+	initial for (i = 0; i < $size(hram); i++) hram[i] = /*random*/0;
 	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= /*isunknown(d))*/0 ? /*random*/0 : d;
 	assign d = (hram_cs && cpu_rd) ? hram[a[6:0]] : 'z;
 
@@ -496,14 +498,14 @@ module dmg_cpu_b(
 		f = 0;
 		if (bootrom_file != "") begin
 			f = $fopen(bootrom_file, "rb");
-			if (!f)
-				$error("Failed to open boot ROM file %s for reading. Using all-zero boot ROM.", bootrom_file);
+			// if (!f)
+			// 	$error("Failed to open boot ROM file %s for reading. Using all-zero boot ROM.", bootrom_file);
 		end
 		if (f) begin
 			_ = $fread(brom, f);
 			$fclose(f);
 		end else
-			foreach (brom[i]) brom[i] = '0;
+			for (i = 0; i < $size(brom); i++) brom[i] = '0;
 	end
 	assign d = boot_cs ? brom[a[7:0]] : 'z;
 
