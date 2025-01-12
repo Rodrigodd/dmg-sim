@@ -37,7 +37,7 @@ module oam(
 	logic mynu, wafo, guko, wuku, ylyc, ynyc, wume, wewu, zone, zofe;
 	tri logic [7:0] oam_na;
 
-	logic [7:0] oam_na_cap = $random;
+	logic [7:0] oam_na_cap = /*$random*/ '0;
 
 	dffr_bp dffr_yfel(gava,  anom, !yfel, yfel);
 	dffr_bp dffr_wewy(!yfel, anom, !wewy, wewy);
