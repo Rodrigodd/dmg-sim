@@ -110,7 +110,7 @@ module dmg_cpu_b_test;
 	endtask
 
 	initial foreach (video_ram[i]) video_ram[i] = $random;
-	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= $isunknown(md_pin) ? $random : md_pin;
+	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= /*isunknown(md_pin)*/0 ? $random : md_pin;
 	assign md_pin = (!nmcs && !nmoe) ? video_ram[ma_pin] : 'z;
 
 	/* CPU must not drive data bus when cpu_clkin_t3 (BEDO) is low or cpu_clkin_t2 (BOWA) is high,
