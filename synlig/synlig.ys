@@ -1,0 +1,364 @@
+read_verilog -sv -icells \
+cells/dffsr.sv \
+cells/dffr_bp.sv \
+cells/tffd.sv \
+cells/nor_srlatch.sv \
+cells/dlatch_a.sv \
+cells/drlatch.sv \
+
+read_systemverilog -dump_ast1 -dump_ast2 -parseall \
+../dmg_cpu_b/cells/timing_param.sv \
+../dmg_cpu_b/cells/nand_srlatch.sv \
+../dmg_cpu_b/cells/dlatch_b.sv \
+../dmg_cpu_b/cells/dffr_a.sv \
+../dmg_cpu_b/cells/dffr_b.sv \
+../dmg_cpu_b/cells/trireg_m.sv \
+../dmg_cpu_b/pages/p1_clocks_reset.sv \
+../dmg_cpu_b/pages/p2_interrupts.sv \
+../dmg_cpu_b/pages/p3_timer.sv \
+../dmg_cpu_b/pages/p4_dma.sv \
+../dmg_cpu_b/pages/p5_joypad_io.sv \
+../dmg_cpu_b/pages/p6_serial_link.sv \
+../dmg_cpu_b/pages/p7_sys_decode.sv \
+../dmg_cpu_b/pages/p8_ext_cpu_busses.sv \
+../dmg_cpu_b/pages/p9_apu_control.sv \
+../dmg_cpu_b/pages/p10_apu_decode.sv \
+../dmg_cpu_b/pages/p11_ch1_regs.sv \
+../dmg_cpu_b/pages/p12_ch1_sweep.sv \
+../dmg_cpu_b/pages/p13_channel1.sv \
+../dmg_cpu_b/pages/p14_ch2_regs.sv \
+../dmg_cpu_b/pages/p15_channel2.sv \
+../dmg_cpu_b/pages/p16_ch3_regs.sv \
+../dmg_cpu_b/pages/p17_wave_ram.sv \
+../dmg_cpu_b/pages/p18_channel3.sv \
+../dmg_cpu_b/pages/p19_ch4_regs.sv \
+../dmg_cpu_b/pages/p20_channel4.sv \
+../dmg_cpu_b/pages/p21_video_control.sv \
+../dmg_cpu_b/pages/p22_ppu_decode.sv \
+../dmg_cpu_b/pages/p23_video_regs.sv \
+../dmg_cpu_b/pages/p24_lcd_control.sv \
+../dmg_cpu_b/pages/p25_vram_interface.sv \
+../dmg_cpu_b/pages/p26_background.sv \
+../dmg_cpu_b/pages/p27_window_map_lookup.sv \
+../dmg_cpu_b/pages/p28_oam.sv \
+../dmg_cpu_b/pages/p29_sprite_control.sv \
+../dmg_cpu_b/pages/p30_sprite_store.sv \
+../dmg_cpu_b/pages/p31_sprite_x_matchers.sv \
+../dmg_cpu_b/pages/p32_bg_pixel_shifter.sv \
+../dmg_cpu_b/pages/p33_sprite_pixel_shifter.sv \
+../dmg_cpu_b/pages/p34_sprite_palette_shifter.sv \
+../dmg_cpu_b/pages/p35_pixel_mux.sv \
+../dmg_cpu_b/pages/p36_palettes.sv \
+../dmg_cpu_b/dmg_cpu_b.sv \
+../mbc/mbc1.sv \
+../mbc/mbc5.sv \
+dmg.sv
+
+read_verilog \
+../dmgcpu/HDL/sm83/_GekkioNames.v \
+../dmgcpu/HDL/sm83/ALU.v \
+../dmgcpu/HDL/sm83/Bottom.v \
+../dmgcpu/HDL/sm83/DataMux.v \
+../dmgcpu/HDL/sm83/Decoder1.v \
+../dmgcpu/HDL/sm83/Decoder2.v \
+../dmgcpu/HDL/sm83/Decoder3.v \
+../dmgcpu/HDL/sm83/IDU.v \
+../dmgcpu/HDL/sm83/IRNots.v \
+../dmgcpu/HDL/sm83/IRQ.v \
+../dmgcpu/HDL/sm83/Regs.v \
+../dmgcpu/HDL/sm83/SeqCells.v \
+../dmgcpu/HDL/sm83/Seq.v \
+../dmgcpu/HDL/sm83/Thingy.v \
+../dmgcpu/HDL/sm83/Top.v \
+
+log Finished reading all system verilog file
+
+hierarchy -top DMG
+
+tribuf -propagate bidir_out
+tribuf -propagate bidir_in
+opt_clean bidir_in
+
+# In DataMux, the buskeepers res_latch and dv_latch are unecessary, as Res and
+# DV are never tristate, so we just flatten them as simple Buffers here. For
+# ext_to_int we do the same, but because we will add another BusKeeper to the
+# `D` signal later in this script.
+proc DataMux
+flatten data_mux_bit/c:res_latch data_mux_bit/c:dv_latch data_mux_bit/c:ext_to_int %%
+setattr -mod -set keep_hierarchy 1 BusKeeper
+flatten DataMux
+opt_clean -purge DataMux
+opt_clean RegsBuses
+
+delete bootram
+delete mbc1
+delete mbc5
+# setattr -mod -set keep_hierarchy 1 dffsr
+# setattr -mod -set keep_hierarchy 1 drlatch
+# delete BusKeeper
+
+# Read new modules after `hierarchy` and `flatten`, otherwise they will be
+# removed.
+
+read_verilog -icells <<EOT
+// used to replace seq_sr_latch with internal cell $sr
+module mysr (input nr, s, output q );
+    $sr #(
+        .SET_POLARITY(1'b1),
+        .CLR_POLARITY(1'b0),
+        .WIDTH(1)
+    ) sr1 (
+        .CLR(nr),
+        .SET(s),
+        .Q(q)
+    );
+endmodule
+
+// used to add a delay to seq_dff_posedge_comp, otherwise verilator evaluate
+// the signals in the wrong order.
+module myseqdff (d, clk, cclk, q);
+	input d;	
+	input clk;
+	input cclk;
+	output q;
+
+    wire i;
+    $delay #(
+        .DELAY(1),
+        .WIDTH(1)
+    ) d1 (
+        .A(d),
+        .Y(i)
+    );
+
+	reg val;
+	initial val = 1'b1;
+
+	always @(posedge clk) begin
+		val <= i;
+	end
+
+	assign q = val;
+endmodule
+EOT
+
+chtype -map seq_rs_latch mysr Sequencer
+chtype -map seq_rs_latch2 mysr Sequencer
+chtype -map seq_dff_posedge_comp myseqdff Sequencer
+
+# opt_clean
+tribuf
+
+# write_verilog -sv dmg.tribuf.sv
+
+proc -noopt
+
+opt_clean
+
+write_rtlil dmg.1.rtlil
+write_verilog -sv dmg.proc.sv
+
+delete trireg_m
+
+# tribuf
+flatten
+opt_clean
+
+write_verilog -sv dmg.flatten.sv
+write_rtlil dmg.flatten.rtil
+
+read_verilog -noopt -defer <<EOT
+module BusKeeperW #(parameter WIDTH=8) (a, y);
+    input [WIDTH-1:0] a;
+    output [WIDTH-1:0] y;
+    BusKeeper keeper [WIDTH-1:0] ( .d(a), .q(y) );
+endmodule
+EOT
+
+# wire2buf -buf BusKeeperW a y DMG/w:\cpu.data_mux.DataBus 
+wire2buf -buf BusKeeperW a y t:trireg_m %x1
+hierarchy -top DMG
+delete t:\trireg_m
+flatten t:*BusKeeperW*
+
+write_verilog -sv dmg.2buf.sv
+write_rtlil dmg.2buf.rtil
+
+# find tribufs, and propragate them. The tribufs will propagate until they
+# reach a output port, a BusKeepr, or a internal bus. 
+#
+# tristates will reach `D` (data-bus) and `A` (address-bus), but only `D` need
+# to be a tristate, `A` will be removed.
+#
+# Tristates that reachs a BusKeeper, will be merged together into a `$dlatch`.
+#
+# Remaning tristates will be replaced by a mux.
+tribuf -propagate
+opt_clean
+
+write_verilog -sv dmg.propagated.sv
+write_rtlil dmg.propagated.rtlil
+
+tribuf -merge 
+
+write_verilog -sv dmg.merged.sv
+write_rtlil dmg.merged.rtlil
+
+# Prepare modules for extracting tribuf/MuxKeeper pairs, and replacing them by
+# `$dlatches`:
+
+read_verilog -icells <<EOT
+// used to replace tribuffer/buskeeper pair with a $dlatch
+module mybuskeeper(input a, x, output q);
+    wire z;
+
+    $tribuf #(.WIDTH(1)) tb1 (.EN(x), .A(a), .Y(z));
+    BusKeeper bk1 (.d(z), .q(q));
+endmodule
+
+module mydff(input a, x, output q);
+    $dlatch #(.WIDTH(1), .EN_POLARITY(1)) 
+    dl1 (.D(a), .EN(x), .Q(q));
+endmodule
+
+module mydffd(input a, x, output q);
+    wire i;
+    $delay #(
+        .DELAY(1),
+        .WIDTH(1)
+    ) d1 (
+        .A(a),
+        .Y(i)
+    );
+
+    $dlatch #(.WIDTH(1), .EN_POLARITY(1)) 
+    dl1 (.D(i), .EN(x), .Q(q));
+endmodule
+
+module mybuskeeper8(input [7:0] a, input x, output  [7:0] q);
+    wire [7:0] z;
+    $tribuf #(.WIDTH(8)) tb1 (.EN(x), .A(a), .Y(z));
+    BusKeeper bk0 (.d(z[0]), .q(q[0]));
+    BusKeeper bk1 (.d(z[1]), .q(q[1]));
+    BusKeeper bk2 (.d(z[2]), .q(q[2]));
+    BusKeeper bk3 (.d(z[3]), .q(q[3]));
+    BusKeeper bk4 (.d(z[4]), .q(q[4]));
+    BusKeeper bk5 (.d(z[5]), .q(q[5]));
+    BusKeeper bk6 (.d(z[6]), .q(q[6]));
+    BusKeeper bk7 (.d(z[7]), .q(q[7]));
+endmodule
+
+module mydff8(input [7:0] a, input x, output [7:0] q);
+    $dlatch #(.WIDTH(8), .EN_POLARITY(1)) dl1 (.D(a), .EN(x), .Q(q));
+endmodule
+
+module mybuskeeper14(input [13:0] a, input x, output  [13:0] q);
+    wire [13:0] z;
+    $tribuf #(.WIDTH(14)) tb1 (.EN(x), .A(a), .Y(z));
+    BusKeeper bk0 (.d(z[0]), .q(q[0]));
+    BusKeeper bk1 (.d(z[1]), .q(q[1]));
+    BusKeeper bk2 (.d(z[2]), .q(q[2]));
+    BusKeeper bk3 (.d(z[3]), .q(q[3]));
+    BusKeeper bk4 (.d(z[4]), .q(q[4]));
+    BusKeeper bk5 (.d(z[5]), .q(q[5]));
+    BusKeeper bk6 (.d(z[6]), .q(q[6]));
+    BusKeeper bk7 (.d(z[7]), .q(q[7]));
+    BusKeeper bk8 (.d(z[8]), .q(q[8]));
+    BusKeeper bk9 (.d(z[9]), .q(q[9]));
+    BusKeeper bk10 (.d(z[10]), .q(q[10]));
+    BusKeeper bk11 (.d(z[11]), .q(q[11]));
+    BusKeeper bk12 (.d(z[12]), .q(q[12]));
+    BusKeeper bk13 (.d(z[13]), .q(q[13]));
+endmodule
+
+module mydff14(input [13:0] a, input x, output [13:0] q);
+    $dlatch #(.WIDTH(14), .EN_POLARITY(1)) dl1 (.D(a), .EN(x), .Q(q));
+endmodule
+
+// used for PCL_KeepInput
+module mybuskeeper332(input [2:0] a0, input [2:0] a1, input [1:0] a2, input x0, input x1, input x2, output  [7:0] q);
+    wire [7:0] z;
+    $tribuf #(.WIDTH(3)) tb0 (.EN(x0), .A(a0), .Y(z[2:0]));
+    $tribuf #(.WIDTH(3)) tb1 (.EN(x1), .A(a1), .Y(z[5:3]));
+    $tribuf #(.WIDTH(2)) tb2 (.EN(x2), .A(a2), .Y(z[7:6]));
+    BusKeeper bk0 (.d(z[0]), .q(q[0]));
+    BusKeeper bk1 (.d(z[1]), .q(q[1]));
+    BusKeeper bk2 (.d(z[2]), .q(q[2]));
+    BusKeeper bk3 (.d(z[3]), .q(q[3]));
+    BusKeeper bk4 (.d(z[4]), .q(q[4]));
+    BusKeeper bk5 (.d(z[5]), .q(q[5]));
+    BusKeeper bk6 (.d(z[6]), .q(q[6]));
+    BusKeeper bk7 (.d(z[7]), .q(q[7]));
+endmodule
+
+module mydff332(input [2:0] a0, input [2:0] a1, input [1:0] a2, input x0, input x1, input x2, output  [7:0] q);
+    $dlatch #(.WIDTH(3), .EN_POLARITY(1)) tb0 (.D(a0), .EN(x0), .Q(q[2:0]));
+    $dlatch #(.WIDTH(3), .EN_POLARITY(1)) tb1 (.D(a1), .EN(x1), .Q(q[5:3]));
+    $dlatch #(.WIDTH(2), .EN_POLARITY(1)) tb2 (.D(a2), .EN(x2), .Q(q[7:6]));
+endmodule
+
+// replace remaining BusKeeper
+module mybuffer(input d, output q);
+    assign q = d;
+endmodule
+EOT
+
+opt_clean DMG
+# Merge identical BusKeepers
+opt_merge -share_all DMG
+
+design -copy-to mybuskeepermap mybuskeeper
+design -copy-to mybuskeepermap8 mybuskeeper8
+design -copy-to mybuskeepermap332 mybuskeeper332
+
+extract -map %mybuskeepermap DMG
+extract -map %mybuskeepermap8 DMG
+extract -map %mybuskeepermap332 DMG
+
+chtype -map mybuskeeper mydffd w:\dmgcore.bot.regs.RegIR* %ci1
+chtype -map mybuskeeper mydff
+chtype -map mybuskeeper8 mydff8
+chtype -map mybuskeeper332 mydff332
+
+# perm_ff is strangely always driven
+chtype -map BusKeeper mybuffer c:*perm_ff
+
+opt_clean DMG
+opt_merge
+
+write_rtlil dmg.mapped.rtlil
+
+# There now should be no BusKeeper
+cd DMG
+select -assert-none t:BusKeeper 
+cd
+delete BusKeeper
+
+# replace remaining tristates with pmux (except output ports)
+tribuf -merge -logic 
+
+# From this point onwards, the design should be completely synthesizable
+# (hopefully). So we can apply more aggressive optimizations.
+
+# delete dffsr
+# delete drlatch
+
+flatten
+
+write_verilog -sv dmg.fflatten.sv
+
+opt
+
+write_rtlil dmg.opt.rtlil
+write_verilog -sv dmg.opt.sv
+
+# purging unused signals considerably speed things up, but we lose tracing for
+# many internal signals.
+opt_clean -purge
+
+# Write the code back to SystemVerilog. SystemVerilog contains a little more of
+# semanthic information that helps Verilator.
+write_verilog -sv dmg.purge.sv
+
+# Write the RTLIL text represenation, for debugging.
+write_rtlil dmg.yosys.rtlil
