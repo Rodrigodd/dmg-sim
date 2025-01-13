@@ -1,0 +1,93 @@
+# read verilog
+read_systemverilog -parseall \
+dmg_cpu_b/cells/timing_param.sv \
+dmg_cpu_b/cells/nor_srlatch.sv \
+dmg_cpu_b/cells/nand_srlatch.sv \
+dmg_cpu_b/cells/dlatch_a.sv \
+dmg_cpu_b/cells/dlatch_b.sv \
+dmg_cpu_b/cells/drlatch.sv \
+dmg_cpu_b/cells/dffr_a.sv \
+dmg_cpu_b/cells/dffr_b.sv \
+dmg_cpu_b/cells/dffr_bp.sv \
+dmg_cpu_b/cells/dffsr.sv \
+dmg_cpu_b/cells/tffd.sv \
+dmg_cpu_b/cells/trireg_m.sv \
+dmg_cpu_b/pages/p1_clocks_reset.sv \
+dmg_cpu_b/pages/p2_interrupts.sv \
+dmg_cpu_b/pages/p3_timer.sv \
+dmg_cpu_b/pages/p4_dma.sv \
+dmg_cpu_b/pages/p5_joypad_io.sv \
+dmg_cpu_b/pages/p6_serial_link.sv \
+dmg_cpu_b/pages/p7_sys_decode.sv \
+dmg_cpu_b/pages/p8_ext_cpu_busses.sv \
+dmg_cpu_b/pages/p9_apu_control.sv \
+dmg_cpu_b/pages/p10_apu_decode.sv \
+dmg_cpu_b/pages/p11_ch1_regs.sv \
+dmg_cpu_b/pages/p12_ch1_sweep.sv \
+dmg_cpu_b/pages/p13_channel1.sv \
+dmg_cpu_b/pages/p14_ch2_regs.sv \
+dmg_cpu_b/pages/p15_channel2.sv \
+dmg_cpu_b/pages/p16_ch3_regs.sv \
+dmg_cpu_b/pages/p17_wave_ram.sv \
+dmg_cpu_b/pages/p18_channel3.sv \
+dmg_cpu_b/pages/p19_ch4_regs.sv \
+dmg_cpu_b/pages/p20_channel4.sv \
+dmg_cpu_b/pages/p21_video_control.sv \
+dmg_cpu_b/pages/p22_ppu_decode.sv \
+dmg_cpu_b/pages/p23_video_regs.sv \
+dmg_cpu_b/pages/p24_lcd_control.sv \
+dmg_cpu_b/pages/p25_vram_interface.sv \
+dmg_cpu_b/pages/p26_background.sv \
+dmg_cpu_b/pages/p27_window_map_lookup.sv \
+dmg_cpu_b/pages/p28_oam.sv \
+dmg_cpu_b/pages/p29_sprite_control.sv \
+dmg_cpu_b/pages/p30_sprite_store.sv \
+dmg_cpu_b/pages/p31_sprite_x_matchers.sv \
+dmg_cpu_b/pages/p32_bg_pixel_shifter.sv \
+dmg_cpu_b/pages/p33_sprite_pixel_shifter.sv \
+dmg_cpu_b/pages/p34_sprite_palette_shifter.sv \
+dmg_cpu_b/pages/p35_pixel_mux.sv \
+dmg_cpu_b/pages/p36_palettes.sv \
+dmg_cpu_b/dmg_cpu_b.sv
+
+log Finished reading all system verilog file
+
+hierarchy -top dmg_cpu_b
+
+delete trireg_m
+
+proc
+flatten
+
+# write_rtlil sm83.1.rtlil
+
+# find tribufs, and propragate them. The tribufs will propagate until they
+# reach a output port, a BusKeepr, or a internal bus. 
+#
+# tristates will reach `D` (data-bus) and `A` (address-bus), but only `D` need
+# to be a tristate, `A` will be removed.
+#
+# Tristates that reachs a BusKeeper, will be merged together into a `$dlatch`.
+#
+# Remaning tristates will be replaced by a mux.
+tribuf -propagate
+
+# replace remaining tristates with pmux (except output ports)
+tribuf -merge -logic 
+
+# From this point onwards, the design should be completely synthesizable
+# (hopefully). So we can apply more aggressive optimizations.
+
+flatten
+opt
+
+# purging unused signals considerably speed things up, but we lose tracing for
+# many internal signals.
+opt_clean -purge
+
+# Write the code back to SystemVerilog. SystemVerilog contains a little more of
+# semanthic information that helps Verilator.
+write_verilog -sv sm83.yosys.v
+
+# Write the RTLIL text represenation, for debugging.
+write_rtlil sm83.yosys.rtlil
