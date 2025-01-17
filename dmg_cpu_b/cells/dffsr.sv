@@ -22,7 +22,7 @@ module dffsr #(
 	initial nreset_posedge = 0;
 	always @(posedge nreset) nreset_posedge <= 1;
 
-	always @(posedge clk, negedge nset, negedge nreset, posedge nset_posedge, posedge nreset_posedge) begin
+	always @(posedge clk/* , negedge nset, negedge nreset, posedge nset_posedge, posedge nreset_posedge */) begin
 		if (!nreset) // TODO: check priority of set/reset
 			ff <= 0;
 		else if (!nset)

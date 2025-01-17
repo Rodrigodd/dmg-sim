@@ -54,10 +54,12 @@ log Finished reading all system verilog file
 
 hierarchy -top dmg_cpu_b
 
-delete trireg_m
+tribuf
 
 proc
 flatten
+
+shell
 
 # write_rtlil sm83.1.rtlil
 
