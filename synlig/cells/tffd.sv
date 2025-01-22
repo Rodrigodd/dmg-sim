@@ -18,7 +18,7 @@ module tffd #(
 	initial load_negedge = 0;
 	always @(negedge load) load_negedge <= 1;
 
-	always @(negedge nclk, posedge load_negedge) begin
+	always @(negedge nclk/* , posedge load_negedge */) begin
 		if (load_negedge)
 			ff <= /*isunknown(d))*/0 ? initff : d;
 		else
