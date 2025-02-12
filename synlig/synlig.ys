@@ -1,5 +1,8 @@
-# read verilog
-read_systemverilog -parseall \
+read_verilog -sv -icells \
+cells/dffsr.sv \
+cells/tffd.sv \
+
+read_systemverilog -icells -parseall \
 ../dmg_cpu_b/cells/timing_param.sv \
 ../dmg_cpu_b/cells/nor_srlatch.sv \
 ../dmg_cpu_b/cells/nand_srlatch.sv \
@@ -9,8 +12,6 @@ read_systemverilog -parseall \
 ../dmg_cpu_b/cells/dffr_a.sv \
 ../dmg_cpu_b/cells/dffr_b.sv \
 ../dmg_cpu_b/cells/dffr_bp.sv \
-cells/dffsr.sv \
-cells/tffd.sv \
 ../dmg_cpu_b/cells/trireg_m.sv \
 ../dmg_cpu_b/pages/p1_clocks_reset.sv \
 ../dmg_cpu_b/pages/p2_interrupts.sv \
@@ -54,12 +55,22 @@ log Finished reading all system verilog file
 
 hierarchy -top dmg_cpu_b
 
+# write_verilog -sv dmg.plain.sv
+
 tribuf
 
+# write_verilog -sv dmg.tribuf.sv
+
 proc
+
+write_verilog -sv dmg.proc.sv
+
 flatten
 
-# write_rtlil sm83.1.rtlil
+write_rtlil dmg.1.rtlil
+write_verilog -sv dmg.flatten.sv
+
+exit
 
 # find tribufs, and propragate them. The tribufs will propagate until they
 # reach a output port, a BusKeepr, or a internal bus. 
@@ -72,8 +83,12 @@ flatten
 # Remaning tristates will be replaced by a mux.
 tribuf -propagate
 
+write_verilog -sv dmg.propagated.sv
+
 # replace remaining tristates with pmux (except output ports)
 tribuf -merge -logic 
+
+write_verilog -sv dmg.merged.sv
 
 # From this point onwards, the design should be completely synthesizable
 # (hopefully). So we can apply more aggressive optimizations.
@@ -81,13 +96,15 @@ tribuf -merge -logic
 flatten
 opt
 
+write_verilog -sv dmg.opt.sv
+
 # purging unused signals considerably speed things up, but we lose tracing for
 # many internal signals.
 opt_clean -purge
 
 # Write the code back to SystemVerilog. SystemVerilog contains a little more of
 # semanthic information that helps Verilator.
-write_verilog -sv sm83.yosys.v
+write_verilog -sv dmg.purge.sv
 
 # Write the RTLIL text represenation, for debugging.
-write_rtlil sm83.yosys.rtlil
+write_rtlil dmg.yosys.rtlil
