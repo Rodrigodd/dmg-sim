@@ -2,7 +2,7 @@
 `default_nettype none
 
 module dffr_b #(
-		parameter logic INITIAL_Q = 'x
+		parameter logic INITIAL_Q = '0
 	) (
 		input  logic clk, nreset, d,
 		output logic q

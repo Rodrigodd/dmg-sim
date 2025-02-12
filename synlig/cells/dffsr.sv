@@ -1,17 +1,30 @@
 `timescale 1ns/1ns
 `default_nettype none
 
+// D flip-flop with asynchronous set and reset
 module dffsr #(
-		parameter logic INITIAL_Q = 'x
+		parameter logic INITIAL_Q = '0
 	) (
 		input  logic clk, nset, nreset, d,
 		output logic q
 	);
 
-	bit ff, initff;
+	// $dffsr #(
+	// 	.WIDTH(1),
+	// 	.CLK_POLARITY(1'b1),
+	// 	.SET_POLARITY(1'b0),
+	// 	.CLR_POLARITY(1'b0),
+	// ) dffsr (
+	// 	.CLK(clk),
+	// 	.SET(nset),
+	// 	.CLR(nreset),
+	// 	.D(d),
+	// 	.Q(q)
+	// );
+
+	bit ff;
 	initial begin
-		initff = /*isunknown(INITIAL_Q))*/0 ? /*random*/0 : INITIAL_Q;
-		ff     = initff;
+		ff <=  INITIAL_Q;
 	end
 
 	bit nset_posedge;
@@ -22,25 +35,18 @@ module dffsr #(
 	initial nreset_posedge = 0;
 	always @(posedge nreset) nreset_posedge <= 1;
 
-	always @(posedge clk/* , negedge nset, negedge nreset, posedge nset_posedge, posedge nreset_posedge */) begin
-		if (!nreset) // TODO: check priority of set/reset
+	wire set = ~nset;
+	wire reset = ~nreset;
+
+	always @(posedge clk , posedge set, posedge reset) begin
+		if (reset)
 			ff <= 0;
-		else if (!nset)
-			ff <= 1;
-		else if (nreset_posedge)
-			ff <= 0;
-		else if (nset_posedge)
+		else if (set)
 			ff <= 1;
 		else
-			ff <= /*isunknown(d))*/0 ? initff : d;
-
-		if (nset_posedge)
-			nset_posedge <= 0;
-
-		if (nreset_posedge)
-			nreset_posedge <= 0;
+			ff <= d;
 	end
 
-	assign #T_DFFSR q = ff;
+	assign q = ff;
 
 endmodule

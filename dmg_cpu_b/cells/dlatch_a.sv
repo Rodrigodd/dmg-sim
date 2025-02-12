@@ -2,7 +2,7 @@
 `default_nettype none
 
 module dlatch_a #(
-		parameter logic INITIAL_Q = 'x
+		parameter logic INITIAL_Q = '0
 	) (
 		input  logic c, d,
 		output logic q
