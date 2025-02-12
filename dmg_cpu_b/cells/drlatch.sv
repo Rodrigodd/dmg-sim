@@ -1,7 +1,7 @@
 `default_nettype none
 
 module drlatch #(
-		parameter logic INITIAL_Q = 'x
+		parameter logic INITIAL_Q = '0
 	) (
 		input  logic c, nreset, d,
 		output logic q

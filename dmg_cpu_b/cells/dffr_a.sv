@@ -1,9 +1,9 @@
 `default_nettype none
 
-parameter bit dffra_inv_clk = 0; /* DFFR Variant A clock input is inverted? */
+// parameter bit dffra_inv_clk = 0; /* DFFR Variant A clock input is inverted? */
 
 module dffr_a #(
-		parameter logic INITIAL_Q = 'x
+		parameter logic INITIAL_Q = '0
 	) (
 		input  logic clk, nreset, d,
 		output logic q

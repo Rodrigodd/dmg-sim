@@ -1,7 +1,7 @@
 `default_nettype none
 
 module tffd #(
-		parameter logic INITIAL_Q = 'x
+		parameter logic INITIAL_Q = '0
 	) (
 		input  logic nclk, load, d,
 		output logic q
