@@ -231,7 +231,7 @@ module dmg_cpu_b(
 
 	/* connections to analog parts */
 	logic [3:0] rmixer, lmixer;
-	logic [3:0] ch1_out, ch2_out, wave_dac_d, ch4_out;
+	(*keep*) logic [3:0] ch1_out, ch2_out, wave_dac_d, ch4_out;
 	logic [2:0] nrvolume, nlvolume;
 	logic       vin_r_ena, vin_l_ena;
 

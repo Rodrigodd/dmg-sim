@@ -179,8 +179,9 @@ module dmg_cpu_b_gameboy;
 		 .d_pin(d_pin), .md_pin(md_pin), .a_pin(a_pin), .ma_pin(ma_pin),
 		 .sout(sout), .sin(sin), .sck(sck), .p10(p10), .p11(p11), .p12(p12),
 		 .p13(p13), .p14(p14), .p15(p15), .cpg(cpg), .cp(cp), .cpl(cpl),
-		 .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .rout(rout),
-		 .lout(lout), .vin(0.0), .unbonded_pad0('1),
+		 .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), 
+		 // .rout(rout), .lout(lout), .vin(0.0),
+		 .unbonded_pad0('1),
 		 .unbonded_pad1(), .cpu_out_t1(cpu_out_t1),
 		 .cpu_clkin_t2(cpu_clkin_t2), .cpu_clkin_t3(cpu_clkin_t3),
 		 .cpu_clkin_t4(cpu_clkin_t4), .cpu_clkin_t5(cpu_clkin_t5),
@@ -325,7 +326,7 @@ module dmg_cpu_b_gameboy;
 		end
 	end
 
-	assign ncyc        = !dmg.p1_clocks_reset.adyk && !dmg.p1_clocks_reset.alef;
+	// assign ncyc        = !dmg.p1_clocks_reset.adyk && !dmg.p1_clocks_reset.alef;
 	assign din         = d;
 	assign clk_stable  = cpu_in_t15;
 	assign reset       = cpu_in_t12;
@@ -408,10 +409,10 @@ module dmg_cpu_b_gameboy;
 					forever begin
 						cyc(64);
 						if (dump_channels) begin
-							write_bit4_as_int8(fch[1], dmg.ch1_out);
-							write_bit4_as_int8(fch[2], dmg.ch2_out);
-							write_bit4_as_int8(fch[3], dmg.wave_dac_d);
-							write_bit4_as_int8(fch[4], dmg.ch4_out);
+							// write_bit4_as_int8(fch[1], dmg.ch1_out);
+							// write_bit4_as_int8(fch[2], dmg.ch2_out);
+							// write_bit4_as_int8(fch[3], dmg.wave_dac_d);
+							// write_bit4_as_int8(fch[4], dmg.ch4_out);
 						end
 						if (dump_sound) begin
 							write_real_as_int16(fmix, lout);
