@@ -97,9 +97,9 @@ module channel1(
 	tffd tffd_hemy(hyto, ch1_restart, ff12_d5,  hemy);
 	tffd tffd_hafo(jufy, ch1_restart, ff12_d4,  hafo);
 	drlatch latch_dupe(!doge, dado, d[7], dupe);
-	nor_srlatch latch_cyto(ch1_restart, bery, cyto,);
+	nor_srlatch latch_cyto(ch1_restart, bery, cyto,'0);
 	nor_srlatch latch_fyfo(gefe,        ezec, fyfo, nfyfo);
-	nor_srlatch latch_kezu(kyno,        keko, kezu,);
+	nor_srlatch latch_kezu(kyno,        keko, kezu,'0);
 	assign #T_INV  jone = !byfe_128hz;
 	assign #T_INV  kado = !apu_reset;
 	assign #T_INV  kere = !kaly;

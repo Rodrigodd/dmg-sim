@@ -61,8 +61,8 @@ module channel2(
 	tffd tffd_feno(gafa, elox_q, ff17_d4,  feno);
 	nand_srlatch latch_buta(bodo, ares, buta, nbuta);
 	nor_srlatch  latch_dala(celo, dope, dala, ndala);
-	nor_srlatch  latch_dane(elox, esyk, dane,);
-	nor_srlatch  latch_jeme(hepo, hyle, jeme,);
+	nor_srlatch  latch_dane(elox, esyk, dane,'0);
+	nor_srlatch  latch_jeme(hepo, hyle, jeme,'0);
 	assign #T_INV  hota = !byfe_128hz;
 	assign #T_INV  katy = !apu_reset;
 	assign #T_INV  kylo = !jyna;

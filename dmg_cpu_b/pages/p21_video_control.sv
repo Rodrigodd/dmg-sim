@@ -88,7 +88,7 @@ module video_control(
 	drlatch latch_rufo(!ryve, nreset9, d[4], rufo);
 	drlatch latch_roxe(!ryve, nreset9, d[3], roxe);
 	nor_srlatch latch_xymu(wego, avap, xymu, nxymu);
-	nor_srlatch latch_wusa(xajo, wego, wusa,);
+	nor_srlatch latch_wusa(xajo, wego, wusa, '0);
 	nor_srlatch latch_rupo(ropo, pago, rupo, nrupo);
 	assign #T_AND  xyvo = v[4] && v[7];
 	assign #T_NAND xugu = !(h[0] && h[1] && h[2] && h[5] && h[7]);

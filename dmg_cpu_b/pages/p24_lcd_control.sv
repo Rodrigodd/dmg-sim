@@ -42,7 +42,7 @@ module lcd_control(
 	dffr_bp dffr_pory(myvo, nafy,  nyka, pory);
 	dffr_bp dffr_pygo(clk2, nxymu, pory, pygo);
 	dffr_bp dffr_paho(roxo, nxymu, h[3], paho);
-	nor_srlatch latch_poky(pygo, loby, poky,);
+	nor_srlatch latch_poky(pygo, loby, poky,'0);
 	assign #T_INV  loby = !nxymu;
 	assign #T_NOR  nafy = !(loby || mosu);
 	assign #T_INV  tomu = !sylo;

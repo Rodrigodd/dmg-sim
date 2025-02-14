@@ -105,7 +105,7 @@ module channel3(
 	assign d[4] = fera;
 
 	dffr_bp dffr_davo(ajer_2mhz, calu, doru, davo);
-	nor_srlatch latch_fozu(gara, fygo, fozu,);
+	nor_srlatch latch_fozu(gara, fygo, fozu,'0);
 	assign #T_AND  gedo = fexu && ff1e_d6;
 	assign #T_OR   fygo = apu_reset || gedo || nff1a_d7;
 	assign #T_INV  ezas = !fozu;

@@ -61,8 +61,8 @@ module oam(
 
 	dffr_bp dffr_xuva(xyny, xare, xecy, xuva);
 	drlatch latch_xecy(waru, nreset7, d[7], xecy);
-	nor_srlatch latch_besu(catu, asen, besu,);
-	nor_srlatch latch_wuje(xyny, xuto, wuje,);
+	nor_srlatch latch_besu(catu, asen, besu,'0);
+	nor_srlatch latch_wuje(xyny, xuto, wuje,'0);
 	assign #T_OR   asen = reset_video || avap;
 	assign #T_INV  boge = !dma_run;
 	assign #T_AND  ajon = nxymu && boge;

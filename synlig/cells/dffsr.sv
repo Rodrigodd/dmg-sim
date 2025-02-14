@@ -24,16 +24,8 @@ module dffsr #(
 
 	bit ff;
 	initial begin
-		ff <=  INITIAL_Q;
+		ff <= INITIAL_Q;
 	end
-
-	bit nset_posedge;
-	initial nset_posedge = 0;
-	always @(posedge nset) nset_posedge <= 1;
-
-	bit nreset_posedge;
-	initial nreset_posedge = 0;
-	always @(posedge nreset) nreset_posedge <= 1;
 
 	wire set = ~nset;
 	wire reset = ~nreset;

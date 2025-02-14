@@ -1,10 +1,10 @@
 read_verilog -sv -icells \
 cells/dffsr.sv \
 cells/tffd.sv \
+cells/nor_srlatch.sv \
 
-read_systemverilog -icells -parseall \
+read_systemverilog -parseall \
 ../dmg_cpu_b/cells/timing_param.sv \
-../dmg_cpu_b/cells/nor_srlatch.sv \
 ../dmg_cpu_b/cells/nand_srlatch.sv \
 ../dmg_cpu_b/cells/dlatch_a.sv \
 ../dmg_cpu_b/cells/dlatch_b.sv \

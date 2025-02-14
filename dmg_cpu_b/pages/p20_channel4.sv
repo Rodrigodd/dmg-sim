@@ -94,7 +94,7 @@ module channel4(
 	tffd tffd_faty(etef, ch4_restart, ff21_d5, faty);
 	tffd tffd_feru(edyf, ch4_restart, ff21_d6, feru);
 	tffd tffd_fyro(elaf, ch4_restart, ff21_d7, fyro);
-	nor_srlatch latch_erox(fyno, enur, erox,);
+	nor_srlatch latch_erox(fyno, enur, erox,'0);
 	assign #T_OR   felo = ch4_eg_tick || ch4_eg_disable || erox;
 	assign #T_AO   fole = (felo && ff21_d3) || (felo && nff21_d3);
 	assign #T_AO   etef = (feko && ff21_d3) || (!feko && nff21_d3);
@@ -155,7 +155,7 @@ module channel4(
 	tffd tffd_jyco(kanu, huce, nff22_d0, jyco);
 	tffd tffd_jyre(jyco, huce, nff22_d1, jyre);
 	tffd tffd_jyfu(jyre, huce, nff22_d2, jyfu);
-	nor_srlatch  latch_gena(ch4_restart, fegy, gena,);
+	nor_srlatch  latch_gena(ch4_restart, fegy, gena,'0);
 	nor_srlatch  latch_hazo(helu,        gysu, hazo, nhazo);
 	nand_srlatch latch_jery(hapu,        hery, jery, njery);
 	assign #T_INV  gaso = !apu_reset;

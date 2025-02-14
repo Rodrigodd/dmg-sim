@@ -113,9 +113,9 @@ module window_map_lookup(
 	dffr_bp dffr_wobo(!wody, xaco,         !wobo, wobo);
 	dffr_bp dffr_wyko(!wobo, xaco,         !wyko, wyko);
 	dffr_bp dffr_xolo(!wyko, xaco,         !xolo, xolo);
-	nor_srlatch latch_rejo(sary, repu, rejo,);
-	nor_srlatch latch_pynu(nunu, xofo, pynu,);
-	nor_srlatch latch_roxy(paha, pova, roxy,);
+	nor_srlatch latch_rejo(sary, repu, rejo,'0);
+	nor_srlatch latch_pynu(nunu, xofo, pynu,'0);
+	nor_srlatch latch_roxy(paha, pova, roxy,'0);
 	assign #T_OR   repu = int_vbl || reset_video2;
 	assign #T_XNOR nezo = ff4b_d4 == h[4];
 	assign #T_XNOR nory = ff4b_d5 == h[5];
