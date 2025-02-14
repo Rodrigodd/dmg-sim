@@ -328,7 +328,7 @@ module dmg_cpu_b(
 		else if (drv_low)
 			bidir_out = 'x;
 		else
-			bidir_out = 'z;
+			bidir_out = 8'hzz;
 	endfunction
 
 	assign phi = !nphi_out;
@@ -480,12 +480,12 @@ module dmg_cpu_b(
 	initial for (i = 0; i < $size(oam_b_ram); i++) oam_b_ram[i] = $random;
 	always_ff @(posedge oam_a_ncs) oam_a_ram[oam_a[7:1]] <= /*isunknown(oam_a_nd))*/0 ? $random : oam_a_nd;
 	always_ff @(posedge oam_b_ncs) oam_b_ram[oam_a[7:1]] <= /*isunknown(oam_b_nd))*/0 ? $random : oam_b_nd;
-	assign oam_a_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_a_ram[oam_a[7:1]] : 'z;
-	assign oam_b_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_b_ram[oam_a[7:1]] : 'z;
+	assign oam_a_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_a_ram[oam_a[7:1]] : 8'hzz;
+	assign oam_b_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_b_ram[oam_a[7:1]] : 8'hzz;
 
 	initial for (i = 0; i < $size(hram); i++) hram[i] = $random;
 	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= /*isunknown(d))*/0 ? $random : d;
-	assign d = (hram_cs && cpu_rd) ? hram[a[6:0]] : 'z;
+	assign d = (hram_cs && cpu_rd) ? hram[a[6:0]] : 8'hzz;
 
 	initial begin
 		string bootrom_file;
@@ -506,7 +506,7 @@ module dmg_cpu_b(
 		end else
 			for (i = 0; i < $size(brom); i++) brom[i] = '0;
 	end
-	assign d = boot_cs ? brom[a[7:0]] : 'z;
+	assign d = boot_cs ? brom[a[7:0]] : 8'hzz;
 
 	clocks_reset           p1_clocks_reset(
 		.clkin_a(clkin_a), .clkin_b(clkin_b), .reset(reset), .nreset2(nreset2), .nreset6(nreset6),

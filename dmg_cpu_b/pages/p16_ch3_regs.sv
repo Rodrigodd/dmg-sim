@@ -51,7 +51,7 @@ module ch3_regs(
 	assign #T_NOR  fuvo = !(!guxe || apu_reset);
 	assign #T_NAND fasy = !(ff1a && gaxo);
 	assign #T_INV  fevo = !guxe;
-	assign #T_TRI  geko = !fasy ? !fevo : 'z;
+	assign #T_TRI  geko = !fasy ? !fevo : 1'bz;
 	assign #T_INV  fabo = !cery_2mhz;
 	assign #T_INV  gaze = !apu_reset;
 	assign #T_INV  faju = !gyra;
@@ -98,14 +98,14 @@ module ch3_regs(
 	assign #T_INV  hoxa = !ff1d;
 	assign #T_NOR  gute = !(hoxa || egad);
 	assign #T_INV  hovo = !gute;
-	assign #T_TRI  kamy = !hovo ? !nkeno : 'z;
-	assign #T_TRI  kora = !hovo ? !nkafo : 'z;
-	assign #T_TRI  jeza = !hovo ? !nkepa : 'z;
-	assign #T_TRI  juke = !hovo ? !nkygu : 'z;
-	assign #T_TRI  jude = !hovo ? !nkemu : 'z;
-	assign #T_TRI  kesy = !hovo ? !nkunu : 'z;
-	assign #T_TRI  kafu = !hovo ? !nkupe : 'z;
-	assign #T_TRI  jofo = !hovo ? !nkutu : 'z;
+	assign #T_TRI  kamy = !hovo ? !nkeno : 1'bz;
+	assign #T_TRI  kora = !hovo ? !nkafo : 1'bz;
+	assign #T_TRI  jeza = !hovo ? !nkepa : 1'bz;
+	assign #T_TRI  juke = !hovo ? !nkygu : 1'bz;
+	assign #T_TRI  jude = !hovo ? !nkemu : 1'bz;
+	assign #T_TRI  kesy = !hovo ? !nkunu : 1'bz;
+	assign #T_TRI  kafu = !hovo ? !nkupe : 1'bz;
+	assign #T_TRI  jofo = !hovo ? !nkutu : 1'bz;
 	assign d = { kamy, kora, jeza, juke, jude, kesy, kafu, jofo };
 
 	drlatch latch_hoto(!fovo, heky, d[6], hoto);
@@ -114,7 +114,7 @@ module ch3_regs(
 	assign #T_INV  heky = !apu_reset;
 	assign #T_INV  gory = !ncpu_rd;
 	assign #T_NAND gawa = !(ff1e && gory);
-	assign #T_TRI  haca = !gawa ? !(!hoto) : 'z;
+	assign #T_TRI  haca = !gawa ? !(!hoto) : 1'bz;
 	assign ff1e_d6  = hoto;
 	assign nff1e_d6 = !hoto;
 	assign d[6]     = haca;
@@ -131,9 +131,9 @@ module ch3_regs(
 
 	assign #T_INV  gunu = !ff1e;
 	assign #T_OR   fuva = gunu || egad;
-	assign #T_TRI  hufo = !fuva ? !njapu : 'z;
-	assign #T_TRI  jura = !fuva ? !nkeza : 'z;
-	assign #T_TRI  juvy = !fuva ? !nkeju : 'z;
+	assign #T_TRI  hufo = !fuva ? !njapu : 1'bz;
+	assign #T_TRI  jura = !fuva ? !nkeza : 1'bz;
+	assign #T_TRI  juvy = !fuva ? !nkeju : 1'bz;
 	assign d[2] = hufo;
 	assign d[1] = jura;
 	assign d[0] = juvy;
@@ -145,8 +145,8 @@ module ch3_regs(
 	assign #T_INV  guzu = !haga;
 	assign #T_INV  jotu = !ncpu_rd;
 	assign #T_NAND henu = !(ff1c && jotu);
-	assign #T_TRI  huco = !henu ? !(!huky) : 'z;
-	assign #T_TRI  hamu = !henu ? !(!hody) : 'z;
+	assign #T_TRI  huco = !henu ? !(!huky) : 1'bz;
+	assign #T_TRI  hamu = !henu ? !(!hody) : 1'bz;
 	assign ff1c_d6  = huky;
 	assign nff1c_d6 = !huky;
 	assign ff1c_d5  = hody;

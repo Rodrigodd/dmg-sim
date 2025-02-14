@@ -110,8 +110,8 @@ module dmg_cpu_b_test;
 	endtask
 
 	initial foreach (video_ram[i]) video_ram[i] = $random;
-	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= /*isunknown(md_pin)*/0 ? $random : md_pin;
-	assign md_pin = (!nmcs && !nmoe) ? video_ram[ma_pin] : 'z;
+	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= /*isunknown(md_pin))*/0 ? $random : md_pin;
+	assign md_pin = (!nmcs && !nmoe) ? video_ram[ma_pin] : 8'hzz;
 
 	/* CPU must not drive data bus when cpu_clkin_t3 (BEDO) is low or cpu_clkin_t2 (BOWA) is high,
 	 * otherwise it collides with 0xff driven on the right side of page 5. */
@@ -130,9 +130,9 @@ module dmg_cpu_b_test;
 	 * raise it when accessing FExx and FFxx (cpu_in_r4) or 00xx while boot ROM is visible (cpu_in_r5). */
 	assign cpu_out_r7 = !cpu_in_t13 && !cpu_in_t12 && mem_cycle && !cpu_in_r4 && !cpu_in_r5;
 
-	assign cpu_a = cpu_drv_a ? cpu_a_out : 'z;
+	assign cpu_a = cpu_drv_a ? cpu_a_out : 8'hzz;
 
-	assign d = cpu_drv_d ? cpu_d_out : 'z;
+	assign d = cpu_drv_d ? cpu_d_out : 8'hzz;
 
 	assign d_pin = d_pin_drv;
 
@@ -164,7 +164,7 @@ module dmg_cpu_b_test;
 			end
 			begin
 				@(posedge cpu_clkin_t2);
-				d_pin_drv    = 'z;
+				d_pin_drv    = 8'hzz;
 				read_cycle   = 0;
 				mem_cycle    = 0;
 				if (!cpu_in_r4 && !cpu_in_r5) /* Higher address byte is supposed to go low after external memory access */
@@ -224,7 +224,7 @@ module dmg_cpu_b_test;
 
 			xi        = 0;
 			nrst      = 0;
-			d_pin_drv = 'z;
+			d_pin_drv = 8'hzz;
 
 			cpu_out_t1   = 0;
 			cpu_clk_ena  = 0;

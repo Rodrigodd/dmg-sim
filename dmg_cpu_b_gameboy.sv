@@ -218,17 +218,17 @@ module dmg_cpu_b_gameboy;
 	endtask
 
 	initial foreach (video_ram[i]) video_ram[i] = $random;
-	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= /*isunknown(md_pin)*/0 ? $random : md_pin;
-	assign md_pin = (!nmcs && !nmoe) ? video_ram[ma_pin] : 'z;
+	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= /*isunknown(md_pin))*/0 ? $random : md_pin;
+	assign md_pin = (!nmcs && !nmoe) ? video_ram[ma_pin] : 8'hzz;
 
 	initial foreach (work_ram[i]) work_ram[i] = $random;
-	always_ff @(posedge nwr) if (!ncs && a_pin[14]) work_ram[a_pin[12:0]] <= /*isunknown(d_pin)*/0 ? $random : d_pin;
-	assign d_pin = (!ncs && a_pin[14] && !nrd) ? work_ram[a_pin[12:0]] : 'z;
+	always_ff @(posedge nwr) if (!ncs && a_pin[14]) work_ram[a_pin[12:0]] <= /*isunknown(d_pin))*/0 ? $random : d_pin;
+	assign d_pin = (!ncs && a_pin[14] && !nrd) ? work_ram[a_pin[12:0]] : 8'hzz;
 
-	assign d_pin = (has_rom && cart_rom_cs && !nrd) ? cart_rom[cart_rom_adr] : 'z;
+	assign d_pin = (has_rom && cart_rom_cs && !nrd) ? cart_rom[cart_rom_adr] : 8'hzz;
 	initial foreach (cart_ram[i]) cart_ram[i] = $random;
-	always_ff @(posedge nwr) if (has_ram && cart_ram_cs) cart_ram[cart_ram_adr] <= /*isunknown(d_pin)*/0 ? $random : d_pin;
-	assign d_pin = (has_ram && cart_ram_cs && !nrd) ? cart_rom[cart_ram_adr] : 'z;
+	always_ff @(posedge nwr) if (has_ram && cart_ram_cs) cart_ram[cart_ram_adr] <= /*isunknown(d_pin))*/0 ? $random : d_pin;
+	assign d_pin = (has_ram && cart_ram_cs && !nrd) ? cart_rom[cart_ram_adr] : 8'hzz;
 
 	mbc1 mbc1_chip(
 		.nrst,

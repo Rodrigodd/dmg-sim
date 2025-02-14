@@ -81,7 +81,7 @@ module channel4(
 	assign #T_NAND bagu = !(ff23 && como);
 	assign #T_INV  befa = !cary;
 	assign #T_OR   dato = ezul || cote;
-	assign #T_TRI  atel = !bagu ? !befa : 'z;
+	assign #T_TRI  atel = !bagu ? !befa : 1'bz;
 	assign ch4_lfsr_clk1 = feme;
 	assign ch4_lfsr_clk2 = gyve;
 	assign ch4_lfsr_clk3 = kopa;

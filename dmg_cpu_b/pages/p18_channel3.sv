@@ -79,11 +79,11 @@ module channel3(
 	assign #T_MUX  agyl = ch3_active ? efuz : a[1];
 	assign #T_MUX  afum = ch3_active ? exel : a[2];
 	assign #T_MUX  axol = ch3_active ? efal : a[3];
-	assign #T_TRI  fapy = !geno ? !(!efar) : 'z;
-	assign #T_TRI  faro = !geno ? !(!erus) : 'z;
-	assign #T_TRI  fote = !geno ? !(!efuz) : 'z;
-	assign #T_TRI  fana = !geno ? !(!exel) : 'z;
-	assign #T_TRI  fera = !geno ? !(!efal) : 'z;
+	assign #T_TRI  fapy = !geno ? !(!efar) : 1'bz;
+	assign #T_TRI  faro = !geno ? !(!erus) : 1'bz;
+	assign #T_TRI  fote = !geno ? !(!efuz) : 1'bz;
+	assign #T_TRI  fana = !geno ? !(!exel) : 1'bz;
+	assign #T_TRI  fera = !geno ? !(!efal) : 1'bz;
 	assign nkutu = !kutu;
 	assign nkupe = !kupe;
 	assign nkunu = !kunu;
