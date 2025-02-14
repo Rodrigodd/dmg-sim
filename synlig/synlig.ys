@@ -63,14 +63,15 @@ tribuf
 
 proc
 
+delete trireg_m
 write_verilog -sv dmg.proc.sv
+write_rtlil dmg.1.rtlil
+
+exit
 
 flatten
 
-write_rtlil dmg.1.rtlil
 write_verilog -sv dmg.flatten.sv
-
-exit
 
 # find tribufs, and propragate them. The tribufs will propagate until they
 # reach a output port, a BusKeepr, or a internal bus. 
