@@ -52,9 +52,11 @@ dmg_cpu_b/cells/trireg_m.sv
 
 DMG_CPU_B = \
 dmg_cpu_b/dmg_cpu_b.sv \
+dmg_cpu_b/bootrom.sv \
 $(DMG_CPU_B_CELLS) \
 $(DMG_CPU_B_PAGES)
 
+# dmgcpu/HDL/sm83/Icarus/sm83.yosys.v
 SM83 = \
 dmgcpu/HDL/sm83/_GekkioNames.v \
 dmgcpu/HDL/sm83/ALU.v \

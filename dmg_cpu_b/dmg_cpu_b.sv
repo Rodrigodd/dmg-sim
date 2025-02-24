@@ -264,8 +264,6 @@ module dmg_cpu_b(
 	/* connection to boot ROM */
 	logic boot_cs; /* OE */
 
-	logic [7:0] brom[0:255];
-
 	/* for convinience */
 	logic [15:0] reg_div16;
 	logic [7:0]  reg_ff00;
@@ -487,26 +485,11 @@ module dmg_cpu_b(
 	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= /*isunknown(d))*/0 ? $random : d;
 	assign d = (hram_cs && cpu_rd) ? hram[a[6:0]] : 8'hzz;
 
-	initial begin
-		string bootrom_file;
-		int f, _;
-
-		bootrom_file = "";
-		_ = $value$plusargs("BOOTROM=%s", bootrom_file);
-
-		f = 0;
-		if (bootrom_file != "") begin
-			f = $fopen(bootrom_file, "rb");
-			// if (!f)
-			// 	$error("Failed to open boot ROM file %s for reading. Using all-zero boot ROM.", bootrom_file);
-		end
-		if (f) begin
-			_ = $fread(brom, f);
-			$fclose(f);
-		end else
-			for (i = 0; i < $size(brom); i++) brom[i] = '0;
-	end
-	assign d = boot_cs ? brom[a[7:0]] : 8'hzz;
+	wire [7:0] bram_d;
+	bootrom bram (
+		.a(a),
+		.d(bram_d));
+	assign d = boot_cs ? bram_d : 8'hzz;
 
 	clocks_reset           p1_clocks_reset(
 		.clkin_a(clkin_a), .clkin_b(clkin_b), .reset(reset), .nreset2(nreset2), .nreset6(nreset6),
