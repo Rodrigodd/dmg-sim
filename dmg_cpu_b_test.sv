@@ -110,25 +110,25 @@ module dmg_cpu_b_test;
 	endtask
 
 	initial foreach (video_ram[i]) video_ram[i] = $random;
-	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= /*isunknown(md_pin))*/0 ? $random : md_pin;
-	assign md_pin = (!nmcs && !nmoe) ? video_ram[ma_pin] : 8'hzz;
+	always_ff @(posedge nmwr) if (~nmcs) video_ram[ma_pin] <= /*isunknown(md_pin))*/0 ? $random : md_pin;
+	assign md_pin = (~nmcs && ~nmoe) ? video_ram[ma_pin] : 8'hzz;
 
 	/* CPU must not drive data bus when cpu_clkin_t3 (BEDO) is low or cpu_clkin_t2 (BOWA) is high,
 	 * otherwise it collides with 0xff driven on the right side of page 5. */
-	assign cpu_drv_d = !cpu_in_t13 && !cpu_in_t12 && cpu_raw_wr && cpu_clkin_t3 && !cpu_clkin_t2;
+	assign cpu_drv_d = ~cpu_in_t13 && ~cpu_in_t12 && cpu_raw_wr && cpu_clkin_t3 && ~cpu_clkin_t2;
 	assign cpu_drv_a = 1;
 
-	assign cpu_raw_rd = !cpu_in_t13 && !cpu_in_t12 && read_cycle;
+	assign cpu_raw_rd = ~cpu_in_t13 && ~cpu_in_t12 && read_cycle;
 
 	/* CPU must release WR when cpu_clkin_t3 (BEDO) is low or cpu_clkin_t2 (BOWA) is high. This
 	 * allows the RD signal to be asserted between the cycles for half a tick, like it is seen
 	 * on the cartridge connector. */
 	// TODO: Figure out if cpu_out_r7 (FROM_CPU4) has to do the same thing.
-	assign cpu_raw_wr = !cpu_in_t13 && !cpu_in_t12 && write_cycle && cpu_clkin_t3 && !cpu_clkin_t2;
+	assign cpu_raw_wr = ~cpu_in_t13 && ~cpu_in_t12 && write_cycle && cpu_clkin_t3 && ~cpu_clkin_t2;
 
 	/* CPU must raise cpu_out_r7 during mem cycles that are targeting external busses. It must not
 	 * raise it when accessing FExx and FFxx (cpu_in_r4) or 00xx while boot ROM is visible (cpu_in_r5). */
-	assign cpu_out_r7 = !cpu_in_t13 && !cpu_in_t12 && mem_cycle && !cpu_in_r4 && !cpu_in_r5;
+	assign cpu_out_r7 = ~cpu_in_t13 && ~cpu_in_t12 && mem_cycle && ~cpu_in_r4 && ~cpu_in_r5;
 
 	assign cpu_a = cpu_drv_a ? cpu_a_out : 8'hzz;
 

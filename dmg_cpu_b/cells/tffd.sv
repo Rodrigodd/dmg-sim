@@ -21,7 +21,7 @@ module tffd #(
 		if (load_negedge)
 			ff <= /*isunknown(d)*/0 ? initff : d;
 		else
-			ff <= !ff;
+			ff <= ~ff;
 
 		if (load_negedge)
 			load_negedge <= 0;

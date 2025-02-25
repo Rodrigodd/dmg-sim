@@ -322,17 +322,17 @@ module dmg_cpu_b(
 		if (/*isunknown(drv_low))*/0 || /*isunknown(ndrv_high))*/0)
 			bidir_out = 'x;
 		else if (drv_low == ndrv_high)
-			bidir_out = !drv_low;
+			bidir_out = ~drv_low;
 		else if (drv_low)
 			bidir_out = 'x;
 		else
 			bidir_out = 8'hzz;
 	endfunction
 
-	assign phi = !nphi_out;
+	assign phi = ~nphi_out;
 	assign nrd = bidir_out(rd_c, rd_a);
 	assign nwr = bidir_out(wr_c, wr_a);
-	assign ncs = !cs_out;
+	assign ncs = ~cs_out;
 
 	assign nmoe = bidir_out(moe_d, moe_a);
 	assign nmwr = bidir_out(mwr_d, mwr_a);
@@ -342,14 +342,14 @@ module dmg_cpu_b(
 		for (genvar i = 0; i < 8; i++)
 			assign d_pin_drv[i] = bidir_out(d_d[i], d_a[i]);
 	endgenerate
-	assign (pull1, highz0) d_pin = {8{!lula}};
+	assign (pull1, highz0) d_pin = {8{~lula}};
 	assign                 d_pin = d_pin_drv;
 
 	generate
 		for (genvar i = 0; i < 8; i++)
 			assign md_pin_drv[i] = bidir_out(md_out[i], md_a[i]);
 	endgenerate
-	assign (pull1, highz0) md_pin = {8{!md_b}};
+	assign (pull1, highz0) md_pin = {8{~md_b}};
 	assign                 md_pin = md_pin_drv;
 
 	generate
@@ -362,8 +362,8 @@ module dmg_cpu_b(
 	assign                 sout = nsout;
 	assign                 sin  = bidir_out(sin_d, sin_a);
 	assign                 sck  = bidir_out(sck_d, sck_a);
-	assign (pull1, highz0) sin  = !sin_b;
-	assign (pull1, highz0) sck  = !sck_dir;
+	assign (pull1, highz0) sin  = ~sin_b;
+	assign (pull1, highz0) sck  = ~sck_dir;
 
 	assign                 p10  = bidir_out(p10_d, p10_a);
 	assign                 p11  = bidir_out(p11_d, p11_a);
@@ -371,19 +371,19 @@ module dmg_cpu_b(
 	assign                 p13  = bidir_out(p13_d, p13_a);
 	assign                 p14  = bidir_out(p14_b, p14_a);
 	assign                 p15  = bidir_out(p15_b, p15_a);
-	assign (pull1, highz0) p10  = !p10_b;
-	assign (pull1, highz0) p11  = !p11_b;
-	assign (pull1, highz0) p12  = !p12_b;
-	assign (pull1, highz0) p13  = !p13_b;
+	assign (pull1, highz0) p10  = ~p10_b;
+	assign (pull1, highz0) p11  = ~p11_b;
+	assign (pull1, highz0) p12  = ~p12_b;
+	assign (pull1, highz0) p13  = ~p13_b;
 
-	assign cpg = !npin_cpg;
-	assign cp  = !ncp;
-	assign cpl = !npin_cpl;
-	assign fr  = !npin_fr;
-	assign st  = !npin_st;
-	assign s   = !npin_s;
-	assign ld0 = !nld0;
-	assign ld1 = !nld1;
+	assign cpg = ~npin_cpg;
+	assign cp  = ~ncp;
+	assign cpl = ~npin_cpl;
+	assign fr  = ~npin_fr;
+	assign st  = ~npin_st;
+	assign s   = ~npin_s;
+	assign ld0 = ~nld0;
+	assign ld1 = ~nld1;
 
 	assign cpu_in_t13 = reset;
 	assign cpu_in_r3  = t1_nt2;
@@ -404,7 +404,7 @@ module dmg_cpu_b(
 	assign cpu_in_r5     = tutu;
 	assign a             = cpu_a;
 	assign cpu_wakeup    = to_cpu2;
-	assign cpu_in_t16    = !unbonded_pad0;
+	assign cpu_in_t16    = ~unbonded_pad0;
 	assign cpu_irq5_trig = 0;
 	assign cpu_irq6_trig = 0;
 	assign cpu_irq7_trig = 0;
@@ -416,33 +416,33 @@ module dmg_cpu_b(
 	assign md_in = ~md_pin;
 	assign a_c   = ~a_pin;
 
-	assign wr_in  = !nwr;
-	assign rd_b   = !nrd;
-	assign moe_in = !nmoe;
-	assign mwr_in = !nmwr;
-	assign mcs_in = !nmcs;
+	assign wr_in  = ~nwr;
+	assign rd_b   = ~nrd;
+	assign moe_in = ~nmoe;
+	assign mwr_in = ~nmwr;
+	assign mcs_in = ~nmcs;
 
-	assign reset = !nrst;
+	assign reset = ~nrst;
 
 	assign clkin_a = cpu_xo_ena;
-	assign clkin_b = !xi;
+	assign clkin_b = ~xi;
 
-	assign xo = cpu_xo_ena ? !xi : 0;
+	assign xo = cpu_xo_ena ? ~xi : 0;
 
 	assign from_cpu3    = cpu_raw_wr;
 	assign from_cpu4    = cpu_out_r7;
 	assign from_cpu6    = cpu_out_t1;
 	assign clk_from_cpu = cpu_clk_ena;
 
-	assign nt1 = !t1;
-	assign nt2 = !t2;
+	assign nt1 = ~t1;
+	assign nt2 = ~t2;
 
-	assign sin_in = !sin;
-	assign sck_in = !sck;
-	assign p10_c  = !p10;
-	assign p11_c  = !p11;
-	assign p12_c  = !p12;
-	assign p13_c  = !p13;
+	assign sin_in = ~sin;
+	assign sck_in = ~sck;
+	assign p10_c  = ~p10;
+	assign p11_c  = ~p11;
+	assign p12_c  = ~p12;
+	assign p13_c  = ~p13;
 
 	/* simulate analog parts */
 	// assign ch1_fp = $itor(ch1_out) / 15.0;
@@ -465,8 +465,8 @@ module dmg_cpu_b(
 	// assign lout = (lmix * lvol_fp > 1.0) ? 1.0 : (lmix * lvol_fp);
 
 	initial for (i = 0; i < $size(wave_ram); i++) wave_ram[i] = $random;
-	always_ff @(posedge nwave_ram_wr) if (!wave_ram_ctrl1) wave_ram[wave_a] <= /*isunknown(d))*/0 ? $random : d;
-	always_latch if (!wave_ram_ctrl1 && !atok) wave_rd_d = wave_ram[wave_a];
+	always_ff @(posedge nwave_ram_wr) if (~wave_ram_ctrl1) wave_ram[wave_a] <= /*isunknown(d))*/0 ? $random : d;
+	always_latch if (~wave_ram_ctrl1 && ~atok) wave_rd_d = wave_ram[wave_a];
 	// TODO: The very first sample (high nibble of FF30) gets skipped when CH3 is started. Check if this is correct.
 	// TODO: When reading the next byte from wave RAM (for example FF31), the previous sample (high nibble of FF30)
 	//       gets output for a very short time before the next sample (high nibble of FF31) gets output. Check if correct.
@@ -478,8 +478,8 @@ module dmg_cpu_b(
 	initial for (i = 0; i < $size(oam_b_ram); i++) oam_b_ram[i] = $random;
 	always_ff @(posedge oam_a_ncs) oam_a_ram[oam_a[7:1]] <= /*isunknown(oam_a_nd))*/0 ? $random : oam_a_nd;
 	always_ff @(posedge oam_b_ncs) oam_b_ram[oam_a[7:1]] <= /*isunknown(oam_b_nd))*/0 ? $random : oam_b_nd;
-	assign oam_a_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_a_ram[oam_a[7:1]] : 8'hzz;
-	assign oam_b_nd = (!oam_clk && oam_a[7:1] < 80) ? oam_b_ram[oam_a[7:1]] : 8'hzz;
+	assign oam_a_nd = (~oam_clk && oam_a[7:1] < 80) ? oam_a_ram[oam_a[7:1]] : 8'hzz;
+	assign oam_b_nd = (~oam_clk && oam_a[7:1] < 80) ? oam_b_ram[oam_a[7:1]] : 8'hzz;
 
 	initial for (i = 0; i < $size(hram); i++) hram[i] = $random;
 	always_ff @(negedge cpu_wr) if (hram_cs) hram[a[6:0]] <= /*isunknown(d))*/0 ? $random : d;
@@ -866,10 +866,10 @@ module dmg_cpu_b(
 	assign reg_div16[13]  = p1_clocks_reset.teka;
 	assign reg_div16[14]  = p1_clocks_reset.uket;
 	assign reg_div16[15]  = p1_clocks_reset.upof;
-	assign reg_ff00[0]    = !p5_joypad_io.kevu;
-	assign reg_ff00[1]    = !p5_joypad_io.kapa;
-	assign reg_ff00[2]    = !p5_joypad_io.keja;
-	assign reg_ff00[3]    = !p5_joypad_io.kolo;
+	assign reg_ff00[0]    = ~p5_joypad_io.kevu;
+	assign reg_ff00[1]    = ~p5_joypad_io.kapa;
+	assign reg_ff00[2]    = ~p5_joypad_io.keja;
+	assign reg_ff00[3]    = ~p5_joypad_io.kolo;
 	assign reg_ff00[4]    = p5_joypad_io.kely;
 	assign reg_ff00[5]    = p5_joypad_io.cofy;
 	assign reg_ff00[7:6]  = '1;
@@ -919,13 +919,13 @@ module dmg_cpu_b(
 	assign reg_ff10[5]    = p11_ch1_regs.bana;
 	assign reg_ff10[6]    = p11_ch1_regs.botu;
 	assign reg_ff10[7]    = '1;
-	assign reg_ff10s[0]   = !p13_channel1.copa;
-	assign reg_ff10s[1]   = !p13_channel1.caja;
-	assign reg_ff10s[2]   = !p13_channel1.byra;
+	assign reg_ff10s[0]   = ~p13_channel1.copa;
+	assign reg_ff10s[1]   = ~p13_channel1.caja;
+	assign reg_ff10s[2]   = ~p13_channel1.byra;
 	assign reg_ff10s[3]   = reg_ff10[3];
-	assign reg_ff10s[4]   = !p13_channel1.cupo;
-	assign reg_ff10s[5]   = !p13_channel1.cypu;
-	assign reg_ff10s[6]   = !p13_channel1.caxy;
+	assign reg_ff10s[4]   = ~p13_channel1.cupo;
+	assign reg_ff10s[5]   = ~p13_channel1.cypu;
+	assign reg_ff10s[6]   = ~p13_channel1.caxy;
 	assign reg_ff10s[7]   = reg_ff10[7];
 	assign reg_ff11[0]    = p13_channel1.bacy;
 	assign reg_ff11[1]    = p13_channel1.cavy;
@@ -943,9 +943,9 @@ module dmg_cpu_b(
 	assign reg_ff12[5]    = p11_ch1_regs.jaxo;
 	assign reg_ff12[6]    = p11_ch1_regs.jena;
 	assign reg_ff12[7]    = p11_ch1_regs.jopu;
-	assign reg_ff12s[0]   = !p13_channel1.jova;
-	assign reg_ff12s[1]   = !p13_channel1.kenu;
-	assign reg_ff12s[2]   = !p13_channel1.kera;
+	assign reg_ff12s[0]   = ~p13_channel1.jova;
+	assign reg_ff12s[1]   = ~p13_channel1.kenu;
+	assign reg_ff12s[2]   = ~p13_channel1.kera;
 	assign reg_ff12s[3]   = reg_ff12[3];
 	assign reg_ff12s[4]   = p13_channel1.hafo;
 	assign reg_ff12s[5]   = p13_channel1.hemy;
@@ -1030,9 +1030,9 @@ module dmg_cpu_b(
 	assign reg_ff17[5]    = p14_ch2_regs.gufe;
 	assign reg_ff17[6]    = p14_ch2_regs.gura;
 	assign reg_ff17[7]    = p14_ch2_regs.gage;
-	assign reg_ff17s[0]   = !p15_channel2.jore;
-	assign reg_ff17s[1]   = !p15_channel2.jona;
-	assign reg_ff17s[2]   = !p15_channel2.jevy;
+	assign reg_ff17s[0]   = ~p15_channel2.jore;
+	assign reg_ff17s[1]   = ~p15_channel2.jona;
+	assign reg_ff17s[2]   = ~p15_channel2.jevy;
 	assign reg_ff17s[3]   = reg_ff17[3];
 	assign reg_ff17s[4]   = p15_channel2.feno;
 	assign reg_ff17s[5]   = p15_channel2.fete;
@@ -1124,9 +1124,9 @@ module dmg_cpu_b(
 	assign reg_ff21[5]    = p19_ch4_regs.goky;
 	assign reg_ff21[6]    = p19_ch4_regs.gozo;
 	assign reg_ff21[7]    = p19_ch4_regs.gedu;
-	assign reg_ff21s[0]   = !p20_channel4.cuna;
-	assign reg_ff21s[1]   = !p20_channel4.cofe;
-	assign reg_ff21s[2]   = !p20_channel4.dogo;
+	assign reg_ff21s[0]   = ~p20_channel4.cuna;
+	assign reg_ff21s[1]   = ~p20_channel4.cofe;
+	assign reg_ff21s[2]   = ~p20_channel4.dogo;
 	assign reg_ff21s[3]   = reg_ff21[3];
 	assign reg_ff21s[4]   = p20_channel4.feko;
 	assign reg_ff21s[5]   = p20_channel4.faty;
@@ -1140,9 +1140,9 @@ module dmg_cpu_b(
 	assign reg_ff22[5]    = p19_ch4_regs.fyto;
 	assign reg_ff22[6]    = p19_ch4_regs.gogo;
 	assign reg_ff22[7]    = p19_ch4_regs.gafo;
-	assign reg_ff22s[0]   = !p20_channel4.jyco;
-	assign reg_ff22s[1]   = !p20_channel4.jyre;
-	assign reg_ff22s[2]   = !p20_channel4.jyfu;
+	assign reg_ff22s[0]   = ~p20_channel4.jyco;
+	assign reg_ff22s[1]   = ~p20_channel4.jyre;
+	assign reg_ff22s[2]   = ~p20_channel4.jyfu;
 	assign reg_ff22s[7:3] = reg_ff22[7:3];
 	assign reg_ff23[5:0]  = '1;
 	assign reg_ff23[6]    = p19_ch4_regs.cuny;
@@ -1165,10 +1165,10 @@ module dmg_cpu_b(
 	assign reg_ff25[5]    = p9_apu_control.bofa;
 	assign reg_ff25[6]    = p9_apu_control.befo;
 	assign reg_ff25[7]    = p9_apu_control.bepu;
-	assign reg_ff26[0]    = !nch1_active;
-	assign reg_ff26[1]    = !nch2_active;
-	assign reg_ff26[2]    = !nch3_active;
-	assign reg_ff26[3]    = !nch4_active;
+	assign reg_ff26[0]    = ~nch1_active;
+	assign reg_ff26[1]    = ~nch2_active;
+	assign reg_ff26[2]    = ~nch3_active;
+	assign reg_ff26[3]    = ~nch4_active;
 	assign reg_ff26[4]    = p9_apu_control.fero;
 	assign reg_ff26[5]    = p9_apu_control.bowy;
 	assign reg_ff26[6]    = '1;
@@ -1181,9 +1181,9 @@ module dmg_cpu_b(
 	assign reg_ff40[5]    = p23_video_regs.wymo;
 	assign reg_ff40[6]    = p23_video_regs.woky;
 	assign reg_ff40[7]    = p23_video_regs.xona;
-	assign reg_ff41[0]    = !p21_video_control.sadu;
-	assign reg_ff41[1]    = !p21_video_control.xaty;
-	assign reg_ff41[2]    = !p21_video_control.nrupo;
+	assign reg_ff41[0]    = ~p21_video_control.sadu;
+	assign reg_ff41[1]    = ~p21_video_control.xaty;
+	assign reg_ff41[2]    = ~p21_video_control.nrupo;
 	assign reg_ff41[3]    = p21_video_control.roxe;
 	assign reg_ff41[4]    = p21_video_control.rufo;
 	assign reg_ff41[5]    = p21_video_control.refe;
@@ -1262,14 +1262,14 @@ module dmg_cpu_b(
 	assign reg_oam_src[1] = p29_sprite_control.cuxy;
 	assign reg_oam_src[2] = p29_sprite_control.bego;
 	assign reg_oam_src[3] = p29_sprite_control.dybe;
-	assign reg_obj_y_cmp[0] = !p29_sprite_control.xuso;
-	assign reg_obj_y_cmp[1] = !p29_sprite_control.xegu;
-	assign reg_obj_y_cmp[2] = !p29_sprite_control.yjex;
-	assign reg_obj_y_cmp[3] = !p29_sprite_control.xyju;
-	assign reg_obj_y_cmp[4] = !p29_sprite_control.ybog;
-	assign reg_obj_y_cmp[5] = !p29_sprite_control.wyso;
-	assign reg_obj_y_cmp[6] = !p29_sprite_control.xote;
-	assign reg_obj_y_cmp[7] = !p29_sprite_control.yzab;
+	assign reg_obj_y_cmp[0] = ~p29_sprite_control.xuso;
+	assign reg_obj_y_cmp[1] = ~p29_sprite_control.xegu;
+	assign reg_obj_y_cmp[2] = ~p29_sprite_control.yjex;
+	assign reg_obj_y_cmp[3] = ~p29_sprite_control.xyju;
+	assign reg_obj_y_cmp[4] = ~p29_sprite_control.ybog;
+	assign reg_obj_y_cmp[5] = ~p29_sprite_control.wyso;
+	assign reg_obj_y_cmp[6] = ~p29_sprite_control.xote;
+	assign reg_obj_y_cmp[7] = ~p29_sprite_control.yzab;
 	assign obj0 = { oam_a_ram[1], oam_b_ram[1], oam_a_ram[0], oam_b_ram[0] };
 	assign obj1 = { oam_a_ram[3], oam_b_ram[3], oam_a_ram[2], oam_b_ram[2] };
 	assign obj2 = { oam_a_ram[5], oam_b_ram[5], oam_a_ram[4], oam_b_ram[4] };
@@ -1378,85 +1378,85 @@ module dmg_cpu_b(
 	assign reg_obj0i[3] = p30_sprite_store.yzep;
 	assign reg_obj0i[4] = p30_sprite_store.ysok;
 	assign reg_obj0i[5] = p30_sprite_store.ygus;
-	assign reg_obj0x[0] = !p31_sprite_x_matchers.xepe;
-	assign reg_obj0x[1] = !p31_sprite_x_matchers.ylah;
-	assign reg_obj0x[2] = !p31_sprite_x_matchers.zola;
-	assign reg_obj0x[3] = !p31_sprite_x_matchers.zulu;
-	assign reg_obj0x[4] = !p31_sprite_x_matchers.welo;
-	assign reg_obj0x[5] = !p31_sprite_x_matchers.xuny;
-	assign reg_obj0x[6] = !p31_sprite_x_matchers.wote;
-	assign reg_obj0x[7] = !p31_sprite_x_matchers.xako;
-	assign reg_obj3x[0] = !p31_sprite_x_matchers.xoly;
-	assign reg_obj3x[1] = !p31_sprite_x_matchers.xyba;
-	assign reg_obj3x[2] = !p31_sprite_x_matchers.xabe;
-	assign reg_obj3x[3] = !p31_sprite_x_matchers.xeka;
-	assign reg_obj3x[4] = !p31_sprite_x_matchers.xomy;
-	assign reg_obj3x[5] = !p31_sprite_x_matchers.wuha;
-	assign reg_obj3x[6] = !p31_sprite_x_matchers.wyna;
-	assign reg_obj3x[7] = !p31_sprite_x_matchers.weco;
-	assign reg_obj7x[0] = !p31_sprite_x_matchers.eraz;
-	assign reg_obj7x[1] = !p31_sprite_x_matchers.epum;
-	assign reg_obj7x[2] = !p31_sprite_x_matchers.erol;
-	assign reg_obj7x[3] = !p31_sprite_x_matchers.ehyn;
-	assign reg_obj7x[4] = !p31_sprite_x_matchers.fazu;
-	assign reg_obj7x[5] = !p31_sprite_x_matchers.faxe;
-	assign reg_obj7x[6] = !p31_sprite_x_matchers.exuk;
-	assign reg_obj7x[7] = !p31_sprite_x_matchers.fede;
-	assign reg_obj1x[0] = !p31_sprite_x_matchers.dany;
-	assign reg_obj1x[1] = !p31_sprite_x_matchers.duko;
-	assign reg_obj1x[2] = !p31_sprite_x_matchers.desu;
-	assign reg_obj1x[3] = !p31_sprite_x_matchers.dazo;
-	assign reg_obj1x[4] = !p31_sprite_x_matchers.dake;
-	assign reg_obj1x[5] = !p31_sprite_x_matchers.ceso;
-	assign reg_obj1x[6] = !p31_sprite_x_matchers.dyfu;
-	assign reg_obj1x[7] = !p31_sprite_x_matchers.cusy;
-	assign reg_obj6x[0] = !p31_sprite_x_matchers.ycol;
-	assign reg_obj6x[1] = !p31_sprite_x_matchers.yrac;
-	assign reg_obj6x[2] = !p31_sprite_x_matchers.ymem;
-	assign reg_obj6x[3] = !p31_sprite_x_matchers.yvag;
-	assign reg_obj6x[4] = !p31_sprite_x_matchers.zecu;
-	assign reg_obj6x[5] = !p31_sprite_x_matchers.zogo;
-	assign reg_obj6x[6] = !p31_sprite_x_matchers.zoly;
-	assign reg_obj6x[7] = !p31_sprite_x_matchers.zesa;
-	assign reg_obj4x[0] = !p31_sprite_x_matchers.wedu;
-	assign reg_obj4x[1] = !p31_sprite_x_matchers.ygaj;
-	assign reg_obj4x[2] = !p31_sprite_x_matchers.zyjo;
-	assign reg_obj4x[3] = !p31_sprite_x_matchers.xury;
-	assign reg_obj4x[4] = !p31_sprite_x_matchers.ybed;
-	assign reg_obj4x[5] = !p31_sprite_x_matchers.zala;
-	assign reg_obj4x[6] = !p31_sprite_x_matchers.wyde;
-	assign reg_obj4x[7] = !p31_sprite_x_matchers.xepa;
-	assign reg_obj8x[0] = !p31_sprite_x_matchers.gavy;
-	assign reg_obj8x[1] = !p31_sprite_x_matchers.gypu;
-	assign reg_obj8x[2] = !p31_sprite_x_matchers.gady;
-	assign reg_obj8x[3] = !p31_sprite_x_matchers.gaza;
-	assign reg_obj8x[4] = !p31_sprite_x_matchers.ezuf;
-	assign reg_obj8x[5] = !p31_sprite_x_matchers.enad;
-	assign reg_obj8x[6] = !p31_sprite_x_matchers.ebow;
-	assign reg_obj8x[7] = !p31_sprite_x_matchers.fyca;
-	assign reg_obj9x[0] = !p31_sprite_x_matchers.xuvy;
-	assign reg_obj9x[1] = !p31_sprite_x_matchers.xere;
-	assign reg_obj9x[2] = !p31_sprite_x_matchers.xuzo;
-	assign reg_obj9x[3] = !p31_sprite_x_matchers.xexa;
-	assign reg_obj9x[4] = !p31_sprite_x_matchers.ypod;
-	assign reg_obj9x[5] = !p31_sprite_x_matchers.yrop;
-	assign reg_obj9x[6] = !p31_sprite_x_matchers.ynep;
-	assign reg_obj9x[7] = !p31_sprite_x_matchers.yzof;
-	assign reg_obj5x[0] = !p31_sprite_x_matchers.fusa;
-	assign reg_obj5x[1] = !p31_sprite_x_matchers.faxa;
-	assign reg_obj5x[2] = !p31_sprite_x_matchers.fozy;
-	assign reg_obj5x[3] = !p31_sprite_x_matchers.fesy;
-	assign reg_obj5x[4] = !p31_sprite_x_matchers.cywe;
-	assign reg_obj5x[5] = !p31_sprite_x_matchers.dyby;
-	assign reg_obj5x[6] = !p31_sprite_x_matchers.dury;
-	assign reg_obj5x[7] = !p31_sprite_x_matchers.cuvy;
-	assign reg_obj2x[0] = !p31_sprite_x_matchers.foka;
-	assign reg_obj2x[1] = !p31_sprite_x_matchers.fyty;
-	assign reg_obj2x[2] = !p31_sprite_x_matchers.fuby;
-	assign reg_obj2x[3] = !p31_sprite_x_matchers.goxu;
-	assign reg_obj2x[4] = !p31_sprite_x_matchers.duhy;
-	assign reg_obj2x[5] = !p31_sprite_x_matchers.ejuf;
-	assign reg_obj2x[6] = !p31_sprite_x_matchers.enor;
-	assign reg_obj2x[7] = !p31_sprite_x_matchers.depy;
+	assign reg_obj0x[0] = ~p31_sprite_x_matchers.xepe;
+	assign reg_obj0x[1] = ~p31_sprite_x_matchers.ylah;
+	assign reg_obj0x[2] = ~p31_sprite_x_matchers.zola;
+	assign reg_obj0x[3] = ~p31_sprite_x_matchers.zulu;
+	assign reg_obj0x[4] = ~p31_sprite_x_matchers.welo;
+	assign reg_obj0x[5] = ~p31_sprite_x_matchers.xuny;
+	assign reg_obj0x[6] = ~p31_sprite_x_matchers.wote;
+	assign reg_obj0x[7] = ~p31_sprite_x_matchers.xako;
+	assign reg_obj3x[0] = ~p31_sprite_x_matchers.xoly;
+	assign reg_obj3x[1] = ~p31_sprite_x_matchers.xyba;
+	assign reg_obj3x[2] = ~p31_sprite_x_matchers.xabe;
+	assign reg_obj3x[3] = ~p31_sprite_x_matchers.xeka;
+	assign reg_obj3x[4] = ~p31_sprite_x_matchers.xomy;
+	assign reg_obj3x[5] = ~p31_sprite_x_matchers.wuha;
+	assign reg_obj3x[6] = ~p31_sprite_x_matchers.wyna;
+	assign reg_obj3x[7] = ~p31_sprite_x_matchers.weco;
+	assign reg_obj7x[0] = ~p31_sprite_x_matchers.eraz;
+	assign reg_obj7x[1] = ~p31_sprite_x_matchers.epum;
+	assign reg_obj7x[2] = ~p31_sprite_x_matchers.erol;
+	assign reg_obj7x[3] = ~p31_sprite_x_matchers.ehyn;
+	assign reg_obj7x[4] = ~p31_sprite_x_matchers.fazu;
+	assign reg_obj7x[5] = ~p31_sprite_x_matchers.faxe;
+	assign reg_obj7x[6] = ~p31_sprite_x_matchers.exuk;
+	assign reg_obj7x[7] = ~p31_sprite_x_matchers.fede;
+	assign reg_obj1x[0] = ~p31_sprite_x_matchers.dany;
+	assign reg_obj1x[1] = ~p31_sprite_x_matchers.duko;
+	assign reg_obj1x[2] = ~p31_sprite_x_matchers.desu;
+	assign reg_obj1x[3] = ~p31_sprite_x_matchers.dazo;
+	assign reg_obj1x[4] = ~p31_sprite_x_matchers.dake;
+	assign reg_obj1x[5] = ~p31_sprite_x_matchers.ceso;
+	assign reg_obj1x[6] = ~p31_sprite_x_matchers.dyfu;
+	assign reg_obj1x[7] = ~p31_sprite_x_matchers.cusy;
+	assign reg_obj6x[0] = ~p31_sprite_x_matchers.ycol;
+	assign reg_obj6x[1] = ~p31_sprite_x_matchers.yrac;
+	assign reg_obj6x[2] = ~p31_sprite_x_matchers.ymem;
+	assign reg_obj6x[3] = ~p31_sprite_x_matchers.yvag;
+	assign reg_obj6x[4] = ~p31_sprite_x_matchers.zecu;
+	assign reg_obj6x[5] = ~p31_sprite_x_matchers.zogo;
+	assign reg_obj6x[6] = ~p31_sprite_x_matchers.zoly;
+	assign reg_obj6x[7] = ~p31_sprite_x_matchers.zesa;
+	assign reg_obj4x[0] = ~p31_sprite_x_matchers.wedu;
+	assign reg_obj4x[1] = ~p31_sprite_x_matchers.ygaj;
+	assign reg_obj4x[2] = ~p31_sprite_x_matchers.zyjo;
+	assign reg_obj4x[3] = ~p31_sprite_x_matchers.xury;
+	assign reg_obj4x[4] = ~p31_sprite_x_matchers.ybed;
+	assign reg_obj4x[5] = ~p31_sprite_x_matchers.zala;
+	assign reg_obj4x[6] = ~p31_sprite_x_matchers.wyde;
+	assign reg_obj4x[7] = ~p31_sprite_x_matchers.xepa;
+	assign reg_obj8x[0] = ~p31_sprite_x_matchers.gavy;
+	assign reg_obj8x[1] = ~p31_sprite_x_matchers.gypu;
+	assign reg_obj8x[2] = ~p31_sprite_x_matchers.gady;
+	assign reg_obj8x[3] = ~p31_sprite_x_matchers.gaza;
+	assign reg_obj8x[4] = ~p31_sprite_x_matchers.ezuf;
+	assign reg_obj8x[5] = ~p31_sprite_x_matchers.enad;
+	assign reg_obj8x[6] = ~p31_sprite_x_matchers.ebow;
+	assign reg_obj8x[7] = ~p31_sprite_x_matchers.fyca;
+	assign reg_obj9x[0] = ~p31_sprite_x_matchers.xuvy;
+	assign reg_obj9x[1] = ~p31_sprite_x_matchers.xere;
+	assign reg_obj9x[2] = ~p31_sprite_x_matchers.xuzo;
+	assign reg_obj9x[3] = ~p31_sprite_x_matchers.xexa;
+	assign reg_obj9x[4] = ~p31_sprite_x_matchers.ypod;
+	assign reg_obj9x[5] = ~p31_sprite_x_matchers.yrop;
+	assign reg_obj9x[6] = ~p31_sprite_x_matchers.ynep;
+	assign reg_obj9x[7] = ~p31_sprite_x_matchers.yzof;
+	assign reg_obj5x[0] = ~p31_sprite_x_matchers.fusa;
+	assign reg_obj5x[1] = ~p31_sprite_x_matchers.faxa;
+	assign reg_obj5x[2] = ~p31_sprite_x_matchers.fozy;
+	assign reg_obj5x[3] = ~p31_sprite_x_matchers.fesy;
+	assign reg_obj5x[4] = ~p31_sprite_x_matchers.cywe;
+	assign reg_obj5x[5] = ~p31_sprite_x_matchers.dyby;
+	assign reg_obj5x[6] = ~p31_sprite_x_matchers.dury;
+	assign reg_obj5x[7] = ~p31_sprite_x_matchers.cuvy;
+	assign reg_obj2x[0] = ~p31_sprite_x_matchers.foka;
+	assign reg_obj2x[1] = ~p31_sprite_x_matchers.fyty;
+	assign reg_obj2x[2] = ~p31_sprite_x_matchers.fuby;
+	assign reg_obj2x[3] = ~p31_sprite_x_matchers.goxu;
+	assign reg_obj2x[4] = ~p31_sprite_x_matchers.duhy;
+	assign reg_obj2x[5] = ~p31_sprite_x_matchers.ejuf;
+	assign reg_obj2x[6] = ~p31_sprite_x_matchers.enor;
+	assign reg_obj2x[7] = ~p31_sprite_x_matchers.depy;
 
 endmodule

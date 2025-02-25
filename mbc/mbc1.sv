@@ -21,7 +21,7 @@ module mbc1(
 	logic       mode;
 
 	always_ff @(negedge nwr, negedge nrst) begin
-		if (!nrst) begin
+		if (~nrst) begin
 			ena      <= 0;
 			rom_bank <= 0;
 			ram_bank <= 0;
@@ -34,13 +34,13 @@ module mbc1(
 		endcase
 	end
 
-	assign ncs_rom = !(!nrst || (!a[15] && !nrd));
-	assign ncs_ram = !(ena && !ncs && !a[14]);
-	assign cs_ram  = !ncs_ram;
+	assign ncs_rom = ~(~nrst || (~a[15] && ~nrd));
+	assign ncs_ram = ~(ena && ~ncs && ~a[14]);
+	assign cs_ram  = ~ncs_ram;
 
 	always_comb priority case (1)
-		!nrst, !a[14]: ra = 0;
-		!rom_bank:     ra = 1;
+		~nrst, ~a[14]: ra = 0;
+		~rom_bank:     ra = 1;
 		default:       ra = rom_bank;
 	endcase
 

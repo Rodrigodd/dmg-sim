@@ -17,7 +17,7 @@ module mbc5(
 	logic [3:0] ram_bank;
 
 	always_ff @(negedge nwr, negedge nrst) begin
-		if (!nrst) begin
+		if (~nrst) begin
 			ena      <= 0;
 			rom_bank <= 0;
 			ram_bank <= 0;
@@ -29,10 +29,10 @@ module mbc5(
 		endcase
 	end
 
-	assign ncs_ram = !(ena && !ncs && !a[14]);
+	assign ncs_ram = ~(ena && ~ncs && ~a[14]);
 
 	always_comb priority case (1)
-		!nrst, !a[14]: ra = 0;
+		~nrst, ~a[14]: ra = 0;
 		default:       ra = rom_bank;
 	endcase
 

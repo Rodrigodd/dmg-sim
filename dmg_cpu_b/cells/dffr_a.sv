@@ -16,7 +16,7 @@ module dffr_a #(
 	end
 
 	logic dffra_clk;
-	assign dffra_clk = dffra_inv_clk ? !clk : clk;
+	assign dffra_clk = dffra_inv_clk ? ~clk : clk;
 
 	always_ff @(posedge dffra_clk, negedge nreset) begin
 		if (nreset)

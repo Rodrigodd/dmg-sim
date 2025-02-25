@@ -218,17 +218,17 @@ module dmg_cpu_b_gameboy;
 	endtask
 
 	initial foreach (video_ram[i]) video_ram[i] = $random;
-	always_ff @(posedge nmwr) if (!nmcs) video_ram[ma_pin] <= /*isunknown(md_pin))*/0 ? $random : md_pin;
-	assign md_pin = (!nmcs && !nmoe) ? video_ram[ma_pin] : 8'hzz;
+	always_ff @(posedge nmwr) if (~nmcs) video_ram[ma_pin] <= /*isunknown(md_pin))*/0 ? $random : md_pin;
+	assign md_pin = (~nmcs && ~nmoe) ? video_ram[ma_pin] : 8'hzz;
 
 	initial foreach (work_ram[i]) work_ram[i] = $random;
-	always_ff @(posedge nwr) if (!ncs && a_pin[14]) work_ram[a_pin[12:0]] <= /*isunknown(d_pin))*/0 ? $random : d_pin;
-	assign d_pin = (!ncs && a_pin[14] && !nrd) ? work_ram[a_pin[12:0]] : 8'hzz;
+	always_ff @(posedge nwr) if (~ncs && a_pin[14]) work_ram[a_pin[12:0]] <= /*isunknown(d_pin))*/0 ? $random : d_pin;
+	assign d_pin = (~ncs && a_pin[14] && ~nrd) ? work_ram[a_pin[12:0]] : 8'hzz;
 
-	assign d_pin = (has_rom && cart_rom_cs && !nrd) ? cart_rom[cart_rom_adr] : 8'hzz;
+	assign d_pin = (has_rom && cart_rom_cs && ~nrd) ? cart_rom[cart_rom_adr] : 8'hzz;
 	initial foreach (cart_ram[i]) cart_ram[i] = $random;
 	always_ff @(posedge nwr) if (has_ram && cart_ram_cs) cart_ram[cart_ram_adr] <= /*isunknown(d_pin))*/0 ? $random : d_pin;
-	assign d_pin = (has_ram && cart_ram_cs && !nrd) ? cart_rom[cart_ram_adr] : 8'hzz;
+	assign d_pin = (has_ram && cart_ram_cs && ~nrd) ? cart_rom[cart_ram_adr] : 8'hzz;
 
 	mbc1 mbc1_chip(
 		.nrst,
@@ -256,22 +256,22 @@ module dmg_cpu_b_gameboy;
 		has_mbc1: begin
 			cart_rom_adr = { mbc1_ra, a_pin[13:0] };
 			cart_ram_adr = { mbc1_aa, a_pin[12:0] };
-			cart_rom_cs  = !mbc1_ncs_rom;
-			cart_ram_cs  = !mbc1_ncs_ram && mbc1_cs_ram;
+			cart_rom_cs  = ~mbc1_ncs_rom;
+			cart_ram_cs  = ~mbc1_ncs_ram && mbc1_cs_ram;
 		end
 
 		has_mbc5: begin
 			cart_rom_adr = { mbc5_ra, a_pin[13:0] };
 			cart_ram_adr = { mbc5_aa, a_pin[12:0] };
-			cart_rom_cs  = !a_pin[15];
-			cart_ram_cs  = !mbc5_ncs_ram;
+			cart_rom_cs  = ~a_pin[15];
+			cart_ram_cs  = ~mbc5_ncs_ram;
 		end
 
 		default: begin
 			cart_rom_adr = a_pin[14:0];
 			cart_ram_adr = a_pin[12:0];
-			cart_rom_cs  = !a_pin[15];
-			cart_ram_cs  = !ncs && a_pin[13];
+			cart_rom_cs  = ~a_pin[15];
+			cart_ram_cs  = ~ncs && a_pin[13];
 		end
 	endcase
 
@@ -291,7 +291,7 @@ module dmg_cpu_b_gameboy;
 		f = 0;
 		if (rom_file != "") begin
 			f = $fopen(rom_file, "rb");
-			if (!f)
+			if (~f)
 				$error("Failed to open cartridge ROM file %s for reading.", rom_file);
 		end
 		if (f) begin
@@ -326,7 +326,7 @@ module dmg_cpu_b_gameboy;
 		end
 	end
 
-	// assign ncyc        = !dmg.p1_clocks_reset.adyk && !dmg.p1_clocks_reset.alef;
+	// assign ncyc        = ~dmg.p1_clocks_reset.adyk && ~dmg.p1_clocks_reset.alef;
 	assign din         = d;
 	assign clk_stable  = cpu_in_t15;
 	assign reset       = cpu_in_t12;
@@ -334,7 +334,7 @@ module dmg_cpu_b_gameboy;
 
 	/* CPU must not drive data bus when cpu_clkin_t3 (BEDO) is low or cpu_clkin_t2 (BOWA) is high,
 	 * otherwise it collides with 0xff driven on the right side of page 5. */
-	assign cpu_drv_d = cpu_raw_wr && cpu_clkin_t3 && !cpu_clkin_t2;
+	assign cpu_drv_d = cpu_raw_wr && cpu_clkin_t3 && ~cpu_clkin_t2;
 
 	assign irq[0] = cpu_irq0_trig;
 	assign irq[1] = cpu_irq1_trig;
