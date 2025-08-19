@@ -279,6 +279,7 @@ module dmg_cpu_b_gameboy;
 		string rom_file;
 		int    f, _;
 		byte   mbc_type, ram_size;
+		string error_message;
 
 		has_rom  = 0;
 		has_ram  = 0;
@@ -291,8 +292,9 @@ module dmg_cpu_b_gameboy;
 		f = 0;
 		if (rom_file != "") begin
 			f = $fopen(rom_file, "rb");
-			if (~f)
-				$error("Failed to open cartridge ROM file %s for reading.", rom_file);
+			if (!f) begin
+				$fatal($ferror(f, error_message), "Failed to open cartridge ROM file %s for reading: %s", rom_file, error_message);
+			end
 		end
 		if (f) begin
 			_ = $fread(cart_rom, f);
@@ -423,7 +425,9 @@ module dmg_cpu_b_gameboy;
 				end
 
 				if (dump_video) begin :video_dump
-					vdump.video_dump_loop(fvid);
+					forever begin
+						vdump.video_dump_loop(fvid);
+					end
 				end
 
 				begin

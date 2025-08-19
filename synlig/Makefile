@@ -82,7 +82,7 @@ MBC = \
 ../mbc/mbc5.sv
 
 DMG = \
-dmg.fflatten.sv \
+dmg.purge.sv \
 ../dmg_cpu_b/cells/trireg_m.sv \
 ../dmg_cpu_b/bootrom.sv \
 $(MBC)
@@ -113,3 +113,31 @@ yosys:
 
 run.mkv: ../mkvid/mkimgs ../mkvid/mkvid.sh run.vid run.snd
 	../mkvid/mkvid.sh run
+
+VERILATOR=../../verilator/bin/verilator
+
+VERILATOR_FLAGS=\
+ --top-module dmg_cpu_b_gameboy\
+ --cc\
+ --timing\
+ --Wno-fatal\
+ --Wno-LATCH\
+ --timescale "1ns/1ns"\
+ --x-initial unique\
+ --autoflush\
+ # --trace-fst\
+ # --trace-underscore\
+ # --no-trace-top\
+
+verilator_build/Vdmg_cpu_b_gameboy: run.sv $(DMG) $(AV_DUMP) $(TIMESCALE) Makefile
+	$(VERILATOR)  $(VERILATOR_FLAGS) $(AV_DUMP) $(DMG) run.sv --binary  -j 0 -Mdir verilator_build
+
+run_verilator: verilator_build/Vdmg_cpu_b_gameboy
+	verilator_build/Vdmg_cpu_b_gameboy +verilator+rand+reset+1 \
+		"+DUMPFILE=run" \
+		"+SND_FILE=run.snd" \
+		"+VID_FILE=run.vid" \
+		"+BOOTROM=$(BOOTROM)" \
+		"+ROM=$(ROM)" \
+		"+SECS=$(SECS)"
+ 

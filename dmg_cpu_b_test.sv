@@ -217,8 +217,12 @@ module dmg_cpu_b_test;
 				fmix = $fopen(snd_file, "wb");
 				write_header(fmix, 65536, 2, 1);
 			end
-			if (dump_video)
+			if (dump_video) begin
 				fvid = $fopen(vid_file, "wb");
+				if (!fvid)
+					$fatal($ferror(fvid, error_message), "Failed to open video dump file %s for writing: %s", vid_file, error_message);
+				$display("dumping video to %s", vid_file);
+			end
 
 			sample_idx = 0;
 
@@ -265,7 +269,9 @@ module dmg_cpu_b_test;
 				end
 
 				if (dump_video) begin :video_dump
-					vdump.video_dump_loop(fvid);
+					forever begin
+						vdump.video_dump_loop(fvid);
+					end
 				end
 
 				begin
