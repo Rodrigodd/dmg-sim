@@ -1,0 +1,3086 @@
+[
+  {
+    "rom_path": "age-test-roms/m3-bg-lcdc/m3-bg-lcdc.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "age-test-roms/m3-bg-lcdc/m3-bg-lcdc-dmgC.png"
+      }
+    ],
+    "timeout_cycles": 24269272
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/02-interrupts.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/02-interrupts.png"
+      }
+    ],
+    "timeout_cycles": 25990240
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/07-len sweep period sync.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/07-len sweep period sync.png"
+      }
+    ],
+    "timeout_cycles": 27400000
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/08-misc instrs.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/08-misc instrs.png"
+      }
+    ],
+    "timeout_cycles": 26000000
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/06-ld r,r.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/06-ld r,r.png"
+      }
+    ],
+    "timeout_cycles": 26622552
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/07-jr,jp,call,ret,rst.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/07-jr,jp,call,ret,rst.png"
+      }
+    ],
+    "timeout_cycles": 27183956
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/04-sweep.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/04-sweep.png"
+      }
+    ],
+    "timeout_cycles": 29500000
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/05-sweep details.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/05-sweep details.png"
+      }
+    ],
+    "timeout_cycles": 29300000
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/08-len ctr during power.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/08-len ctr during power.png"
+      }
+    ],
+    "timeout_cycles": 30000000
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/06-overflow on trigger.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/06-overflow on trigger.png"
+      }
+    ],
+    "timeout_cycles": 29800000
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/01-registers.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/01-registers.png"
+      }
+    ],
+    "timeout_cycles": 30600000
+  },
+  {
+    "rom_path": "age-test-roms/ly/ly-dmgC-cgbBC.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/age-test-roms/ly/ly-dmgC-cgbBC.png"
+      }
+    ],
+    "timeout_cycles": 67206460
+  },
+  {
+    "rom_path": "blargg/mem_timing/individual/02-write_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing/individual/02-write_timing.png"
+      }
+    ],
+    "timeout_cycles": 25400000
+  },
+  {
+    "rom_path": "blargg/mem_timing/individual/01-read_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing/individual/01-read_timing.png"
+      }
+    ],
+    "timeout_cycles": 26130752
+  },
+  {
+    "rom_path": "blargg/mem_timing/individual/03-modify_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing/individual/03-modify_timing.png"
+      }
+    ],
+    "timeout_cycles": 26271208
+  },
+  {
+    "rom_path": "blargg/instr_timing/instr_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/instr_timing/instr_timing.png"
+      }
+    ],
+    "timeout_cycles": 26500000
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/11-regs after power.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/11-regs after power.png"
+      }
+    ],
+    "timeout_cycles": 27700000
+  },
+  {
+    "rom_path": "age-test-roms/vram/vram-read-dmgC.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/age-test-roms/vram/vram-read-dmgC.png"
+      }
+    ],
+    "timeout_cycles": 72194004
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_bgp_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_bgp_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24015028
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m2_win_en_toggle.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m2_win_en_toggle_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24138444
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_bgp_change_sprites.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_bgp_change_sprites_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24052896
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_lcdc_tile_sel_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_lcdc_tile_sel_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24054720
+  },
+  {
+    "rom_path": "blargg/mem_timing-2/rom_singles/02-write_timing.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing-2/rom_singles/02-write_timing.png"
+      }
+    ],
+    "timeout_cycles": 25400000
+  },
+  {
+    "rom_path": "blargg/halt_bug.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "blargg/halt_bug-dmg-cgb.png"
+      }
+    ],
+    "timeout_cycles": 31691976
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_lcdc_bg_map_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_lcdc_bg_map_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24054708
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_lcdc_tile_sel_win_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_lcdc_tile_sel_win_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24054760
+  },
+  {
+    "rom_path": "age-test-roms/oam/oam-read-dmgC-cgbBC.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/age-test-roms/oam/oam-read-dmgC-cgbBC.png"
+      }
+    ],
+    "timeout_cycles": 72194004
+  },
+  {
+    "rom_path": "age-test-roms/stat-mode/stat-mode-dmgC-cgbBC.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/age-test-roms/stat-mode/stat-mode-dmgC-cgbBC.png"
+      }
+    ],
+    "timeout_cycles": 72146852
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_obp0_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_obp0_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 23919140
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_lcdc_win_map_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_lcdc_win_map_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24054748
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_scx_low_3_bits.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_scx_low_3_bits_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 23930772
+  },
+  {
+    "rom_path": "blargg/mem_timing/mem_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing/mem_timing.png"
+      }
+    ],
+    "timeout_cycles": 30413548
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_window_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_window_timing_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24065320
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_window_timing_wx_0.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_window_timing_wx_0_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24065320
+  },
+  {
+    "rom_path": "blargg/mem_timing-2/rom_singles/01-read_timing.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing-2/rom_singles/01-read_timing.png"
+      }
+    ],
+    "timeout_cycles": 26500000
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/09-wave read while on.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/09-wave read while on.png"
+      }
+    ],
+    "timeout_cycles": 43000000
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_wx_4_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_wx_4_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24075296
+  },
+  {
+    "rom_path": "blargg/mem_timing-2/rom_singles/03-modify_timing.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing-2/rom_singles/03-modify_timing.png"
+      }
+    ],
+    "timeout_cycles": 30500000
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_wx_5_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_wx_5_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24074308
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_wx_4_change_sprites.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_wx_4_change_sprites_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24216848
+  },
+  {
+    "rom_path": "mealybug-tearoom-tests/ppu/m3_wx_6_change.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mealybug-tearoom-tests/ppu/m3_wx_6_change_dmg_blob.png"
+      }
+    ],
+    "timeout_cycles": 24074308
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/bits/reg_f.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/bits/reg_f.png"
+      }
+    ],
+    "timeout_cycles": 24707708
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/03-op sp,hl.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/03-op sp,hl.png"
+      }
+    ],
+    "timeout_cycles": 34000000
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/bits/unused_hwio-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/bits/unused_hwio-GS.png"
+      }
+    ],
+    "timeout_cycles": 24695488
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/boot_div-dmgABCmgb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/boot_div-dmgABCmgb.png"
+      }
+    ],
+    "timeout_cycles": 24709028
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/add_sp_e_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/add_sp_e_timing.png"
+      }
+    ],
+    "timeout_cycles": 24919028
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/01-special.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/01-special.png"
+      }
+    ],
+    "timeout_cycles": 33995844
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/boot_regs-dmgABC.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/boot_regs-dmgABC.png"
+      }
+    ],
+    "timeout_cycles": 24709624
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/boot_hwio-dmgABCmgb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/boot_hwio-dmgABCmgb.png"
+      }
+    ],
+    "timeout_cycles": 24695508
+  },
+  {
+    "rom_path": "dmg-acid2/dmg-acid2.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "dmg-acid2/dmg-acid2-dmg.png"
+      }
+    ],
+    "timeout_cycles": 24554332
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/bits/mem_oam.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/bits/mem_oam.png"
+      }
+    ],
+    "timeout_cycles": 24713580
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/call_cc_timing2.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/call_cc_timing2.png"
+      }
+    ],
+    "timeout_cycles": 24989888
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/call_cc_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/call_cc_timing.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/call_timing2.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/call_timing2.png"
+      }
+    ],
+    "timeout_cycles": 24989892
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ei_sequence.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ei_sequence.png"
+      }
+    ],
+    "timeout_cycles": 24707728
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/div_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/div_timing.png"
+      }
+    ],
+    "timeout_cycles": 24708032
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ei_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ei_timing.png"
+      }
+    ],
+    "timeout_cycles": 24707700
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/halt_ime1_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/halt_ime1_timing.png"
+      }
+    ],
+    "timeout_cycles": 24707408
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/05-op rp.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/05-op rp.png"
+      }
+    ],
+    "timeout_cycles": 39965484
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/halt_ime0_nointr_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/halt_ime0_nointr_timing.png"
+      }
+    ],
+    "timeout_cycles": 24988584
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/04-op r,imm.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/04-op r,imm.png"
+      }
+    ],
+    "timeout_cycles": 35680720
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/if_ie_registers.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/if_ie_registers.png"
+      }
+    ],
+    "timeout_cycles": 24708372
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/call_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/call_timing.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/halt_ime1_timing2-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/halt_ime1_timing2-GS.png"
+      }
+    ],
+    "timeout_cycles": 25270112
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/halt_ime0_ei.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/halt_ime0_ei.png"
+      }
+    ],
+    "timeout_cycles": 24695672
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/interrupts/ie_push.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/interrupts/ie_push.png"
+      }
+    ],
+    "timeout_cycles": 24696144
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/intr_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/intr_timing.png"
+      }
+    ],
+    "timeout_cycles": 24707712
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/di_timing-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/di_timing-GS.png"
+      }
+    ],
+    "timeout_cycles": 25046760
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/jp_cc_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/jp_cc_timing.png"
+      }
+    ],
+    "timeout_cycles": 24906172
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ld_hl_sp_e_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ld_hl_sp_e_timing.png"
+      }
+    ],
+    "timeout_cycles": 24919052
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/instr/daa.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/instr/daa.png"
+      }
+    ],
+    "timeout_cycles": 25538176
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/jp_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/jp_timing.png"
+      }
+    ],
+    "timeout_cycles": 24906172
+  },
+  {
+    "rom_path": "blargg/mem_timing-2/mem_timing.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/mem_timing-2/mem_timing.png"
+      }
+    ],
+    "timeout_cycles": 36000000
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/rom_16Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/rom_16Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906180
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/multicart_rom_8Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/multicart_rom_8Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906180
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/rom_1Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/rom_1Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906180
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/rom_2Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/rom_2Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906180
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/rom_512kb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/rom_512kb.png"
+      }
+    ],
+    "timeout_cycles": 24906180
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/rom_8Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/rom_8Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906180
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/rom_4Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/rom_4Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906180
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc2/rom_1Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc2/rom_1Mb.png"
+      }
+    ],
+    "timeout_cycles": 24695508
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc2/rom_2Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc2/rom_2Mb.png"
+      }
+    ],
+    "timeout_cycles": 24695508
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc2/rom_512kb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc2/rom_512kb.png"
+      }
+    ],
+    "timeout_cycles": 24695508
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_1Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_1Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc2/ram.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc2/ram.png"
+      }
+    ],
+    "timeout_cycles": 25959540
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_16Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_16Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_2Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_2Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_32Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_32Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/ram_64kb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/ram_64kb.png"
+      }
+    ],
+    "timeout_cycles": 27855560
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_512kb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_512kb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_4Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_4Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/ram_256kb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/ram_256kb.png"
+      }
+    ],
+    "timeout_cycles": 27855588
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_64Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_64Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/oam_dma/reg_read.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/oam_dma/reg_read.png"
+      }
+    ],
+    "timeout_cycles": 24702096
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc5/rom_8Mb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc5/rom_8Mb.png"
+      }
+    ],
+    "timeout_cycles": 24906156
+  },
+  {
+    "rom_path": "age-test-roms/stat-mode-sprites/stat-mode-sprites-dmgC-cgbBCE.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/age-test-roms/stat-mode-sprites/stat-mode-sprites-dmgC-cgbBCE.png"
+      }
+    ],
+    "timeout_cycles": 43170900
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/oam_dma_restart.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/oam_dma_restart.png"
+      }
+    ],
+    "timeout_cycles": 24918400
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/oam_dma_start.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/oam_dma_start.png"
+      }
+    ],
+    "timeout_cycles": 25003812
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/pop_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/pop_timing.png"
+      }
+    ],
+    "timeout_cycles": 24708672
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/oam_dma/basic.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/oam_dma/basic.png"
+      }
+    ],
+    "timeout_cycles": 24716960
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/oam_dma_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/oam_dma_timing.png"
+      }
+    ],
+    "timeout_cycles": 24918384
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/intr_1_2_timing-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/intr_1_2_timing-GS.png"
+      }
+    ],
+    "timeout_cycles": 24918368
+  },
+  {
+    "rom_path": "age-test-roms/stat-mode-window/stat-mode-window-dmgC.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/age-test-roms/stat-mode-window/stat-mode-window-dmgC.png"
+      }
+    ],
+    "timeout_cycles": 43892040
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/intr_2_0_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/intr_2_0_timing.png"
+      }
+    ],
+    "timeout_cycles": 24848172
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/intr_2_mode0_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/intr_2_mode0_timing.png"
+      }
+    ],
+    "timeout_cycles": 24848172
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/intr_2_mode3_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/intr_2_mode3_timing.png"
+      }
+    ],
+    "timeout_cycles": 24848176
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/oam_dma/sources-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/oam_dma/sources-GS.png"
+      }
+    ],
+    "timeout_cycles": 26521784
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/intr_2_oam_ok_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/intr_2_oam_ok_timing.png"
+      }
+    ],
+    "timeout_cycles": 24848172
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/stat_irq_blocking.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/stat_irq_blocking.png"
+      }
+    ],
+    "timeout_cycles": 24765744
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/push_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/push_timing.png"
+      }
+    ],
+    "timeout_cycles": 24919016
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/rapid_di_ei.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/rapid_di_ei.png"
+      }
+    ],
+    "timeout_cycles": 24708352
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/stat_lyc_onoff.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/stat_lyc_onoff.png"
+      }
+    ],
+    "timeout_cycles": 24958864
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/reti_intr_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/reti_intr_timing.png"
+      }
+    ],
+    "timeout_cycles": 24708012
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/vblank_stat_intr-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/vblank_stat_intr-GS.png"
+      }
+    ],
+    "timeout_cycles": 25270144
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/02-len ctr.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/02-len ctr.png"
+      }
+    ],
+    "timeout_cycles": 65000000
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ret_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ret_timing.png"
+      }
+    ],
+    "timeout_cycles": 24976384
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ret_cc_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ret_cc_timing.png"
+      }
+    ],
+    "timeout_cycles": 24976384
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/rst_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/rst_timing.png"
+      }
+    ],
+    "timeout_cycles": 24919036
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/serial/boot_sclk_align-dmgABCmgb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/serial/boot_sclk_align-dmgABCmgb.png"
+      }
+    ],
+    "timeout_cycles": 24709288
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim00_div_trigger.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim00_div_trigger.png"
+      }
+    ],
+    "timeout_cycles": 24707708
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/reti_timing.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/reti_timing.png"
+      }
+    ],
+    "timeout_cycles": 24976384
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/rapid_toggle.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/rapid_toggle.png"
+      }
+    ],
+    "timeout_cycles": 24707720
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/lcdon_timing-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/lcdon_timing-GS.png"
+      }
+    ],
+    "timeout_cycles": 26093276
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim00.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim00.png"
+      }
+    ],
+    "timeout_cycles": 24707716
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc2/bits_unused.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc2/bits_unused.png"
+      }
+    ],
+    "timeout_cycles": 36212232
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim01.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim01.png"
+      }
+    ],
+    "timeout_cycles": 24707716
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim01_div_trigger.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim01_div_trigger.png"
+      }
+    ],
+    "timeout_cycles": 24707708
+  },
+  {
+    "rom_path": "mooneye-test-suite/manual-only/sprite_priority.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "screen_comparison",
+        "reference_path": "mooneye-test-suite/manual-only/sprite_priority-dmg.png"
+      }
+    ],
+    "timeout_cycles": 24200000
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/10-wave trigger while on.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/10-wave trigger while on.png"
+      }
+    ],
+    "timeout_cycles": 41000000
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim11.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim11.png"
+      }
+    ],
+    "timeout_cycles": 24707716
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim10_div_trigger.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim10_div_trigger.png"
+      }
+    ],
+    "timeout_cycles": 24707712
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim10.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim10.png"
+      }
+    ],
+    "timeout_cycles": 24707696
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tim11_div_trigger.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tim11_div_trigger.png"
+      }
+    ],
+    "timeout_cycles": 24707704
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tima_reload.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tima_reload.png"
+      }
+    ],
+    "timeout_cycles": 24709000
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tima_write_reloading.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tima_write_reloading.png"
+      }
+    ],
+    "timeout_cycles": 24708376
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/tma_write_reloading.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/tma_write_reloading.png"
+      }
+    ],
+    "timeout_cycles": 24708376
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/bits_bank2.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/bits_bank2.png"
+      }
+    ],
+    "timeout_cycles": 36282448
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/timer/div_write.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/timer/div_write.png"
+      }
+    ],
+    "timeout_cycles": 27574664
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/lcdon_write_timing-GS.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/lcdon_write_timing-GS.png"
+      }
+    ],
+    "timeout_cycles": 27884252
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc2/bits_romb.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc2/bits_romb.png"
+      }
+    ],
+    "timeout_cycles": 37054916
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/12-wave write while on.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/12-wave write while on.png"
+      }
+    ],
+    "timeout_cycles": 41000000
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/bits_bank1.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/bits_bank1.png"
+      }
+    ],
+    "timeout_cycles": 36493124
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/bits_ramg.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/bits_ramg.png"
+      }
+    ],
+    "timeout_cycles": 48431200
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc1/bits_mode.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc1/bits_mode.png"
+      }
+    ],
+    "timeout_cycles": 36493140
+  },
+  {
+    "rom_path": "mooneye-test-suite/emulator-only/mbc2/bits_ramg.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/emulator-only/mbc2/bits_ramg.png"
+      }
+    ],
+    "timeout_cycles": 48922780
+  },
+  {
+    "rom_path": "blargg/dmg_sound/rom_singles/03-trigger.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/rom_singles/03-trigger.png"
+      }
+    ],
+    "timeout_cycles": 95000000
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/09-op r,r.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/09-op r,r.png"
+      }
+    ],
+    "timeout_cycles": 62000000
+  },
+  {
+    "rom_path": "mooneye-test-suite/acceptance/ppu/intr_2_mode0_timing_sprites.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "opcode",
+          "opcode": 64
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "fibonacci_registers"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/mooneye-test-suite/acceptance/ppu/intr_2_mode0_timing_sprites.png"
+      }
+    ],
+    "timeout_cycles": 40701864
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/10-bit ops.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/10-bit ops.png"
+      }
+    ],
+    "timeout_cycles": 82380752
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/individual/11-op a,(hl).gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/individual/11-op a,(hl).png"
+      }
+    ],
+    "timeout_cycles": 97970008
+  },
+  {
+    "rom_path": "blargg/dmg_sound/dmg_sound.gb",
+    "termination_condition": [
+      []
+    ],
+    "success_check": [
+      [
+        {
+          "type": "blargg_memory_signature"
+        }
+      ],
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/dmg_sound/dmg_sound.png"
+      }
+    ],
+    "timeout_cycles": 173500000
+  },
+  {
+    "rom_path": "blargg/cpu_instrs/cpu_instrs.gb",
+    "termination_condition": [
+      [
+        {
+          "type": "serial_pattern",
+          "pattern": "Passed"
+        }
+      ]
+    ],
+    "success_check": [
+      {
+        "type": "serial_passed"
+      },
+      {
+        "type": "screen_output",
+        "output_path": "/home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/test_output/blargg/cpu_instrs/cpu_instrs.png"
+      }
+    ],
+    "timeout_cycles": 248459412
+  }
+]
