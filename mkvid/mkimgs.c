@@ -27,10 +27,10 @@ static void put_pixel(FILE *f, int v, bool raw)
 {
 	const uint8_t pal_raw[5][3] = {
 		{ 255, 255, 255 }, /* off */
-		{ 252, 252, 252 }, /*  0  */
-		{ 189, 189, 189 }, /*  1  */
-		{ 126, 126, 126 }, /*  2  */
-		{  63,  63,  63 }, /*  3  */
+		{ 0xff, 0xff, 0xff }, /*  0  */
+		{ 0xAA, 0xAA, 0xAA }, /*  1  */
+		{ 0x55, 0x55, 0x55 }, /*  2  */
+		{ 0x00, 0x00, 0x00 }, /*  3  */
 	};
 
 	const uint8_t pal_classic[5][3] = {
