@@ -234,27 +234,17 @@ module DMG(
 		.ncs_ram(mbc5_ncs_ram)
 	);
 
-	always_comb unique case (1)
-		has_mbc1: begin
-			cart_rom_adr = { mbc1_ra, a_pin[13:0] };
-			cart_ram_adr = { mbc1_aa, a_pin[12:0] };
-			cart_rom_cs  = ~mbc1_ncs_rom;
-			cart_ram_cs  = ~mbc1_ncs_ram && mbc1_cs_ram;
-		end
-
-		has_mbc5: begin
-			cart_rom_adr = { mbc5_ra, a_pin[13:0] };
-			cart_ram_adr = { mbc5_aa, a_pin[12:0] };
-			cart_rom_cs  = ~a_pin[15];
-			cart_ram_cs  = ~mbc5_ncs_ram;
-		end
-
-		default: begin
-			cart_rom_adr = a_pin[14:0];
-			cart_ram_adr = a_pin[12:0];
-			cart_rom_cs  = ~a_pin[15];
-			cart_ram_cs  = ~ncs && a_pin[13];
-		end
-	endcase
+	assign cart_rom_adr = has_mbc1 ? { mbc1_ra, a_pin[13:0] } :
+	                      has_mbc5 ? { mbc5_ra, a_pin[13:0] } :
+	                                 a_pin[14:0];
+	assign cart_ram_adr = has_mbc1 ? { mbc1_aa, a_pin[12:0] } :
+	                      has_mbc5 ? { mbc5_aa, a_pin[12:0] } :
+	                                 a_pin[12:0];
+	assign cart_rom_cs  = has_mbc1 ? ~mbc1_ncs_rom :
+	                      has_mbc5 ? ~a_pin[15] :
+	                                 ~a_pin[15];
+	assign cart_ram_cs  = has_mbc1 ? (~mbc1_ncs_ram && mbc1_cs_ram) :
+	                      has_mbc5 ? ~mbc5_ncs_ram :
+	                                 (~ncs && a_pin[13]);
 
 endmodule

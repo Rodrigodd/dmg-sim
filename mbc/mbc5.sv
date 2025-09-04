@@ -31,14 +31,8 @@ module mbc5(
 
 	assign ncs_ram = ~(ena && ~ncs && ~a[14]);
 
-	always_comb priority case (1)
-		~nrst, ~a[14]: ra = 0;
-		default:       ra = rom_bank;
-	endcase
+	assign ra = (~nrst || ~a[14]) ? 0 : rom_bank;
 
-	always_comb priority case (1)
-		a[14]:   aa = ram_bank;
-		default: aa = 0;
-	endcase
+	assign aa = a[14] ? ram_bank : 0;
 
 endmodule
