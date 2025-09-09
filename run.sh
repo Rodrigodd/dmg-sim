@@ -1,7 +1,7 @@
 # python run_simulation.py Legend\ of\ Zelda,\ The\ -\ Link\'s\ Awakening\ \(USA,\ Europe\).gb --output zelda --secs 0.5
 run() {
     echo "Running $1"
-    python3 run_simulation.py "$2" --output "sim/$1" --secs 1.0 &
+    python3 run_simulation.py "$2" --output "sim/$1" --secs 1.5 &
 }
 
 run hblank_ly_scx_ /home/rodrigodd/repos/gameroy/core/tests/gameboy-test-roms/mooneye-test-suite/acceptance/ppu/hblank_ly_scx_timing-GS.gb
