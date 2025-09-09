@@ -255,6 +255,6 @@ module oam(
 	assign oam_a_ncs = zone;
 	assign oam_b_ncs = zofe;
 
-	trireg_m tr_oam_na [7:0] (oam_na);
+	trireg_m tr_oam_na [7:0] (oam_na, 8'b0);
 
 endmodule

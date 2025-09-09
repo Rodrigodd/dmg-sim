@@ -414,8 +414,8 @@ module dmg_cpu_b(
 	assign cpu_irq6_trig = 0;
 	assign cpu_irq7_trig = 0;
 
-	trireg_m d_trireg [7:0] (d);
-	trireg_m md_trireg [7:0] (md);
+	trireg_m d_trireg [7:0] (d, 8'b0);
+	trireg_m md_trireg [7:0] (md, 8'b0);
 
 	assign d_in  = ~d_pin;
 	assign md_in = ~md_pin;
@@ -476,8 +476,8 @@ module dmg_cpu_b(
 	// TODO: When reading the next byte from wave RAM (for example FF31), the previous sample (high nibble of FF30)
 	//       gets output for a very short time before the next sample (high nibble of FF31) gets output. Check if correct.
 
-	trireg_m oam_a_trireg [7:0] (oam_a_nd);
-	trireg_m oam_b_trireg [7:0] (oam_b_nd);
+	trireg_m oam_a_trireg [7:0] (oam_a_nd, 8'b0);
+	trireg_m oam_b_trireg [7:0] (oam_b_nd, 8'b0);
 
 	initial for (i = 0; i < $size(oam_a_ram); i++) oam_a_ram[i] = $random;
 	initial for (i = 0; i < $size(oam_b_ram); i++) oam_b_ram[i] = $random;

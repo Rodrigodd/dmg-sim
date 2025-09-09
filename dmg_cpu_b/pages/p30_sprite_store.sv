@@ -378,14 +378,14 @@ module sprite_store(
 	assign cega = cega_tri;
 	assign cuca = cuca_tri;
 
-	trireg_m trireg_weza (weza_tri);
-	trireg_m trireg_wuco (wuco_tri);
-	trireg_m trireg_wyda (wyda_tri);
-	trireg_m trireg_zysu (zysu_tri);
-	trireg_m trireg_wyse (wyse_tri);
-	trireg_m trireg_wuzy (wuzy_tri);
-	trireg_m trireg_wenu (wenu_tri);
-	trireg_m trireg_cucu (cucu_tri);
-	trireg_m trireg_cuca (cuca_tri);
-	trireg_m trireg_cega (cega_tri);
+	trireg_m trireg_weza (weza_tri, 1'b0);
+	trireg_m trireg_wuco (wuco_tri, 1'b0);
+	trireg_m trireg_wyda (wyda_tri, 1'b0);
+	trireg_m trireg_zysu (zysu_tri, 1'b0);
+	trireg_m trireg_wyse (wyse_tri, 1'b0);
+	trireg_m trireg_wuzy (wuzy_tri, 1'b0);
+	trireg_m trireg_wenu (wenu_tri, 1'b0);
+	trireg_m trireg_cucu (cucu_tri, 1'b0);
+	trireg_m trireg_cuca (cuca_tri, 1'b0);
+	trireg_m trireg_cega (cega_tri, 1'b0);
 endmodule
