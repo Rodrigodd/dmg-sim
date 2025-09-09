@@ -2,11 +2,6 @@
 
 module dmg_cpu_b_gameboy;
 
-	import snd_dump::write_header;
-	import snd_dump::write_bit4_as_int8;
-	import snd_dump::write_real_as_int16;
-	vid_dump vdump(.cpg(cpg), .cp(cp), .cpl(cpl), .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .t(test.sample_idx));
-
 	/* Clock (crystal) pins */
 	logic xi, xo;
 
@@ -119,6 +114,11 @@ module dmg_cpu_b_gameboy;
 	logic        cpu_drv_d;
 	logic [7:0]  cpu_d_out;
 	logic [15:0] cpu_a_out;
+
+	import snd_dump::write_header;
+	import snd_dump::write_bit4_as_int8;
+	import snd_dump::write_real_as_int16;
+	vid_dump vdump(.cpg(cpg), .cp(cp), .cpl(cpl), .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .t(test.sample_idx));
 
 	// See dmgcpu/ports.md
 	SM83Core cpu(
