@@ -3,6 +3,29 @@
 /* Not sure about these things, so make them easily switchable for testing: */
 parameter bit dffra_inv_clk = 0; /* DFFR Variant A clock input is inverted? */
 
+module bidir_out(drv_low, ndrv_high, q);
+	input drv_low;
+	input ndrv_high;
+	output q;
+	// assign q = (/*isunknown(drv_low))*/0 || /*isunknown(ndrv_high))*/0) ? 1'bx
+	// : (drv_low == ndrv_high) ? ~drv_low
+	// : (drv_low) ? 1'bx
+	// : 1'bz;
+	assign q = (drv_low == ndrv_high) ? ~drv_low : (drv_low) ? 1'bx : 1'bz;
+endmodule
+
+module bidir_in(drv_low, ndrv_high, x, q);
+	input drv_low;
+	input ndrv_high;
+	input x;
+	output q;
+	// assign q = (/*isunknown(drv_low))*/0 || /*isunknown(ndrv_high))*/0) ? 1'bx
+	// : (drv_low == ndrv_high) ? ~drv_low
+	// : (drv_low) ? 1'bx
+	// : 1'bz;
+	assign q = (drv_low == ndrv_high) ? ~drv_low : (drv_low) ? x : 1'bz;
+endmodule
+
 module dmg_cpu_b(
 		/* External pins of the DMG CPU B chip */
 		input  logic            xi,         /* Pin 74        - XI clock input pin */
@@ -318,63 +341,45 @@ module dmg_cpu_b(
 	logic [7:0]  reg_obj0x, reg_obj1x, reg_obj2x, reg_obj3x, reg_obj4x;
 	logic [7:0]  reg_obj5x, reg_obj6x, reg_obj7x, reg_obj8x, reg_obj9x;
 
-	function automatic logic bidir_out(logic drv_low, ndrv_high);
-		if (/*isunknown(drv_low))*/0 || /*isunknown(ndrv_high))*/0)
-			bidir_out = 'x;
-		else if (drv_low == ndrv_high)
-			bidir_out = ~drv_low;
-		else if (drv_low)
-			bidir_out = 'x;
-		else
-			bidir_out = 8'hzz;
-	endfunction
-
 	assign phi = ~nphi_out;
-	assign nrd = bidir_out(rd_c, rd_a);
-	assign nwr = bidir_out(wr_c, wr_a);
+	bidir_out nrd_bidir(rd_c, rd_a, nrd);
+	bidir_out nwr_bidir(wr_c, wr_a, nwr);
 	assign ncs = ~cs_out;
 
-	assign nmoe = bidir_out(moe_d, moe_a);
-	assign nmwr = bidir_out(mwr_d, mwr_a);
-	assign nmcs = bidir_out(mcs_d, mcs_a);
+	bidir_out nmoe_bidir(moe_d, moe_a, nmoe);
+	bidir_out nmwr_bidir(mwr_d, mwr_a, nmwr);
+	bidir_out nmcs_bidir(mcs_d, mcs_a, nmcs);
 
-	generate
-		for (genvar i = 0; i < 8; i++)
-			assign d_pin_drv[i] = bidir_out(d_d[i], d_a[i]);
-	endgenerate
-	assign (pull1, highz0) d_pin = {8{~lula}};
+	genvar j;
+
+	generate for (j = 0; j < 8; j++) begin
+			bidir_in d_pin_drv_bidir (.drv_low(d_d[j]), .ndrv_high(d_a[j]), .x(~lula), .q(d_pin_drv[j]));
+	end endgenerate
+
 	assign                 d_pin = d_pin_drv;
 
-	generate
-		for (genvar i = 0; i < 8; i++)
-			assign md_pin_drv[i] = bidir_out(md_out[i], md_a[i]);
-	endgenerate
-	assign (pull1, highz0) md_pin = {8{~md_b}};
+	generate for (j = 0; j < 8; j++) begin
+			bidir_in md_pin_drv_bidirmd_pin_drv_bidir (.drv_low(md_out[j]), .ndrv_high(md_a[j]), .x(~md_b), .q(md_pin_drv[j]));
+	end endgenerate
+
 	assign                 md_pin = md_pin_drv;
 
-	generate
-		for (genvar i = 0; i < 16; i++)
-			assign a_pin[i] = bidir_out(a_d[i], a_a[i]);
-	endgenerate
+	generate for (j = 0; j < 16; j++) begin
+			bidir_out a_pin_bidir (.drv_low(a_d[j]), .ndrv_high(a_a[j]), .q(a_pin[j]));
+	end endgenerate
 
 	assign ma_pin = ~nma_out;
 
 	assign                 sout = nsout;
-	assign                 sin  = bidir_out(sin_d, sin_a);
-	assign                 sck  = bidir_out(sck_d, sck_a);
-	assign (pull1, highz0) sin  = ~sin_b;
-	assign (pull1, highz0) sck  = ~sck_dir;
+	assign sin = (sin_d == sin_a) ? ~sin_d : (sin_d) ? 1'bx : ~sin_b;
+	assign sck = (sck_d == sck_a) ? ~sck_d : (sck_d) ? 1'bx : ~sck_dir;
 
-	assign                 p10  = bidir_out(p10_d, p10_a);
-	assign                 p11  = bidir_out(p11_d, p11_a);
-	assign                 p12  = bidir_out(p12_d, p12_a);
-	assign                 p13  = bidir_out(p13_d, p13_a);
-	assign                 p14  = bidir_out(p14_b, p14_a);
-	assign                 p15  = bidir_out(p15_b, p15_a);
-	assign (pull1, highz0) p10  = ~p10_b;
-	assign (pull1, highz0) p11  = ~p11_b;
-	assign (pull1, highz0) p12  = ~p12_b;
-	assign (pull1, highz0) p13  = ~p13_b;
+	assign p10 = ~(p10_d ^ p10_a) ? ~p10_d : (p10_d) ? 1'bx : ~p10_b;
+	assign p11 = ~(p11_d ^ p11_a) ? ~p11_d : (p11_d) ? 1'bx : ~p11_b;
+	assign p12 = ~(p12_d ^ p12_a) ? ~p12_d : (p12_d) ? 1'bx : ~p12_b;
+	assign p13 = ~(p13_d ^ p13_a) ? ~p13_d : (p13_d) ? 1'bx : ~p13_b;
+	assign p14 = ~(p14_b ^ p14_a) ? ~p14_b : (p14_b) ? 1'bx : ~p14_b;
+	assign p15 = ~(p15_b ^ p15_a) ? ~p15_b : (p15_b) ? 1'bx : ~p15_b;
 
 	assign cpg = ~npin_cpg;
 	assign cp  = ~ncp;
