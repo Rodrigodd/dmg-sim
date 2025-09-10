@@ -6,7 +6,12 @@ cells/nor_srlatch.sv \
 cells/dlatch_a.sv \
 cells/drlatch.sv \
 
-read_systemverilog -dump_ast1 -dump_ast2 -parseall \
+log === Read1
+
+read_systemverilog \
+function_stubs.v
+
+read_systemverilog \
 ../dmg_cpu_b/cells/timing_param.sv \
 ../dmg_cpu_b/cells/nand_srlatch.sv \
 ../dmg_cpu_b/cells/dlatch_b.sv \
@@ -54,6 +59,8 @@ read_systemverilog -dump_ast1 -dump_ast2 -parseall \
 ../mbc/mbc5.sv \
 dmg.sv
 
+log === Read2
+
 read_verilog \
 ../dmgcpu/HDL/sm83/_GekkioNames.v \
 ../dmgcpu/HDL/sm83/ALU.v \
@@ -71,9 +78,13 @@ read_verilog \
 ../dmgcpu/HDL/sm83/Thingy.v \
 ../dmgcpu/HDL/sm83/Top.v \
 
+log === Read3
+
 log Finished reading all system verilog file
 
 hierarchy -top DMG
+
+setundef -zero -undriven w:$random
 
 tribuf -propagate bidir_out
 tribuf -propagate bidir_in
