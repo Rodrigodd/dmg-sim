@@ -9,7 +9,7 @@ cells/drlatch.sv \
 log === Read1
 
 read_systemverilog \
-function_stubs.v
+function_stubs.sv
 
 read_systemverilog \
 ../dmg_cpu_b/cells/timing_param.sv \
