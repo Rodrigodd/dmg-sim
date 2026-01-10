@@ -6,14 +6,16 @@ module drlatch (
 		output logic q
 	);
 
-	// TODO: replace with $dlatchsr or something like that.
+	logic i;
+	$delay #(.DELAY(1), .WIDTH(1)) d1 (.A(c), .Y(i));
+
 	$dlatchsr #(
 		.WIDTH(1),
 		.EN_POLARITY(1),
 		.SET_POLARITY(1),
 		.CLR_POLARITY(0),
 	) mydrlatch (
-		.EN(c),
+		.EN(i),
 		.SET(1'b0),
 		.CLR(nreset),
 		.D(d),
