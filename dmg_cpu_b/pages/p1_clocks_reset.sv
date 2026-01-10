@@ -128,10 +128,33 @@ module clocks_reset(
 	assign nreset_video2 = lyfe;
 	assign reset_video3  = lyha;
 
-	drlatch latch_adyk(~atal_4mhz, t1t2_nrst, apuk,  adyk);
-	drlatch latch_afur(atal_4mhz,  t1t2_nrst, ~adyk, afur);
-	drlatch latch_alef(~atal_4mhz, t1t2_nrst, afur,  alef);
-	drlatch latch_apuk(atal_4mhz,  t1t2_nrst, alef,  apuk);
+	// drlatch latch_adyk(~atal_4mhz, t1t2_nrst, apuk,  adyk);
+	// drlatch latch_afur(atal_4mhz,  t1t2_nrst, ~adyk, afur);
+	// drlatch latch_alef(~atal_4mhz, t1t2_nrst, afur,  alef);
+	// drlatch latch_apuk(atal_4mhz,  t1t2_nrst, alef,  apuk);
+
+	// the logic above can be simplified to the following (avoid cicles in sim):
+	initial begin
+		adyk = 1'b0;
+		afur = 1'b0;
+		alef = 1'b0;
+		apuk = 1'b0;
+	end
+	always_latch begin
+		if (!t1t2_nrst) begin
+			adyk <= 1'b0;
+			afur <= 1'b0;
+			alef <= 1'b0;
+			apuk <= 1'b0;
+		end else if (atal_4mhz) begin
+			afur <= ~adyk;
+			apuk <= alef;
+		end else begin
+			adyk <= apuk;
+			alef <= afur;
+		end
+	end
+
 	assign #T_INV  abol = ~clk_from_cpu;
 	assign #T_INV  ucob = ~clkin_a;
 	assign #T_INV  uvyt = ~nphi_out;
