@@ -115,10 +115,13 @@ module dmg_cpu_b_gameboy;
 	logic [7:0]  cpu_d_out;
 	logic [15:0] cpu_a_out;
 
+
 	import snd_dump::write_header;
 	import snd_dump::write_bit4_as_int8;
 	import snd_dump::write_real_as_int16;
-	vid_dump vdump(.cpg(cpg), .cp(cp), .cpl(cpl), .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .t(test.sample_idx));
+
+	int fvid, sample_idx;
+	vid_dump vdump(.cpg(cpg), .cp(cp), .cpl(cpl), .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .t(sample_idx), .f(fvid));
 
 	// See dmgcpu/ports.md
 	SM83Core cpu(
@@ -338,7 +341,6 @@ module dmg_cpu_b_gameboy;
 	assign irq[7] = cpu_irq7_trig;
 
 	program test;
-		int sample_idx;
 
 		initial begin
 			string dumpfile, ch_file, snd_file, vid_file;
@@ -346,7 +348,7 @@ module dmg_cpu_b_gameboy;
 			real   sim_seconds;
 			int    _;
 			int    fch[1:4];
-			int    fmix, fvid;
+			int    fmix;
 			int    sim_mcycs;
 			bit    dump_channels, dump_sound, dump_video;
 
@@ -383,6 +385,8 @@ module dmg_cpu_b_gameboy;
 				fmix = $fopen(snd_file, "wb");
 				write_header(fmix, 65536, 2, 1);
 			end
+
+			fvid = 0;
 			if (dump_video)
 				fvid = $fopen(vid_file, "wb");
 
@@ -414,12 +418,6 @@ module dmg_cpu_b_gameboy;
 					end
 				end
 
-				if (dump_video) begin :video_dump
-					forever begin
-						vdump.video_dump_loop(fvid);
-					end
-				end
-
 				begin
 					@(negedge reset);
 					$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
@@ -442,7 +440,6 @@ module dmg_cpu_b_gameboy;
 					end
 
 					disable tick_tick;
-					disable video_dump;
 				end
 			join
 

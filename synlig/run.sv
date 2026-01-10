@@ -21,12 +21,13 @@ module dmg_cpu_b_gameboy;
 
 	logic cpu_clkin_t9, cpu_clkin_t10;
 
-	int sample_idx;
 
 	import snd_dump::write_header;
 	import snd_dump::write_bit4_as_int8;
 	import snd_dump::write_real_as_int16;
-	vid_dump vdump(.cpg(cpg), .cp(cp), .cpl(cpl), .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .t(sample_idx));
+
+	int fvid, sample_idx;
+	vid_dump vdump(.cpg(cpg), .cp(cp), .cpl(cpl), .fr(fr), .st(st), .s(s), .ld0(ld0), .ld1(ld1), .t(sample_idx), .f(fvid));
 
 	DMG gb(
 		.xi(xi), .xo(xo),
@@ -111,7 +112,7 @@ module dmg_cpu_b_gameboy;
 		real   sim_seconds;
 		int    _;
 		int    fch[1:4];
-		int    fmix, fvid;
+		int    fmix;
 		int    sim_mcycs;
 		int    stop_flag;
 		bit    dump_channels, dump_sound, dump_video;
@@ -152,6 +153,8 @@ module dmg_cpu_b_gameboy;
 			write_header(fmix, 65536, 2, 1);
 			$display("dumping video to %s", snd_file);
 		end
+
+		fvid = 0;
 		if (dump_video) begin
 			fvid = $fopen(vid_file, "wb");
 			if (!fvid)
@@ -190,14 +193,6 @@ module dmg_cpu_b_gameboy;
 				end
 			end
 
-			if (dump_video) begin :video_dump
-				forever begin
-					if (stop_flag)
-						break;
-					vdump.video_dump_loop(fvid);
-				end
-			end
-
 			begin
 				@(negedge reset);
 				$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
@@ -220,7 +215,6 @@ module dmg_cpu_b_gameboy;
 				end
 
 				// disable tick_tick;
-				// disable video_dump;
 				stop_flag = 1;
 			end
 		join
