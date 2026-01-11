@@ -135,10 +135,10 @@ module clocks_reset(
 
 	// the logic above can be simplified to the following (avoid cicles in sim):
 	initial begin
-		adyk = 1'b0;
-		afur = 1'b0;
-		alef = 1'b0;
-		apuk = 1'b0;
+		adyk = 1'b1;
+		afur = 1'b1;
+		alef = 1'b1;
+		apuk = 1'b1;
 	end
 	always_latch begin
 		if (!t1t2_nrst) begin
