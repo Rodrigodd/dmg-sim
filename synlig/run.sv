@@ -106,15 +106,14 @@ module dmg_cpu_b_gameboy;
 		end
 	end
 
+	int sim_mcycs;
+
 	initial begin
 		string dumpfile, ch_file, snd_file, vid_file;
-		string time_str, prev_time_str;
 		real   sim_seconds;
 		int    _;
 		int    fch[1:4];
 		int    fmix;
-		int    sim_mcycs;
-		int    stop_flag;
 		bit    dump_channels, dump_sound, dump_video;
 		string error_message;
 
@@ -163,7 +162,6 @@ module dmg_cpu_b_gameboy;
 		end
 
 		sample_idx = 0;
-		stop_flag = 0;
 
 		xi   = 0;
 		nrst = 0;
@@ -173,51 +171,48 @@ module dmg_cpu_b_gameboy;
 		cyc(64);
 		nrst = 1;
 
-		fork
-			begin :tick_tick
-				forever begin
-					if (stop_flag)
-						break;
-					cyc(64);
-					if (dump_channels) begin
-						// write_bit4_as_int8(fch[1], dmg.ch1_out);
-						// write_bit4_as_int8(fch[2], dmg.ch2_out);
-						// write_bit4_as_int8(fch[3], dmg.wave_dac_d);
-						// write_bit4_as_int8(fch[4], dmg.ch4_out);
-					end
-					// if (dump_sound) begin
-					// 	write_real_as_int16(fmix, lout);
-					// 	write_real_as_int16(fmix, rout);
-					// end
-					sample_idx++;
-				end
-			end
+		forever begin
+			cyc(128);
 
-			begin
-				@(negedge reset);
+			if (dump_channels) begin
+				// write_bit4_as_int8(fch[1], dmg.ch1_out);
+				// write_bit4_as_int8(fch[2], dmg.ch2_out);
+				// write_bit4_as_int8(fch[3], dmg.wave_dac_d);
+				// write_bit4_as_int8(fch[4], dmg.ch4_out);
+			end
+			// if (dump_sound) begin
+			// 	write_real_as_int16(fmix, lout);
+			// 	write_real_as_int16(fmix, rout);
+			// end
+			sample_idx++;
+		end
+	end
+
+
+	initial begin
+		string time_str, prev_time_str;
+
+		#1ms;
+		@(negedge reset);
+		$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
+		$display("System reset done -- will simulate %s seconds", time_str);
+		$fdisplay(STDERR, "System reset done -- will simulate %s seconds", time_str);
+		$fflush(32'h8000_0001);
+		prev_time_str = time_str;
+
+		while (sim_mcycs) begin
+			sim_mcycs--;
+			if (sim_mcycs % 1024 == 0) begin
 				$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
-				$display("System reset done -- will simulate %s seconds", time_str);
-				$fflush(32'h8000_0001);
-				prev_time_str = time_str;
-
-				while (sim_mcycs) begin
-					sim_mcycs--;
-					if (sim_mcycs % 1024 == 0) begin
-						$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
-						if (time_str != prev_time_str && time_str != "0.0") begin
-							$display("%s seconds remaining", time_str);
-							$fflush(32'h8000_0001);
-							prev_time_str = time_str;
-						end
-					end
-					@(posedge cpu_clkin_t9);
-					@(posedge cpu_clkin_t10);
+				if (time_str != prev_time_str && time_str != "0.0") begin
+					$display("%s seconds remaining", time_str);
+					$fflush(32'h8000_0001);
+					prev_time_str = time_str;
 				end
-
-				// disable tick_tick;
-				stop_flag = 1;
 			end
-		join
+			@(posedge cpu_clkin_t9);
+			@(posedge cpu_clkin_t10);
+		end
 
 		$finish;
 	end
