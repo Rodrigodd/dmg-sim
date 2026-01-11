@@ -196,7 +196,6 @@ module dmg_cpu_b_gameboy;
 		@(negedge reset);
 		$sformat(time_str, "%.4f", $itor(sim_mcycs) / 1048576.0);
 		$display("System reset done -- will simulate %s seconds", time_str);
-		$fdisplay(STDERR, "System reset done -- will simulate %s seconds", time_str);
 		$fflush(32'h8000_0001);
 		prev_time_str = time_str;
 
