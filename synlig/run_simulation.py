@@ -79,6 +79,7 @@ def run_verilator(bootrom, rom, secs, output_name, capture_output=False, dry_run
     vvp_command = [
         "verilator_build/Vdmg_cpu_b_gameboy",
         "+verilator+rand+reset+1",
+        # "+verilator+debug",
         f"+DUMPFILE={output_name}.fst",
         f"+CH_FILE={output_name}_ch%0d.snd",
         f"+SND_FILE={output_name}.snd",
@@ -101,7 +102,7 @@ def run_verilator(bootrom, rom, secs, output_name, capture_output=False, dry_run
             error_msg += f": {result.stderr}"
         raise RuntimeError(error_msg)
 
-def run_mkvid(filename, raw: bool = False, dry_run=False):
+def run_mkvid(filename, raw: bool = False, dry_run=False, keep_images=False):
     """Generate video from simulation output files."""
     script_dir = Path(__file__).resolve().parent
     cur_dir = Path.cwd()
@@ -133,11 +134,17 @@ def run_mkvid(filename, raw: bool = False, dry_run=False):
         return
     
     # Create temporary directory with automatic cleanup
-    tmpdir = tempfile.mkdtemp()
+    if not keep_images:
+        outdir = tempfile.mkdtemp()
+    else:
+        outdir = Path(f"{filename}_mkvid").resolve()
+        if outdir.exists():
+            shutil.rmtree(outdir)
+        outdir.mkdir(parents=True, exist_ok=True)
     original_dir = os.getcwd()
 
     try:
-        os.chdir(tmpdir)
+        os.chdir(outdir)
 
         print(f"Generating video for {filename}")
         
@@ -163,10 +170,10 @@ def run_mkvid(filename, raw: bool = False, dry_run=False):
         # Convert .rgb to .png
         i = 0
         while True:
-            rgb_file = Path(tmpdir) / f"img{i:06d}.rgb"
+            rgb_file = Path(outdir) / f"img{i:06d}.rgb"
             if not rgb_file.exists():
                 break
-            png_file = Path(tmpdir) / f"img{i:06d}.png"
+            png_file = Path(outdir) / f"img{i:06d}.png"
             
             result = subprocess.run(
                 [
@@ -195,7 +202,7 @@ def run_mkvid(filename, raw: bool = False, dry_run=False):
         # Save the final frame
         try:
             shutil.copy(
-                Path(tmpdir) / f"img{num_frames - 1:06d}.png",
+                Path(outdir) / f"img{num_frames - 1:06d}.png",
                 last_frame_path
             )
         except FileNotFoundError:
@@ -245,7 +252,8 @@ def run_mkvid(filename, raw: bool = False, dry_run=False):
         raise
     finally:
         os.chdir(original_dir)
-        shutil.rmtree(tmpdir)
+        if not keep_images:
+            shutil.rmtree(outdir)
 
 def run_single_test(test_entry, roms_base_path, output_base_path, bootrom_path, verilate, dry_run=False):
     """Run a single test from the test database."""
@@ -285,10 +293,10 @@ def run_single_test(test_entry, roms_base_path, output_base_path, bootrom_path, 
         print(f"  - {'DRY RUN - commands will not be executed' if dry_run else 'EXECUTING'}")
         
         # Run the simulation
-        # if verilate:
-        #     run_verilator(bootrom_path, str(full_rom_path), timeout_secs, output_name, capture_output=True, dry_run=dry_run)
-        # else:
-        #     run_simulation(bootrom_path, str(full_rom_path), timeout_secs, output_name, capture_output=True, dry_run=dry_run)
+        if verilate:
+            run_verilator(bootrom_path, str(full_rom_path), timeout_secs, output_name, capture_output=True, dry_run=dry_run)
+        else:
+            run_simulation(bootrom_path, str(full_rom_path), timeout_secs, output_name, capture_output=True, dry_run=dry_run)
         
         # Generate video
         run_mkvid(output_name, True, dry_run=dry_run)
@@ -348,7 +356,9 @@ def run_single_test(test_entry, roms_base_path, output_base_path, bootrom_path, 
         
         return True
     except Exception as e:
+        import traceback
         print(f"Error running test {rom_path}: {e}")
+        traceback.print_exc()
         return False
 
 def run_tests_from_database(test_database_path, roms_base_path, output_base_path, bootrom_path, max_workers=None, verilate=False, dry_run=False):
@@ -439,6 +449,8 @@ def main():
     parser.add_argument("--only-mkvid", action="store_true", help="Only generate the video from existing output files.")
     parser.add_argument("--verilate", action="store_true", help="Use Verilator for simulation.")
     parser.add_argument("--dry-run", action="store_true", help="Print commands that would be executed without actually running them.")
+    parser.add_argument("--keep-images", action="store_true", help="Keep the generated images instead of deleting them after video generation.")
+    parser.add_argument("--raw-images", action="store_true", help="Generate raw image output, without lcd filter")
     
     # Test mode arguments
     parser.add_argument("--run-tests", nargs="?", const="test_database.json", help="Run tests from the specified test database JSON file (default: test_database.json).")
@@ -478,7 +490,7 @@ def main():
             else:
                 run_make("run.vvp", dry_run=args.dry_run)
                 run_simulation(args.bootrom, args.rom, args.secs, args.output, dry_run=args.dry_run)
-        run_mkvid(args.output, False, dry_run=args.dry_run)
+        run_mkvid(args.output, args.raw_images, dry_run=args.dry_run, keep_images=args.keep_images)
 
 if __name__ == "__main__":
     main()
