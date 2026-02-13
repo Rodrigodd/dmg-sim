@@ -231,7 +231,7 @@ module dmg_cpu_b_gameboy;
 	assign d_pin = (has_rom && cart_rom_cs && ~nrd) ? cart_rom[cart_rom_adr] : 8'hzz;
 	initial foreach (cart_ram[i]) cart_ram[i] = $random;
 	always_ff @(posedge nwr) if (has_ram && cart_ram_cs) cart_ram[cart_ram_adr] <= /*isunknown(d_pin))*/0 ? $random : d_pin;
-	assign d_pin = (has_ram && cart_ram_cs && ~nrd) ? cart_rom[cart_ram_adr] : 8'hzz;
+	assign d_pin = (has_ram && cart_ram_cs && ~nrd) ? cart_ram[cart_ram_adr] : 8'hzz;
 
 	mbc1 mbc1_chip(
 		.nrst,

@@ -42,7 +42,7 @@ module mbc1(
 	            !rom_bank       ? 1 :
 	                               rom_bank;
 
-	assign aa = mode || a[14] ? ram_bank :
-	                          0;
+	assign aa = mode ? ram_bank :
+	                   0;
 
 endmodule

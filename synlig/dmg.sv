@@ -208,7 +208,7 @@ module DMG(
 	assign d_pin = (cart_rom_wr) ? cart_rom_d : 8'hzz;
 	// initial for (i = 0; i < 262144; i++) cart_ram[i] = /*random*/0;
 	always_ff @(posedge nwr) if (has_ram && cart_ram_cs) cart_ram[cart_ram_adr] <= /*isunknown(d_pin))*/0 ? /*random*/0 : d_pin;
-	logic [7:0] cart_ram_d = cart_ram[cart_rom_adr];
+	logic [7:0] cart_ram_d = cart_ram[cart_ram_adr];
 	logic cart_ram_wr = has_ram && cart_ram_cs && ~nrd;
 	assign d_pin = (cart_ram_wr) ? cart_ram_d : 8'hzz;
 
@@ -234,11 +234,11 @@ module DMG(
 		.ncs_ram(mbc5_ncs_ram)
 	);
 
-	assign cart_rom_adr = has_mbc1 ? { mbc1_ra, a_pin[13:0] } :
-	                      has_mbc5 ? { mbc5_ra, a_pin[13:0] } :
+	assign cart_rom_adr = has_mbc1 ? { mbc1_ra[18:14], a_pin[13:0] } :
+	                      has_mbc5 ? { mbc5_ra[18:14], a_pin[13:0] } :
 	                                 a_pin[14:0];
-	assign cart_ram_adr = has_mbc1 ? { mbc1_aa, a_pin[12:0] } :
-	                      has_mbc5 ? { mbc5_aa, a_pin[12:0] } :
+	assign cart_ram_adr = has_mbc1 ? { mbc1_aa[14:13], a_pin[12:0] } :
+	                      has_mbc5 ? { mbc5_aa[14:13], a_pin[12:0] } :
 	                                 a_pin[12:0];
 	assign cart_rom_cs  = has_mbc1 ? ~mbc1_ncs_rom :
 	                      has_mbc5 ? ~a_pin[15] :

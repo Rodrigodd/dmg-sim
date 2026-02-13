@@ -82,7 +82,7 @@ MBC = \
 ../mbc/mbc5.sv
 
 DMG = \
-dmg.purge.sv \
+dmg.opt.sv \
 ../dmg_cpu_b/cells/trireg_m.sv \
 ../dmg_cpu_b/bootrom.sv \
 $(MBC)
