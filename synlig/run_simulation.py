@@ -49,7 +49,7 @@ def run_simulation(bootrom, rom, secs, output_name, capture_output=False, dry_ru
         f"+SECS={secs}"
     ]
 
-    print(f"Running command: {' '.join(vvp_command)}")
+    print(f"Running command: {subprocess.list2cmdline(vvp_command)}")
     
     if dry_run:
         return
@@ -89,7 +89,7 @@ def run_verilator(bootrom, rom, secs, output_name, capture_output=False, dry_run
         f"+SECS={secs}"
     ]
 
-    print(f"Running command: {' '.join(vvp_command)}")
+    print(f"Running command: {subprocess.list2cmdline(vvp_command)}")
     
     if dry_run:
         return
